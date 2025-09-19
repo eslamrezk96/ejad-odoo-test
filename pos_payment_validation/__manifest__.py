@@ -9,7 +9,7 @@
                                 - Send notification to
                                 the warehouses admin to check the ROP of
                                 the product less than 5""",
-    'depends': ['point_of_sale', 'stock', 'mail', 'pos_epson_printer'],
+    'depends': ['point_of_sale', 'stock', 'mail'],
     'data': [
         'views/pos_config.xml',
     ],
