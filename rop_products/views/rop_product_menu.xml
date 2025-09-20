@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="rop_product_action" model="ir.actions.act_window">
+            <field name="name">ROP Products</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="domain">[('qty_available', '&lt;=', 5)]</field>
+        </record>
+
+        <record id="product_gt_rop_action" model="ir.actions.act_window">
+            <field name="name">Products > ROP</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="domain">[('qty_available', '&gt;', 5)]</field>
+        </record>
+
+        <menuitem id="rop_root_menu"
+                  name="ROP"
+                  parent="stock.menu_stock_root"
+                  sequence="5"/>
+
+        <menuitem id="rop_product_menu"
+                  name="ROP Products"
+                  parent="rop_root_menu"
+                  action="rop_product_action"
+                  sequence="0"
+        />
+
+        <menuitem id="product_gt_rop_menu"
+                  name="Products > ROP"
+                  parent="rop_root_menu"
+                  action="product_gt_rop_action"
+                  sequence="1"
+        />
+
+    </data>
+</odoo>
