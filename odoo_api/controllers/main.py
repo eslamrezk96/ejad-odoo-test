@@ -6,7 +6,7 @@ from odoo.http import request
 
 class PosOrderApi(http.Controller):
 
-    @http.route('/api/orders', type='http', auth='public', methods=['GET'], csrf=False)
+    @http.route('/api/orders', type='http', auth='user', methods=['GET'], csrf=False)
     def get_pos_orders(self, **kwargs):
         start_date = kwargs.get('start_date')
         end_date = kwargs.get('end_date')
@@ -34,7 +34,7 @@ class PosOrderApi(http.Controller):
 
 class ROPProductsAPI(http.Controller):
 
-    @http.route('/api/products/with-rop', type='http', auth='public', methods=['GET'], csrf=False)
+    @http.route('/api/products/with-rop', type='http', auth='user', methods=['GET'], csrf=False)
     def get_rop_products(self):
         products = request.env['product.template'].sudo().search([('has_rop', '=', True)])
 
@@ -51,7 +51,7 @@ class ROPProductsAPI(http.Controller):
 
 class UpdateROPCount(http.Controller):
 
-    @http.route('/api/products/<int:product_id>/rop', type='http', auth='public', methods=['PUT'], csrf=False)
+    @http.route('/api/products/<int:product_id>/rop', type='http', auth='user', methods=['PUT'], csrf=False)
     def update_rop_count(self, product_id, **kwargs):
         """Add A ROP Count for specific Product"""
         rop_count = kwargs.get('rop_count')
@@ -66,9 +66,10 @@ class UpdateROPCount(http.Controller):
 
         return request.make_json_response({'message': 'ROP count updated successfully.'}, status=200)
 
+
 class POSSessionOrders(http.Controller):
 
-    @http.route('/api/pos/sessions/<int:session_id>/orders', type='http', auth='public', methods=['GET'], csrf=False)
+    @http.route('/api/pos/sessions/<int:session_id>/orders', type='http', auth='user', methods=['GET'], csrf=False)
     def get_pos_session_orders(self, session_id):
         """Get all Orders inside a POS Session"""
 
