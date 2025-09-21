@@ -5,12 +5,14 @@ import { usePos } from "@point_of_sale/app/store/pos_hook";
 import { Component } from "@odoo/owl";
 import { ConnectionLostError } from "@web/core/network/rpc_service";
 import { useService } from "@web/core/utils/hooks";
+import { OrderReceipt } from "@point_of_sale/app/screens/receipt_screen/receipt/order_receipt";
 
 export class cashNowButton extends Component {
     static template = "pos_cash_now.CashNowButton";
     setup() {
         this.pos = usePos();
         this.hardwareProxy = useService("hardware_proxy");
+        this.printer = useService("printer");
     }
 
     get currentOrder() {
@@ -169,11 +171,33 @@ export class cashNowButton extends Component {
             }
         }
 
-        this.pos.showScreen(nextScreen);
+        await this.printReceipt();
+        this.pos.removeOrder(this.currentOrder);
+        this.pos.add_new_order();
+
     }
 
     async _postPushOrderResolve(order, order_server_ids) {
         return true;
+    }
+
+    async printReceipt() {
+        const isPrinted = await this.printer.print(
+            OrderReceipt,
+            {
+                data: {
+                    ...this.currentOrder.export_for_printing(),
+                    isBill: this.isBill,
+                },
+                formatCurrency: this.env.utils.formatCurrency,
+            },
+            { webPrintFallback: true }
+        );
+
+        if (isPrinted) {
+            this.currentOrder._printed = true;
+        }
+
     }
 
 }
