@@ -7,12 +7,14 @@
         <field name="arch" type="xml">
             <xpath expr="//setting[@id='other_devices']" position="after">
                 <setting id="cash_now" string="Enable Cash Now">
-                    <field name="enable_cash_now"/>
-                    <div class="content-group" invisible="not enable_cash_now">
+                    <field name="enable_instance_payment"/>
+                    <div class="content-group" invisible="not enable_instance_payment">
                         <label for="default_pos_partner_id"/>
                         <field name="default_pos_partner_id"/>
                         <label for="default_payment_method_id"/>
                         <field name="default_payment_method_id"/>
+                        <label for="instance_payment_label"/>
+                        <field name="instance_payment_label"/>
                     </div>
                 </setting>
             </xpath>

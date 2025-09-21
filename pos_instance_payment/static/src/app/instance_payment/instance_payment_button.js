@@ -7,8 +7,8 @@ import { ConnectionLostError } from "@web/core/network/rpc_service";
 import { useService } from "@web/core/utils/hooks";
 import { OrderReceipt } from "@point_of_sale/app/screens/receipt_screen/receipt/order_receipt";
 
-export class cashNowButton extends Component {
-    static template = "pos_cash_now.CashNowButton";
+export class instancePaymentButton extends Component {
+    static template = "pos_instance_payment.InstancePaymentButton";
     setup() {
         this.pos = usePos();
         this.hardwareProxy = useService("hardware_proxy");
@@ -17,6 +17,10 @@ export class cashNowButton extends Component {
 
     get currentOrder() {
         return this.pos.get_order();
+    }
+
+    get instancePaymentLabel() {
+        return this.pos.config.instance_payment_label
     }
 
     get paymentLines() {
@@ -32,7 +36,7 @@ export class cashNowButton extends Component {
     }
 
     async click() {
-        var enable_cash_now = this.pos.config.enable_cash_now;
+        var enable_instance_payment = this.pos.config.enable_instance_payment;
 
         var defaultPartner = this.pos.config.default_pos_partner_id[0];
         var partner = this.pos.db.get_partner_by_id(defaultPartner);
@@ -41,7 +45,7 @@ export class cashNowButton extends Component {
             this.pos.config.default_payment_method_id.includes(method.id)
         );
 
-        if (this.currentOrder && enable_cash_now) {
+        if (this.currentOrder && enable_instance_payment) {
             this.currentOrder.set_partner(partner);
             this.currentOrder.add_paymentline(paymentMethod[0]);
             for (const line of this.currentOrder.get_paymentlines()) {
@@ -202,4 +206,9 @@ export class cashNowButton extends Component {
 
 }
 
-ProductScreen.addControlButton({ component: cashNowButton });
+ProductScreen.addControlButton({
+    component: instancePaymentButton,
+    condition: function () {
+        return this.pos.config.enable_instance_payment
+    },
+});
