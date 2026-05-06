@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+
+    <record id="roadmap_layer_global" model="ea.layer">
+        <field name="name">Global</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="roadmap_layer_strategy" model="ea.layer">
+        <field name="name">Strategy</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="roadmap_layer_business" model="ea.layer">
+        <field name="name">Business</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="roadmap_layer_beneficiary_experience" model="ea.layer">
+        <field name="name">Beneficiary Experience</field>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="roadmap_layer_application" model="ea.layer">
+        <field name="name">Application</field>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="roadmap_layer_data" model="ea.layer">
+        <field name="name">Data</field>
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="roadmap_layer_technology" model="ea.layer">
+        <field name="name">Technology</field>
+        <field name="sequence">70</field>
+    </record>
+
+    <record id="roadmap_layer_cybersecurity_structure" model="ea.layer">
+        <field name="name">Cybersecurity Structure</field>
+        <field name="sequence">80</field>
+    </record>
+
+</odoo>

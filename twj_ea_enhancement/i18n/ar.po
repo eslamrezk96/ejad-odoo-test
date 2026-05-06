@@ -1,0 +1,404 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* twj_ea_enhancement
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"POT-Creation-Date: 2026-05-05 00:00+0000\n"
+"PO-Revision-Date: 2026-05-05 00:00+0000\n"
+"Last-Translator: OpenAI\n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#. module: twj_ea_enhancement
+#: model_terms:ir.ui.view,arch_db:twj_ea_enhancement.view_ea_entity_application_form
+msgid "Open Roadmap Report"
+msgstr "فتح تقرير خارطة الطريق"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Failed to load layers."
+msgstr "فشل تحميل الطبقات."
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Failed to load tags."
+msgstr "فشل تحميل الوسوم."
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Search failed."
+msgstr "فشل البحث."
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Search request failed."
+msgstr "فشل طلب البحث."
+
+#. module: twj_ea_enhancement
+#: code:addons/twj_ea_enhancement/controllers/roadmap_report_controller.py:0
+msgid "Invalid filter selection."
+msgstr "اختيار الفلتر غير صالح."
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Q1"
+msgstr "الربع 1"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Q2"
+msgstr "الربع 2"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Q3"
+msgstr "الربع 3"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Q4"
+msgstr "الربع 4"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "BUILDING BLOCK ROADMAP REPORT"
+msgstr "تقرير خارطة طريق اللبنات الأساسية"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Track lifecycle evolution, align with transformation initiatives & identify gaps"
+msgstr "تتبّع تطور دورة الحياة، ومواءمتها مع مبادرات التحول، وتحديد الفجوات"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Filter by Domain"
+msgstr "تصفية حسب المجال"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Select layers..."
+msgstr "اختر الطبقات..."
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Select layers"
+msgstr "اختر الطبقات"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Clear"
+msgstr "مسح"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Loading..."
+msgstr "جاري التحميل..."
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Filter by Tag (Portfolio)"
+msgstr "تصفية حسب الوسم (المحفظة)"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "All"
+msgstr "الكل"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Select tags"
+msgstr "اختر الوسوم"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "LEGEND"
+msgstr "الدليل"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "STATUS (Color Model)"
+msgstr "الحالة (نموذج الألوان)"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Active"
+msgstr "نشط"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Sunset"
+msgstr "إيقاف"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Build"
+msgstr "بناء"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Retired"
+msgstr "متقاعد"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Maintain"
+msgstr "صيانة"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Planned"
+msgstr "مخطط له"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Optimize"
+msgstr "تحسين"
+
+#. module: twj_ea_enhancement
+#: model:ir.model.fields.selection,name:twj_ea_enhancement.selection__ea_entity_base__change_type__active
+msgid "Active"
+msgstr "نشط"
+
+#. module: twj_ea_enhancement
+#: model:ir.model.fields.selection,name:twj_ea_enhancement.selection__ea_entity_base__change_type__cancel
+msgid "Sunset"
+msgstr "إيقاف"
+
+#. module: twj_ea_enhancement
+#: model:ir.model.fields.selection,name:twj_ea_enhancement.selection__ea_entity_base__change_type__change
+msgid "Build"
+msgstr "بناء"
+
+#. module: twj_ea_enhancement
+#: model:ir.model.fields.selection,name:twj_ea_enhancement.selection__ea_entity_base__change_type__old
+msgid "Retired"
+msgstr "متقاعد"
+
+#. module: twj_ea_enhancement
+#: model:ir.model.fields.selection,name:twj_ea_enhancement.selection__ea_entity_base__change_type__maintain
+msgid "Maintain"
+msgstr "صيانة"
+
+#. module: twj_ea_enhancement
+#: model:ir.model.fields.selection,name:twj_ea_enhancement.selection__ea_entity_base__change_type__new
+msgid "Planned"
+msgstr "مخطط"
+
+#. module: twj_ea_enhancement
+#: model:ir.model.fields.selection,name:twj_ea_enhancement.selection__ea_entity_base__change_type__optimize
+msgid "Optimize"
+msgstr "تحسين"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "KPI LAYER"
+msgstr "طبقة المؤشرات"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "(Executive View)"
+msgstr "(عرض تنفيذي)"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "# of Active"
+msgstr "عدد العناصر النشطة"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Visible records"
+msgstr "السجلات الظاهرة"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "# of Sunset"
+msgstr "عدد عناصر الإيقاف"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "# of Gaps"
+msgstr "عدد الفجوات"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Unique visible gaps"
+msgstr "الفجوات الظاهرة الفريدة"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "# of DT Projects"
+msgstr "عدد مشاريع التحول الرقمي"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Unique visible projects"
+msgstr "المشاريع الظاهرة الفريدة"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Expand All"
+msgstr "توسيع الكل"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Collapse All"
+msgstr "طي الكل"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "domain(s) collapsed"
+msgstr "مجال/مجالات مطوية"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Domain"
+msgstr "المجال"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Building Block (BB)"
+msgstr "اللبنة الأساسية"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Tag (Portfolio)"
+msgstr "الوسم (المحفظة)"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "DT Project"
+msgstr "مشروع التحول الرقمي"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Gaps"
+msgstr "الفجوات"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Loading report..."
+msgstr "جاري تحميل التقرير..."
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "No roadmap rows match the selected tags."
+msgstr "لا توجد صفوف خارطة طريق تطابق الوسوم المحددة."
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "All selected domains are collapsed."
+msgstr "كل المجالات المحددة مطوية."
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Select one or more layers to load roadmap rows."
+msgstr "اختر طبقة واحدة أو أكثر لتحميل صفوف خارطة الطريق."
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Remove"
+msgstr "إزالة"

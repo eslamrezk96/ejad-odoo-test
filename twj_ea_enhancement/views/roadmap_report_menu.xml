@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="action_building_block_roadmap_report" model="ir.actions.client">
+        <field name="name">Building Block Roadmap Report</field>
+        <field name="tag">twj_ea_enhancement.building_block_roadmap_report_client_action</field>
+    </record>
+
+    <menuitem
+        id="menu_building_block_roadmap_root"
+        name="Building Block Roadmap"
+        sequence="10"
+    />
+
+    <menuitem
+        id="menu_building_block_roadmap_report"
+        name="Roadmap Report"
+        parent="menu_building_block_roadmap_root"
+        action="action_building_block_roadmap_report"
+        sequence="10"
+    />
+
+</odoo>

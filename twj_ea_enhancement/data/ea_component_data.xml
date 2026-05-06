@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+
+    <record id="ea_component_cybersecurity_security_apparatus" model="ea.component">
+        <field name="name">Security Apparatus</field>
+        <field name="sequence">10</field>
+        <field name="layer_id" ref="roadmap_layer_cybersecurity_structure"/>
+        <field name="data_model_id" ref="model_ea_cybersecurity_security_apparatus"/>
+    </record>
+
+    <record id="ea_component_cybersecurity_security_software" model="ea.component">
+        <field name="name">Security Software</field>
+        <field name="sequence">20</field>
+        <field name="layer_id" ref="roadmap_layer_cybersecurity_structure"/>
+        <field name="data_model_id" ref="model_ea_cybersecurity_security_software"/>
+    </record>
+
+    <record id="ea_component_cybersecurity_security_service" model="ea.component">
+        <field name="name">Security Service</field>
+        <field name="sequence">30</field>
+        <field name="layer_id" ref="roadmap_layer_cybersecurity_structure"/>
+        <field name="data_model_id" ref="model_ea_cybersecurity_security_service"/>
+    </record>
+
+    <record id="ea_component_technology_service" model="ea.component">
+        <field name="name">Technology Service</field>
+        <field name="sequence">40</field>
+        <field name="layer_id" ref="roadmap_layer_technology"/>
+        <field name="data_model_id" ref="model_ea_entity_technology_service"/>
+    </record>
+
+    <record id="ea_component_application" model="ea.component">
+        <field name="name">Application</field>
+        <field name="sequence">50</field>
+        <field name="layer_id" ref="roadmap_layer_application"/>
+        <field name="data_model_id" ref="model_ea_entity_application"/>
+    </record>
+
+    <record id="ea_component_step" model="ea.component">
+        <field name="name">Step</field>
+        <field name="sequence">60</field>
+        <field name="layer_id" ref="roadmap_layer_beneficiary_experience"/>
+        <field name="data_model_id" ref="model_ea_entity_step"/>
+    </record>
+
+    <record id="ea_component_stage" model="ea.component">
+        <field name="name">Stage</field>
+        <field name="sequence">70</field>
+        <field name="layer_id" ref="roadmap_layer_beneficiary_experience"/>
+        <field name="data_model_id" ref="model_ea_entity_stage"/>
+    </record>
+
+    <record id="ea_component_organization_unit" model="ea.component">
+        <field name="name">Organization Unit</field>
+        <field name="sequence">80</field>
+        <field name="layer_id" ref="roadmap_layer_strategy"/>
+        <field name="data_model_id" ref="model_ea_entity_organization_unit"/>
+    </record>
+
+    <record id="ea_component_business_capability" model="ea.component">
+        <field name="name">Business Capability</field>
+        <field name="sequence">90</field>
+        <field name="layer_id" ref="roadmap_layer_strategy"/>
+        <field name="data_model_id" ref="model_ea_entity_business_capability"/>
+    </record>
+
+    <record id="ea_component_business_service" model="ea.component">
+        <field name="name">Business Service</field>
+        <field name="sequence">100</field>
+        <field name="layer_id" ref="roadmap_layer_business"/>
+        <field name="data_model_id" ref="model_ea_entity_business_service"/>
+    </record>
+
+    <record id="ea_component_digital_transformation_goals" model="ea.component">
+        <field name="name">Digital Transformation Goals</field>
+        <field name="sequence">110</field>
+        <field name="layer_id" ref="roadmap_layer_strategy"/>
+        <field name="data_model_id" ref="model_ea_entity_digital_transformation_goals"/>
+    </record>
+
+    <record id="ea_component_ea_objective" model="ea.component">
+        <field name="name">EA Objective</field>
+        <field name="sequence">120</field>
+        <field name="layer_id" ref="roadmap_layer_strategy"/>
+        <field name="data_model_id" ref="model_ea_entity_ea_objective"/>
+    </record>
+
+</odoo>

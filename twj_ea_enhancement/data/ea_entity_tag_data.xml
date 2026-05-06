@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+
+    <record id="ea_entity_tag_cx_modernization" model="ea.entity.tags">
+        <field name="name">CX Modernization</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="ea_entity_tag_partner_enablement" model="ea.entity.tags">
+        <field name="name">Partner Enablement</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="ea_entity_tag_data_platform" model="ea.entity.tags">
+        <field name="name">Data Platform</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="ea_entity_tag_core_modernization" model="ea.entity.tags">
+        <field name="name">Core Modernization</field>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="ea_entity_tag_data_governance" model="ea.entity.tags">
+        <field name="name">Data Governance</field>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="ea_entity_tag_cloud_migration" model="ea.entity.tags">
+        <field name="name">Cloud Migration</field>
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="ea_entity_tag_integration_hub" model="ea.entity.tags">
+        <field name="name">Integration Hub</field>
+        <field name="sequence">70</field>
+    </record>
+
+    <record id="ea_entity_tag_cybersecurity" model="ea.entity.tags">
+        <field name="name">Cybersecurity</field>
+        <field name="sequence">80</field>
+    </record>
+
+    <record id="ea_entity_application_crm" model="ea.entity.application">
+        <field name="name">CRM System</field>
+        <field name="tags_ids" eval="[(6, 0, [ref('ea_entity_tag_cx_modernization')])]"/>
+        <field name="transition_id" ref="ea_transition_crm"/>
+        <field name="gap_ids" eval="[(6, 0, [ref('ea_gap_identity_gap')])]"/>
+    </record>
+
+    <record id="ea_entity_business_service_customer_onboarding" model="ea.entity.business.service">
+        <field name="name">Customer Onboarding Process</field>
+        <field name="tags_ids" eval="[(6, 0, [ref('ea_entity_tag_cx_modernization')])]"/>
+        <field name="transition_id" ref="ea_transition_customer_onboarding"/>
+        <field name="gap_ids" eval="[(6, 0, [ref('ea_gap_identity_gap')])]"/>
+    </record>
+
+    <record id="ea_entity_technology_service_cloud" model="ea.entity.technology.service">
+        <field name="name">Cloud Infrastructure</field>
+        <field name="tags_ids" eval="[(6, 0, [ref('ea_entity_tag_cloud_migration')])]"/>
+        <field name="transition_id" ref="ea_transition_cloud"/>
+        <field name="gap_ids" eval="[(6, 0, [ref('ea_gap_hosting_gap')])]"/>
+    </record>
+
+    <record id="ea_entity_business_capability_partner_management" model="ea.entity.business.capability">
+        <field name="name">Partner Management Capability</field>
+        <field name="tags_ids" eval="[(6, 0, [ref('ea_entity_tag_partner_enablement')])]"/>
+        <field name="transition_id" ref="ea_transition_partner_management"/>
+        <field name="gap_ids" eval="[(6, 0, [ref('ea_gap_service_redundancy')])]"/>
+    </record>
+
+    <record id="ea_entity_ea_objective_data_strategy" model="ea.entity.ea.objective">
+        <field name="name">Data Strategy Objective</field>
+        <field name="tags_ids" eval="[(6, 0, [ref('ea_entity_tag_data_platform')])]"/>
+        <field name="transition_id" ref="ea_transition_data_strategy_objective"/>
+        <field name="gap_ids" eval="[(6, 0, [ref('ea_gap_data_quality')])]"/>
+    </record>
+
+    <record id="ea_entity_application_portal" model="ea.entity.application">
+        <field name="name">Web Portal</field>
+        <field name="tags_ids" eval="[(6, 0, [ref('ea_entity_tag_cx_modernization')])]"/>
+        <field name="transition_id" ref="ea_transition_application_portal"/>
+        <field name="gap_ids" eval="[(6, 0, [ref('ea_gap_experience_gap')])]"/>
+    </record>
+
+    <record id="ea_entity_stage_service" model="ea.entity.stage">
+        <field name="name">Service Stage</field>
+        <field name="tags_ids" eval="[(6, 0, [ref('ea_entity_tag_partner_enablement')])]"/>
+        <field name="transition_id" ref="ea_transition_stage_service"/>
+        <field name="gap_ids" eval="[(6, 0, [ref('ea_gap_service_redundancy')])]"/>
+    </record>
+
+    <record id="ea_entity_digital_transformation_goal" model="ea.entity.digital.transformation.goals">
+        <field name="name">Digital Growth Goal</field>
+        <field name="tags_ids" eval="[(6, 0, [ref('ea_entity_tag_data_platform')])]"/>
+        <field name="transition_id" ref="ea_transition_digital_goal"/>
+        <field name="gap_ids" eval="[(6, 0, [ref('ea_gap_data_quality')])]"/>
+    </record>
+
+    <record id="ea_entity_cybersecurity_service" model="ea.cybersecurity.security.service">
+        <field name="name">Threat Monitoring Service</field>
+        <field name="tags_ids" eval="[(6, 0, [ref('ea_entity_tag_cybersecurity')])]"/>
+        <field name="transition_id" ref="ea_transition_security_service"/>
+        <field name="gap_ids" eval="[(6, 0, [ref('ea_gap_monitoring_gap')])]"/>
+    </record>
+
+</odoo>

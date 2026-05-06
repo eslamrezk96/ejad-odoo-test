@@ -1,0 +1,853 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <menuitem
+        id="menu_ea_management_root"
+        name="Management"
+        parent="menu_building_block_roadmap_root"
+        sequence="20"
+    />
+
+    <menuitem
+        id="menu_ea_entities_root"
+        name="Entities"
+        parent="menu_building_block_roadmap_root"
+        sequence="30"
+    />
+
+    <record id="view_ea_layer_tree" model="ir.ui.view">
+        <field name="name">ea.layer.tree</field>
+        <field name="model">ea.layer</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence"/>
+                <field name="name"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_layer_form" model="ir.ui.view">
+        <field name="name">ea.layer.form</field>
+        <field name="model">ea.layer</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="sequence"/>
+                        <field name="active"/>
+                    </group>
+                    <field name="component_ids"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_layer" model="ir.actions.act_window">
+        <field name="name">Layers</field>
+        <field name="res_model">ea.layer</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_ea_layer"
+        name="Layers"
+        parent="menu_ea_management_root"
+        action="action_ea_layer"
+        sequence="10"
+    />
+
+    <record id="view_ea_component_tree" model="ir.ui.view">
+        <field name="name">ea.component.tree</field>
+        <field name="model">ea.component</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence"/>
+                <field name="name"/>
+                <field name="layer_id"/>
+                <field name="data_model_id"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_component_form" model="ir.ui.view">
+        <field name="name">ea.component.form</field>
+        <field name="model">ea.component</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="sequence"/>
+                        <field name="layer_id"/>
+                        <field name="data_model_id"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_component" model="ir.actions.act_window">
+        <field name="name">Components</field>
+        <field name="res_model">ea.component</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_ea_component"
+        name="Components"
+        parent="menu_ea_management_root"
+        action="action_ea_component"
+        sequence="20"
+    />
+
+    <record id="view_ea_entity_tags_tree" model="ir.ui.view">
+        <field name="name">ea.entity.tags.tree</field>
+        <field name="model">ea.entity.tags</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence"/>
+                <field name="name"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_entity_tags_form" model="ir.ui.view">
+        <field name="name">ea.entity.tags.form</field>
+        <field name="model">ea.entity.tags</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="sequence"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_entity_tags" model="ir.actions.act_window">
+        <field name="name">Tags</field>
+        <field name="res_model">ea.entity.tags</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_ea_entity_tags"
+        name="Tags"
+        parent="menu_ea_management_root"
+        action="action_ea_entity_tags"
+        sequence="30"
+    />
+
+    <record id="view_ea_transition_tree" model="ir.ui.view">
+        <field name="name">ea.transition.tree</field>
+        <field name="model">ea.transition</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="project_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_transition_form" model="ir.ui.view">
+        <field name="name">ea.transition.form</field>
+        <field name="model">ea.transition</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="project_id"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_transition" model="ir.actions.act_window">
+        <field name="name">Transitions</field>
+        <field name="res_model">ea.transition</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_ea_transition"
+        name="Transitions"
+        parent="menu_ea_management_root"
+        action="action_ea_transition"
+        sequence="40"
+    />
+
+    <record id="view_ea_entity_gap_tree" model="ir.ui.view">
+        <field name="name">ea.entity.gap.tree</field>
+        <field name="model">ea.entity.gap</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="change_type"/>
+                <field name="transition_id"/>
+                <field name="tags_ids" widget="many2many_tags"/>
+                <field name="projects_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_entity_gap_form" model="ir.ui.view">
+        <field name="name">ea.entity.gap.form</field>
+        <field name="model">ea.entity.gap</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="change_type"/>
+                        <field name="transition_id"/>
+                    </group>
+                    <group>
+                        <field name="tags_ids" widget="many2many_tags"/>
+                        <field name="projects_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_entity_gap" model="ir.actions.act_window">
+        <field name="name">Gaps</field>
+        <field name="res_model">ea.entity.gap</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_ea_entity_gap"
+        name="Gaps"
+        parent="menu_ea_management_root"
+        action="action_ea_entity_gap"
+        sequence="50"
+    />
+
+    <record id="view_ea_entity_application_tree" model="ir.ui.view">
+        <field name="name">ea.entity.application.tree</field>
+        <field name="model">ea.entity.application</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="change_type"/>
+                <field name="transition_id"/>
+                <field name="tags_ids" widget="many2many_tags"/>
+                <field name="gap_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_entity_application_form" model="ir.ui.view">
+        <field name="name">ea.entity.application.form</field>
+        <field name="model">ea.entity.application</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="change_type"/>
+                        <field name="transition_id"/>
+                    </group>
+                    <group>
+                        <field name="tags_ids" widget="many2many_tags"/>
+                        <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_entity_application" model="ir.actions.act_window">
+        <field name="name">Applications</field>
+        <field name="res_model">ea.entity.application</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_ea_entity_application"
+        name="Applications"
+        parent="menu_ea_entities_root"
+        action="action_ea_entity_application"
+        sequence="10"
+    />
+
+    <record id="view_ea_entity_technology_service_tree" model="ir.ui.view">
+        <field name="name">ea.entity.technology.service.tree</field>
+        <field name="model">ea.entity.technology.service</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="change_type"/>
+                <field name="transition_id"/>
+                <field name="tags_ids" widget="many2many_tags"/>
+                <field name="gap_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_entity_technology_service_form" model="ir.ui.view">
+        <field name="name">ea.entity.technology.service.form</field>
+        <field name="model">ea.entity.technology.service</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="change_type"/>
+                        <field name="transition_id"/>
+                    </group>
+                    <group>
+                        <field name="tags_ids" widget="many2many_tags"/>
+                        <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_entity_technology_service" model="ir.actions.act_window">
+        <field name="name">Technology Services</field>
+        <field name="res_model">ea.entity.technology.service</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_ea_entity_technology_service"
+        name="Technology Services"
+        parent="menu_ea_entities_root"
+        action="action_ea_entity_technology_service"
+        sequence="20"
+    />
+
+    <record id="view_ea_entity_step_tree" model="ir.ui.view">
+        <field name="name">ea.entity.step.tree</field>
+        <field name="model">ea.entity.step</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="change_type"/>
+                <field name="transition_id"/>
+                <field name="tags_ids" widget="many2many_tags"/>
+                <field name="gap_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_entity_step_form" model="ir.ui.view">
+        <field name="name">ea.entity.step.form</field>
+        <field name="model">ea.entity.step</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="change_type"/>
+                        <field name="transition_id"/>
+                    </group>
+                    <group>
+                        <field name="tags_ids" widget="many2many_tags"/>
+                        <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_entity_step" model="ir.actions.act_window">
+        <field name="name">Steps</field>
+        <field name="res_model">ea.entity.step</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_ea_entity_step"
+        name="Steps"
+        parent="menu_ea_entities_root"
+        action="action_ea_entity_step"
+        sequence="30"
+    />
+
+    <record id="view_ea_entity_stage_tree" model="ir.ui.view">
+        <field name="name">ea.entity.stage.tree</field>
+        <field name="model">ea.entity.stage</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="change_type"/>
+                <field name="transition_id"/>
+                <field name="tags_ids" widget="many2many_tags"/>
+                <field name="gap_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_entity_stage_form" model="ir.ui.view">
+        <field name="name">ea.entity.stage.form</field>
+        <field name="model">ea.entity.stage</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="change_type"/>
+                        <field name="transition_id"/>
+                    </group>
+                    <group>
+                        <field name="tags_ids" widget="many2many_tags"/>
+                        <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_entity_stage" model="ir.actions.act_window">
+        <field name="name">Stages</field>
+        <field name="res_model">ea.entity.stage</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_ea_entity_stage"
+        name="Stages"
+        parent="menu_ea_entities_root"
+        action="action_ea_entity_stage"
+        sequence="40"
+    />
+
+    <record id="view_ea_entity_organization_unit_tree" model="ir.ui.view">
+        <field name="name">ea.entity.organization.unit.tree</field>
+        <field name="model">ea.entity.organization.unit</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="change_type"/>
+                <field name="transition_id"/>
+                <field name="tags_ids" widget="many2many_tags"/>
+                <field name="gap_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_entity_organization_unit_form" model="ir.ui.view">
+        <field name="name">ea.entity.organization.unit.form</field>
+        <field name="model">ea.entity.organization.unit</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="change_type"/>
+                        <field name="transition_id"/>
+                    </group>
+                    <group>
+                        <field name="tags_ids" widget="many2many_tags"/>
+                        <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_entity_organization_unit" model="ir.actions.act_window">
+        <field name="name">Organization Units</field>
+        <field name="res_model">ea.entity.organization.unit</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_ea_entity_organization_unit"
+        name="Organization Units"
+        parent="menu_ea_entities_root"
+        action="action_ea_entity_organization_unit"
+        sequence="50"
+    />
+
+    <record id="view_ea_entity_business_capability_tree" model="ir.ui.view">
+        <field name="name">ea.entity.business.capability.tree</field>
+        <field name="model">ea.entity.business.capability</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="change_type"/>
+                <field name="transition_id"/>
+                <field name="tags_ids" widget="many2many_tags"/>
+                <field name="gap_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_entity_business_capability_form" model="ir.ui.view">
+        <field name="name">ea.entity.business.capability.form</field>
+        <field name="model">ea.entity.business.capability</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="change_type"/>
+                        <field name="transition_id"/>
+                    </group>
+                    <group>
+                        <field name="tags_ids" widget="many2many_tags"/>
+                        <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_entity_business_capability" model="ir.actions.act_window">
+        <field name="name">Business Capabilities</field>
+        <field name="res_model">ea.entity.business.capability</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_ea_entity_business_capability"
+        name="Business Capabilities"
+        parent="menu_ea_entities_root"
+        action="action_ea_entity_business_capability"
+        sequence="60"
+    />
+
+    <record id="view_ea_entity_business_service_tree" model="ir.ui.view">
+        <field name="name">ea.entity.business.service.tree</field>
+        <field name="model">ea.entity.business.service</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="change_type"/>
+                <field name="transition_id"/>
+                <field name="tags_ids" widget="many2many_tags"/>
+                <field name="gap_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_entity_business_service_form" model="ir.ui.view">
+        <field name="name">ea.entity.business.service.form</field>
+        <field name="model">ea.entity.business.service</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="change_type"/>
+                        <field name="transition_id"/>
+                    </group>
+                    <group>
+                        <field name="tags_ids" widget="many2many_tags"/>
+                        <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_entity_business_service" model="ir.actions.act_window">
+        <field name="name">Business Services</field>
+        <field name="res_model">ea.entity.business.service</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_ea_entity_business_service"
+        name="Business Services"
+        parent="menu_ea_entities_root"
+        action="action_ea_entity_business_service"
+        sequence="70"
+    />
+
+    <record id="view_ea_entity_digital_transformation_goals_tree" model="ir.ui.view">
+        <field name="name">ea.entity.digital.transformation.goals.tree</field>
+        <field name="model">ea.entity.digital.transformation.goals</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="change_type"/>
+                <field name="transition_id"/>
+                <field name="tags_ids" widget="many2many_tags"/>
+                <field name="gap_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_entity_digital_transformation_goals_form" model="ir.ui.view">
+        <field name="name">ea.entity.digital.transformation.goals.form</field>
+        <field name="model">ea.entity.digital.transformation.goals</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="change_type"/>
+                        <field name="transition_id"/>
+                    </group>
+                    <group>
+                        <field name="tags_ids" widget="many2many_tags"/>
+                        <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_entity_digital_transformation_goals" model="ir.actions.act_window">
+        <field name="name">Digital Transformation Goals</field>
+        <field name="res_model">ea.entity.digital.transformation.goals</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_ea_entity_digital_transformation_goals"
+        name="Digital Transformation Goals"
+        parent="menu_ea_entities_root"
+        action="action_ea_entity_digital_transformation_goals"
+        sequence="80"
+    />
+
+    <record id="view_ea_entity_ea_objective_tree" model="ir.ui.view">
+        <field name="name">ea.entity.ea.objective.tree</field>
+        <field name="model">ea.entity.ea.objective</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="change_type"/>
+                <field name="transition_id"/>
+                <field name="tags_ids" widget="many2many_tags"/>
+                <field name="gap_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_entity_ea_objective_form" model="ir.ui.view">
+        <field name="name">ea.entity.ea.objective.form</field>
+        <field name="model">ea.entity.ea.objective</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="change_type"/>
+                        <field name="transition_id"/>
+                    </group>
+                    <group>
+                        <field name="tags_ids" widget="many2many_tags"/>
+                        <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_entity_ea_objective" model="ir.actions.act_window">
+        <field name="name">EA Objectives</field>
+        <field name="res_model">ea.entity.ea.objective</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_ea_entity_ea_objective"
+        name="EA Objectives"
+        parent="menu_ea_entities_root"
+        action="action_ea_entity_ea_objective"
+        sequence="90"
+    />
+
+    <record id="view_ea_cybersecurity_security_apparatus_tree" model="ir.ui.view">
+        <field name="name">ea.cybersecurity.security.apparatus.tree</field>
+        <field name="model">ea.cybersecurity.security.apparatus</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="change_type"/>
+                <field name="transition_id"/>
+                <field name="tags_ids" widget="many2many_tags"/>
+                <field name="gap_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_cybersecurity_security_apparatus_form" model="ir.ui.view">
+        <field name="name">ea.cybersecurity.security.apparatus.form</field>
+        <field name="model">ea.cybersecurity.security.apparatus</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="change_type"/>
+                        <field name="transition_id"/>
+                    </group>
+                    <group>
+                        <field name="tags_ids" widget="many2many_tags"/>
+                        <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_cybersecurity_security_apparatus" model="ir.actions.act_window">
+        <field name="name">Cybersecurity Apparatus</field>
+        <field name="res_model">ea.cybersecurity.security.apparatus</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_ea_cybersecurity_security_apparatus"
+        name="Cybersecurity Apparatus"
+        parent="menu_ea_entities_root"
+        action="action_ea_cybersecurity_security_apparatus"
+        sequence="100"
+    />
+
+    <record id="view_ea_cybersecurity_security_software_tree" model="ir.ui.view">
+        <field name="name">ea.cybersecurity.security.software.tree</field>
+        <field name="model">ea.cybersecurity.security.software</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="change_type"/>
+                <field name="transition_id"/>
+                <field name="tags_ids" widget="many2many_tags"/>
+                <field name="gap_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_cybersecurity_security_software_form" model="ir.ui.view">
+        <field name="name">ea.cybersecurity.security.software.form</field>
+        <field name="model">ea.cybersecurity.security.software</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="change_type"/>
+                        <field name="transition_id"/>
+                    </group>
+                    <group>
+                        <field name="tags_ids" widget="many2many_tags"/>
+                        <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_cybersecurity_security_software" model="ir.actions.act_window">
+        <field name="name">Cybersecurity Software</field>
+        <field name="res_model">ea.cybersecurity.security.software</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_ea_cybersecurity_security_software"
+        name="Cybersecurity Software"
+        parent="menu_ea_entities_root"
+        action="action_ea_cybersecurity_security_software"
+        sequence="110"
+    />
+
+    <record id="view_ea_cybersecurity_security_service_tree" model="ir.ui.view">
+        <field name="name">ea.cybersecurity.security.service.tree</field>
+        <field name="model">ea.cybersecurity.security.service</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="change_type"/>
+                <field name="transition_id"/>
+                <field name="tags_ids" widget="many2many_tags"/>
+                <field name="gap_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_cybersecurity_security_service_form" model="ir.ui.view">
+        <field name="name">ea.cybersecurity.security.service.form</field>
+        <field name="model">ea.cybersecurity.security.service</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="change_type"/>
+                        <field name="transition_id"/>
+                    </group>
+                    <group>
+                        <field name="tags_ids" widget="many2many_tags"/>
+                        <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_cybersecurity_security_service" model="ir.actions.act_window">
+        <field name="name">Cybersecurity Services</field>
+        <field name="res_model">ea.cybersecurity.security.service</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_ea_cybersecurity_security_service"
+        name="Cybersecurity Services"
+        parent="menu_ea_entities_root"
+        action="action_ea_cybersecurity_security_service"
+        sequence="120"
+    />
+
+</odoo>

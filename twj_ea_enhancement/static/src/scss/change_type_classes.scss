@@ -1,0 +1,79 @@
+:root {
+    --bs-bg-opacity: 1;
+}
+
+/* =========================
+   Selection keys colors
+   ========================= */
+
+/* none = Idea */
+.bg-none {
+    --status-rgb: 224, 224, 224;
+    --status-text: #374151;
+
+    background-color: rgba(var(--status-rgb), var(--bs-bg-opacity)) !important;
+    color: var(--status-text) !important;
+}
+
+/* new = Planned */
+.bg-new {
+    --status-rgb: 191, 219, 254;
+    --status-text: #1f2937;
+
+    background-color: rgba(var(--status-rgb), var(--bs-bg-opacity)) !important;
+    color: var(--status-text) !important;
+}
+
+/* change = Build */
+.bg-change {
+    --status-rgb: 145, 190, 239;
+    --status-text: #1f2937;
+
+    background-color: rgba(var(--status-rgb), var(--bs-bg-opacity)) !important;
+    color: var(--status-text) !important;
+}
+
+/* active = Active */
+.bg-active {
+    --status-rgb: 198, 230, 204;
+    --status-text: #1f2937;
+
+    background-color: rgba(var(--status-rgb), var(--bs-bg-opacity)) !important;
+    color: var(--status-text) !important;
+}
+
+/* maintain = Maintain */
+.bg-maintain {
+    --status-rgb: 255, 224, 130;
+    --status-text: #1f2937;
+
+    background-color: rgba(var(--status-rgb), var(--bs-bg-opacity)) !important;
+    color: var(--status-text) !important;
+}
+
+/* optimize = Optimize */
+.bg-optimize {
+    --status-rgb: 255, 194, 128;
+    --status-text: #1f2937;
+
+    background-color: rgba(var(--status-rgb), var(--bs-bg-opacity)) !important;
+    color: var(--status-text) !important;
+}
+
+/* cancel = Sunset */
+.bg-cancel {
+    --status-rgb: 239, 111, 111;
+    --status-text: #1f2937;
+
+    background-color: rgba(var(--status-rgb), var(--bs-bg-opacity)) !important;
+    color: var(--status-text) !important;
+}
+
+/* old = Retired */
+.bg-old {
+    --status-rgb: 52, 58, 64;
+    --status-text: #ffffff;
+
+    background-color: rgba(var(--status-rgb), var(--bs-bg-opacity)) !important;
+    color: var(--status-text) !important;
+}

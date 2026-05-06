@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+
+    <record id="project_report_cx_transformation" model="project.project">
+        <field name="name">CX Transformation</field>
+    </record>
+
+    <record id="project_report_data_strategy" model="project.project">
+        <field name="name">Data Strategy</field>
+    </record>
+
+    <record id="project_report_cloud_program" model="project.project">
+        <field name="name">Cloud Program</field>
+    </record>
+
+    <record id="project_report_partner_revamp" model="project.project">
+        <field name="name">Partner Revamp</field>
+    </record>
+
+    <record id="project_report_ea_planning" model="project.project">
+        <field name="name">EA Planning</field>
+    </record>
+
+    <record id="ea_transition_customer_onboarding" model="ea.transition">
+        <field name="name">Customer Onboarding Transition</field>
+        <field name="start_date">2023-01-15</field>
+        <field name="end_date">2024-12-15</field>
+        <field name="project_id" ref="project_report_cx_transformation"/>
+    </record>
+
+    <record id="ea_transition_crm" model="ea.transition">
+        <field name="name">CRM Modernization Transition</field>
+        <field name="start_date">2024-02-01</field>
+        <field name="end_date">2027-11-30</field>
+        <field name="project_id" ref="project_report_cx_transformation"/>
+    </record>
+
+    <record id="ea_transition_partner_management" model="ea.transition">
+        <field name="name">Partner Management Transition</field>
+        <field name="start_date">2024-07-01</field>
+        <field name="end_date">2026-12-31</field>
+        <field name="project_id" ref="project_report_partner_revamp"/>
+    </record>
+
+    <record id="ea_transition_cloud" model="ea.transition">
+        <field name="name">Cloud Infrastructure Transition</field>
+        <field name="start_date">2025-03-01</field>
+        <field name="end_date">2030-06-30</field>
+        <field name="project_id" ref="project_report_cloud_program"/>
+    </record>
+
+    <record id="ea_transition_data_strategy_objective" model="ea.transition">
+        <field name="name">Data Strategy Objective Transition</field>
+        <field name="start_date">2026-01-01</field>
+        <field name="end_date">2027-09-30</field>
+        <field name="project_id" ref="project_report_data_strategy"/>
+    </record>
+
+    <record id="ea_transition_security_service" model="ea.transition">
+        <field name="name">Security Service Transition</field>
+        <field name="start_date">2025-01-01</field>
+        <field name="end_date">2028-12-31</field>
+        <field name="project_id" ref="project_report_ea_planning"/>
+    </record>
+
+    <record id="ea_transition_application_portal" model="ea.transition">
+        <field name="name">Portal Transition</field>
+        <field name="start_date">2024-04-01</field>
+        <field name="end_date">2026-06-30</field>
+        <field name="project_id" ref="project_report_cx_transformation"/>
+    </record>
+
+    <record id="ea_transition_stage_service" model="ea.transition">
+        <field name="name">Service Stage Transition</field>
+        <field name="start_date">2023-07-01</field>
+        <field name="end_date">2025-03-31</field>
+        <field name="project_id" ref="project_report_partner_revamp"/>
+    </record>
+
+    <record id="ea_transition_digital_goal" model="ea.transition">
+        <field name="name">Digital Goal Transition</field>
+        <field name="start_date">2027-01-01</field>
+        <field name="end_date">2030-12-31</field>
+        <field name="project_id" ref="project_report_ea_planning"/>
+    </record>
+
+    <record id="ea_gap_identity_gap" model="ea.entity.gap">
+        <field name="name">Identity Gap</field>
+        <field name="projects_ids" eval="[(6, 0, [ref('project_report_cx_transformation')])]"/>
+    </record>
+
+    <record id="ea_gap_hosting_gap" model="ea.entity.gap">
+        <field name="name">Hosting Gap</field>
+        <field name="projects_ids" eval="[(6, 0, [ref('project_report_cloud_program')])]"/>
+    </record>
+
+    <record id="ea_gap_service_redundancy" model="ea.entity.gap">
+        <field name="name">Service Redundancy</field>
+        <field name="projects_ids" eval="[(6, 0, [ref('project_report_partner_revamp')])]"/>
+    </record>
+
+    <record id="ea_gap_data_quality" model="ea.entity.gap">
+        <field name="name">Data Quality</field>
+        <field name="projects_ids" eval="[(6, 0, [ref('project_report_data_strategy')])]"/>
+    </record>
+
+    <record id="ea_gap_monitoring_gap" model="ea.entity.gap">
+        <field name="name">Monitoring Gap</field>
+        <field name="projects_ids" eval="[(6, 0, [ref('project_report_ea_planning')])]"/>
+    </record>
+
+    <record id="ea_gap_experience_gap" model="ea.entity.gap">
+        <field name="name">Experience Gap</field>
+        <field name="projects_ids" eval="[(6, 0, [ref('project_report_cx_transformation')])]"/>
+    </record>
+
+</odoo>
