@@ -1,4 +1,4 @@
-from odoo import models
+from odoo import _, models
 
 
 class RoadmapReportButtonMixin(models.AbstractModel):
@@ -31,6 +31,20 @@ class RoadmapReportButtonMixin(models.AbstractModel):
                 "source_record_id": self.id,
                 "initial_layer_ids": self._get_roadmap_initial_layer_ids(),
                 "initial_tag_ids": self._get_roadmap_initial_tag_ids(),
+            },
+        }
+
+    def action_open_new_version_wizard(self):
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Create New Version"),
+            "res_model": "ea.entity.version.wizard",
+            "view_mode": "form",
+            "target": "new",
+            "context": {
+                "default_source_model": self._name,
+                "default_source_record_id": self.id,
             },
         }
 

@@ -6,3 +6,4 @@ from . import entity_tags
 from . import project_project
 from . import roadmap_report_button
 from . import transition
+from . import entity_version_wizard

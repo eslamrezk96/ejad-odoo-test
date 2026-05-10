@@ -259,6 +259,7 @@
             <form>
                 <header>
                     <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
                     <group>
@@ -269,6 +270,11 @@
                     <group>
                         <field name="tags_ids" widget="many2many_tags"/>
                         <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                    <group string="Version Links">
+                        <field name="version_parent_entity_id"/>
+                        <field name="version_previous_entity_id"/>
+                        <field name="version_next_entity_id"/>
                     </group>
                 </sheet>
             </form>
@@ -310,6 +316,7 @@
             <form>
                 <header>
                     <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
                     <group>
@@ -320,6 +327,11 @@
                     <group>
                         <field name="tags_ids" widget="many2many_tags"/>
                         <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                    <group string="Version Links">
+                        <field name="version_parent_entity_id"/>
+                        <field name="version_previous_entity_id"/>
+                        <field name="version_next_entity_id"/>
                     </group>
                 </sheet>
             </form>
@@ -361,6 +373,7 @@
             <form>
                 <header>
                     <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
                     <group>
@@ -371,6 +384,11 @@
                     <group>
                         <field name="tags_ids" widget="many2many_tags"/>
                         <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                    <group string="Version Links">
+                        <field name="version_parent_entity_id"/>
+                        <field name="version_previous_entity_id"/>
+                        <field name="version_next_entity_id"/>
                     </group>
                 </sheet>
             </form>
@@ -412,6 +430,7 @@
             <form>
                 <header>
                     <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
                     <group>
@@ -422,6 +441,11 @@
                     <group>
                         <field name="tags_ids" widget="many2many_tags"/>
                         <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                    <group string="Version Links">
+                        <field name="version_parent_entity_id"/>
+                        <field name="version_previous_entity_id"/>
+                        <field name="version_next_entity_id"/>
                     </group>
                 </sheet>
             </form>
@@ -463,6 +487,7 @@
             <form>
                 <header>
                     <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
                     <group>
@@ -473,6 +498,11 @@
                     <group>
                         <field name="tags_ids" widget="many2many_tags"/>
                         <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                    <group string="Version Links">
+                        <field name="version_parent_entity_id"/>
+                        <field name="version_previous_entity_id"/>
+                        <field name="version_next_entity_id"/>
                     </group>
                 </sheet>
             </form>
@@ -514,6 +544,7 @@
             <form>
                 <header>
                     <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
                     <group>
@@ -524,6 +555,11 @@
                     <group>
                         <field name="tags_ids" widget="many2many_tags"/>
                         <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                    <group string="Version Links">
+                        <field name="version_parent_entity_id"/>
+                        <field name="version_previous_entity_id"/>
+                        <field name="version_next_entity_id"/>
                     </group>
                 </sheet>
             </form>
@@ -565,6 +601,7 @@
             <form>
                 <header>
                     <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
                     <group>
@@ -575,6 +612,11 @@
                     <group>
                         <field name="tags_ids" widget="many2many_tags"/>
                         <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                    <group string="Version Links">
+                        <field name="version_parent_entity_id"/>
+                        <field name="version_previous_entity_id"/>
+                        <field name="version_next_entity_id"/>
                     </group>
                 </sheet>
             </form>
@@ -616,6 +658,7 @@
             <form>
                 <header>
                     <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
                     <group>
@@ -626,6 +669,11 @@
                     <group>
                         <field name="tags_ids" widget="many2many_tags"/>
                         <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                    <group string="Version Links">
+                        <field name="version_parent_entity_id"/>
+                        <field name="version_previous_entity_id"/>
+                        <field name="version_next_entity_id"/>
                     </group>
                 </sheet>
             </form>
@@ -667,6 +715,7 @@
             <form>
                 <header>
                     <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
                     <group>
@@ -677,6 +726,11 @@
                     <group>
                         <field name="tags_ids" widget="many2many_tags"/>
                         <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                    <group string="Version Links">
+                        <field name="version_parent_entity_id"/>
+                        <field name="version_previous_entity_id"/>
+                        <field name="version_next_entity_id"/>
                     </group>
                 </sheet>
             </form>
@@ -718,6 +772,7 @@
             <form>
                 <header>
                     <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
                     <group>
@@ -728,6 +783,11 @@
                     <group>
                         <field name="tags_ids" widget="many2many_tags"/>
                         <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                    <group string="Version Links">
+                        <field name="version_parent_entity_id"/>
+                        <field name="version_previous_entity_id"/>
+                        <field name="version_next_entity_id"/>
                     </group>
                 </sheet>
             </form>
@@ -769,6 +829,7 @@
             <form>
                 <header>
                     <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
                     <group>
@@ -779,6 +840,11 @@
                     <group>
                         <field name="tags_ids" widget="many2many_tags"/>
                         <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                    <group string="Version Links">
+                        <field name="version_parent_entity_id"/>
+                        <field name="version_previous_entity_id"/>
+                        <field name="version_next_entity_id"/>
                     </group>
                 </sheet>
             </form>
@@ -820,6 +886,7 @@
             <form>
                 <header>
                     <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
                     <group>
@@ -830,6 +897,11 @@
                     <group>
                         <field name="tags_ids" widget="many2many_tags"/>
                         <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                    <group string="Version Links">
+                        <field name="version_parent_entity_id"/>
+                        <field name="version_previous_entity_id"/>
+                        <field name="version_next_entity_id"/>
                     </group>
                 </sheet>
             </form>

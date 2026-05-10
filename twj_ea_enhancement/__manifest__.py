@@ -26,6 +26,7 @@ This version intentionally does not yet read from ea.entity.* models.
         "data/ea_entity_tag_data.xml",
         "data/ea_component_data.xml",
         "views/roadmap_report_menu.xml",
+        "views/ea_entity_version_wizard_views.xml",
         "views/ea_manual_management_views.xml",
     ],
     "assets": {
