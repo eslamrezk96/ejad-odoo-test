@@ -234,7 +234,7 @@
                                     <th t-esc="getText('dtProject')"/>
                                     <th t-esc="getText('gaps')"/>
                                     <t t-foreach="getTimelineColumns()" t-as="phase" t-key="phase">
-                                        <th t-esc="phase"/>
+                                        <th class="text-center" t-esc="phase"/>
                                     </t>
                                 </tr>
                             </thead>
@@ -266,11 +266,11 @@
                                             <td t-att-colspan="getTimelineColumnCount()" class="o_timeline_cell">
                                                 <div class="o_timeline_track" t-att-style="getTimelineTrackStyle()">
                                                     <t t-foreach="row.blocks" t-as="block" t-key="block.key">
-                <div
-                    t-att-class="'o_timeline_block ' + (block.changeType ? ('bg-' + block.changeType) : block.className)"
-                    t-att-style="'grid-column: ' + (block.start + 1) + ' / span ' + block.span"
-                >
-                                                            <span t-esc="row.name"/>
+                                                        <div
+                                                            t-att-class="'o_timeline_block ' + (block.changeType ? ('bg-' + block.changeType) : block.className)"
+                                                            t-att-style="'grid-column: ' + (block.start + 1) + ' / span ' + block.span"
+                                                        >
+                                                            <span t-esc="block.label"/>
                                                         </div>
                                                     </t>
                                                 </div>

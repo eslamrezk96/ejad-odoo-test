@@ -313,7 +313,7 @@
 }
 
 .o_phase_years th {
-    text-align: center;
+    text-align: center !important;
     font-size: 0.8rem;
     background: #f9fbff;
     border-bottom: 1px solid #d7dfed !important;
@@ -329,7 +329,7 @@
 
 .o_roadmap_table thead tr:not(.o_phase_years) th:nth-child(-n + 5),
 .o_roadmap_table tbody td:nth-child(-n + 5) {
-    border-right: 1px solid #d7dfed;
+    border: 1px solid #d7dfed;
 }
 
 .o_domain_cell {
@@ -397,7 +397,7 @@
 .o_timeline_block {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     min-height: 24px;
     padding: 4px 8px;
     border-radius: 4px;
@@ -405,6 +405,15 @@
     font-weight: 600;
     color: #243147;
     border: 1px solid rgba(31, 42, 68, 0.06);
+    overflow: hidden;
+    text-align: start;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.o_timeline_block span {
+    flex: 1 1 auto;
+    min-width: 0;
 }
 
 .o_status_blank {

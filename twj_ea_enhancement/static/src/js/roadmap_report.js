@@ -571,7 +571,7 @@ class BuildingBlockRoadmapReport extends Component {
 
         lines.forEach((line) => {
             if (!rowsByLayerId.has(line.layer_id)) {
-                rowsByLayerId.set(line.layer_id, []);
+                rowsByLayerId.set(line.layer_id, new Map());
                 layerOrder.push(line.layer_id);
             }
 
@@ -580,8 +580,42 @@ class BuildingBlockRoadmapReport extends Component {
                 iconClass: "fa fa-folder-open",
                 accentClass: "",
             };
+            const layerRows = rowsByLayerId.get(line.layer_id);
+            const rowKey = `${line.layer_id}-${line.root_entity_id || line.id}`;
+            let groupedRow = layerRows.get(rowKey);
 
-            const blocks = [];
+            if (!groupedRow) {
+                groupedRow = {
+                    id: rowKey,
+                    layerId: String(line.layer_id),
+                    layerName: line.layer_name,
+                    iconClass: presentation.iconClass,
+                    accentClass: presentation.accentClass,
+                    name: line.root_entity_name || line.name,
+                    tagNames: new Set(),
+                    projectNames: new Set(),
+                    gapNames: new Set(),
+                    blocks: [],
+                };
+                layerRows.set(rowKey, groupedRow);
+            }
+
+            (line.tag_names || []).forEach((tagName) => {
+                if (tagName) {
+                    groupedRow.tagNames.add(tagName);
+                }
+            });
+            (line.project_names || []).forEach((projectName) => {
+                if (projectName) {
+                    groupedRow.projectNames.add(projectName);
+                }
+            });
+            (line.gap_names || []).forEach((gapName) => {
+                if (gapName) {
+                    groupedRow.gapNames.add(gapName);
+                }
+            });
+
             if (line.start_date && line.end_date && firstTimelineYear !== undefined) {
                 const startDate = new Date(line.start_date);
                 const endDate = new Date(line.end_date);
@@ -592,34 +626,27 @@ class BuildingBlockRoadmapReport extends Component {
                 const start = ((startYear - firstTimelineYear) * 4) + startQuarter;
                 const end = ((endYear - firstTimelineYear) * 4) + endQuarter;
 
-                blocks.push({
+                groupedRow.blocks.push({
                     key: `${line.id}-transition`,
                     start,
                     span: Math.max(1, end - start + 1),
-                    label: line.transition_name || line.project_name || line.name,
+                    label: line.name,
                     changeType: line.change_type || "none",
                     className: `bg-${line.change_type || "none"}`,
                 });
             }
-
-            rowsByLayerId.get(line.layer_id).push({
-                id: line.id,
-                layerId: String(line.layer_id),
-                layerName: line.layer_name,
-                iconClass: presentation.iconClass,
-                accentClass: presentation.accentClass,
-                name: line.name,
-                tag: (line.tag_names || []).join(", "),
-                project: line.project_name || "",
-                gaps: line.gap_names || [],
-                blocks,
-            });
         });
 
         const flattenedRows = [];
 
         for (const layerId of layerOrder) {
-            const layerRows = rowsByLayerId.get(layerId) || [];
+            const layerRows = Array.from((rowsByLayerId.get(layerId) || new Map()).values()).map((row) => ({
+                ...row,
+                tag: Array.from(row.tagNames).join(", "),
+                project: Array.from(row.projectNames).join(", "),
+                gaps: Array.from(row.gapNames),
+                blocks: row.blocks.sort((left, right) => left.start - right.start),
+            }));
             layerRows.forEach((row, rowIndex) => {
                 flattenedRows.push({
                     ...row,

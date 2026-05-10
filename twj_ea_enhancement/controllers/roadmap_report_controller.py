@@ -98,12 +98,20 @@ class BuildingBlockRoadmapReportController(http.Controller):
                     project_names = list(dict.fromkeys(gaps.mapped("projects_ids.name")))
                     change_type = record.change_type if "change_type" in model_fields and record.change_type else "none"
                     display_name = record.name if "name" in model_fields and record.name else f"{component.name} {record.id}"
+                    current_base = record.entity_base_id if "entity_base_id" in model_fields else False
+                    root_base = (
+                        record.version_parent_entity_id
+                        if "version_parent_entity_id" in model_fields and record.version_parent_entity_id
+                        else current_base
+                    )
 
                     lines.append(
                         {
                             "id": f"{model_name}-{record.id}",
                             "layer_id": layer.id,
                             "layer_name": layer.name,
+                            "root_entity_id": root_base.id if root_base else record.id,
+                            "root_entity_name": root_base.name if root_base and root_base.name else display_name,
                             "name": display_name,
                             "change_type": change_type,
                             "component_name": component.name,
