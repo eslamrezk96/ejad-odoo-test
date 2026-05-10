@@ -3,40 +3,44 @@ from odoo.http import request
 
 
 class BuildingBlockRoadmapReportController(http.Controller):
-    @http.route("/twj_ea_enhancement/layers", type="json", auth="user")
-    def get_layers(self):
-        layers = request.env["ea.layer"].with_context(lang=request.env.context.get("lang")).sudo().search(
+    @http.route("/building/block/roadmap/layers", type="json", auth="user")
+    def get_building_block_roadmap_layers(self):
+        layers = request.env["ea.layer"].with_context(lang=request.env.context.get("lang")).search_read(
             [],
+            ["id", "name"],
             order="sequence, id",
         )
         return {
             "layers": [
                 {
-                    "id": layer.id,
-                    "name": layer.name,
+                    "id": layer["id"],
+                    "name": layer["name"],
                 }
                 for layer in layers
             ]
         }
 
-    @http.route("/twj_ea_enhancement/tags", type="json", auth="user")
-    def get_tags(self):
-        tags = request.env["ea.entity.tags"].with_context(lang=request.env.context.get("lang")).sudo().search(
+    @http.route("/building/block/roadmap/tags", type="json", auth="user")
+    def get_building_block_roadmap_tags(self):
+        tags = request.env["ea.entity.tags"].with_context(lang=request.env.context.get("lang")).search_read(
             [],
+            ["id", "name"],
             order="name, id",
         )
         return {
             "tags": [
                 {
-                    "id": tag.id,
-                    "name": tag.name,
+                    "id": tag["id"],
+                    "name": tag["name"],
                 }
                 for tag in tags
             ]
         }
 
-    @http.route("/twj_ea_enhancement/search", type="json", auth="user")
-    def search_report(self, layer_ids=None, tag_ids=None, source_model=None, source_record_id=None):
+    @http.route("/building/block/roadmap/search", type="json", auth="user")
+    def search_building_block_roadmap_report(
+        self, layer_ids=None, tag_ids=None, source_model=None, source_record_id=None
+    ):
         layer_ids = layer_ids or []
         tag_ids = tag_ids or []
 
@@ -58,7 +62,7 @@ class BuildingBlockRoadmapReportController(http.Controller):
                 "lines": [],
             }
 
-        layers = request.env["ea.layer"].with_context(lang=request.env.context.get("lang")).sudo().browse(clean_layer_ids).exists()
+        layers = request.env["ea.layer"].with_context(lang=request.env.context.get("lang")).browse(clean_layer_ids).exists()
         if not layers:
             return {
                 "success": True,
@@ -76,7 +80,7 @@ class BuildingBlockRoadmapReportController(http.Controller):
                 model_name = component.data_model_id.model
                 if source_model and model_name != source_model:
                     continue
-                model = request.env[model_name].with_context(lang=request.env.context.get("lang")).sudo()
+                model = request.env[model_name].with_context(lang=request.env.context.get("lang"))
                 model_fields = model._fields
                 domain = []
 

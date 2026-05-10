@@ -94,7 +94,7 @@ class BuildingBlockRoadmapReport extends Component {
         this.state.loadingLayers = true;
 
         try {
-            const result = await this.rpc("/twj_ea_enhancement/layers", {});
+            const result = await this.rpc("/building/block/roadmap/layers", {});
             this.state.layers = result.layers || [];
             this.state.selectedLayerIds = this.recordContext.initialLayerIds.length
                 ? this.recordContext.initialLayerIds.filter((layerId) =>
@@ -113,7 +113,7 @@ class BuildingBlockRoadmapReport extends Component {
         this.state.loadingTags = true;
 
         try {
-            const result = await this.rpc("/twj_ea_enhancement/tags", {});
+            const result = await this.rpc("/building/block/roadmap/tags", {});
             this.state.tags = result.tags || [];
             if (this.recordContext.initialTagIds.length) {
                 this.state.selectedTagIds = this.recordContext.initialTagIds.filter((tagId) =>
@@ -395,7 +395,7 @@ class BuildingBlockRoadmapReport extends Component {
         const currentRequestId = ++this.lastSearchRequestId;
 
         try {
-            const result = await this.rpc("/twj_ea_enhancement/search", {
+            const result = await this.rpc("/building/block/roadmap/search", {
                 layer_ids: this.state.selectedLayerIds,
                 tag_ids: this.state.selectedTagIds,
                 source_model: this.recordContext.useRecordOnly ? this.recordContext.sourceModel : false,
