@@ -630,12 +630,12 @@
 .o_dropdown_backdrop {
     position: fixed;
     inset: 0;
-    z-index: 1040;
+    z-index: 10;
     background: transparent;
 }
 
 .o_domain_filter_dropdown,
 .o_tag_filter_dropdown {
     position: relative;
-    z-index: 1041;
+    z-index: 11;
 }
