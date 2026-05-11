@@ -52,9 +52,11 @@ class BuildingBlockRoadmapReport extends Component {
             layers: [],
             selectedLayerIds: [],
             layerDropdownOpen: false,
+            layerSearchTerm: "",
             tags: [],
             selectedTagIds: [],
             tagDropdownOpen: false,
+            tagSearchTerm: "",
             lines: [],
             filteredLines: [],
             rows: [],
@@ -198,6 +200,8 @@ class BuildingBlockRoadmapReport extends Component {
         const texts = {
             filterByDomain: _t("Filter by Domain"),
             filterByTag: _t("Filter by Tag (Portfolio)"),
+            searchDomain: _t("Search domains..."),
+            searchTag: _t("Search tags..."),
             selectLayersPlaceholder: _t("Select layers..."),
             selectLayers: _t("Select layers"),
             selectTags: _t("Select tags"),
@@ -245,6 +249,22 @@ class BuildingBlockRoadmapReport extends Component {
         );
     }
 
+    getVisibleLayers() {
+        const searchTerm = (this.state.layerSearchTerm || "").trim().toLowerCase();
+        if (!searchTerm) {
+            return this.state.layers;
+        }
+        return this.state.layers.filter((layer) => (layer.name || "").toLowerCase().includes(searchTerm));
+    }
+
+    getVisibleTags() {
+        const searchTerm = (this.state.tagSearchTerm || "").trim().toLowerCase();
+        if (!searchTerm) {
+            return this.state.tags;
+        }
+        return this.state.tags.filter((tag) => (tag.name || "").toLowerCase().includes(searchTerm));
+    }
+
     getLayerKey(layerName) {
         const normalizedName = (layerName || "")
             .toLowerCase()
@@ -283,6 +303,10 @@ class BuildingBlockRoadmapReport extends Component {
         this.scheduleSearch();
     }
 
+    onLayerSearchInput(ev) {
+        this.state.layerSearchTerm = ev.target.value || "";
+    }
+
     onTagOptionChange(ev) {
         this.recordContext.useRecordOnly = false;
         const tagId = ev.target.value;
@@ -302,6 +326,10 @@ class BuildingBlockRoadmapReport extends Component {
         }
 
         this.scheduleSearch();
+    }
+
+    onTagSearchInput(ev) {
+        this.state.tagSearchTerm = ev.target.value || "";
     }
 
     removeSelectedLayer(ev) {

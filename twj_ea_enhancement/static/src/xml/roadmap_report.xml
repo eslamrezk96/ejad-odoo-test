@@ -55,11 +55,20 @@
                                         <t t-esc="getText('clear')"/>
                                     </button>
                                 </div>
+                                <div class="o_filter_search_box">
+                                    <input
+                                        type="text"
+                                        class="form-control o_filter_search_input"
+                                        t-att-value="state.layerSearchTerm"
+                                        t-att-placeholder="getText('searchDomain')"
+                                        t-on-input="onLayerSearchInput"
+                                    />
+                                </div>
                                 <t t-if="state.loadingLayers">
                                     <div class="dropdown-item-text text-muted" t-esc="getText('loading')"/>
                                 </t>
                                 <t t-else="">
-                                    <t t-foreach="state.layers" t-as="layer" t-key="layer.id">
+                                    <t t-foreach="getVisibleLayers()" t-as="layer" t-key="layer.id">
                                         <label class="dropdown-item o_layer_option">
                                             <input
                                                 type="checkbox"
@@ -116,11 +125,20 @@
                                         <t t-esc="getText('clear')"/>
                                     </button>
                                 </div>
+                                <div class="o_filter_search_box">
+                                    <input
+                                        type="text"
+                                        class="form-control o_filter_search_input"
+                                        t-att-value="state.tagSearchTerm"
+                                        t-att-placeholder="getText('searchTag')"
+                                        t-on-input="onTagSearchInput"
+                                    />
+                                </div>
                                 <t t-if="state.loadingTags">
                                     <div class="dropdown-item-text text-muted" t-esc="getText('loading')"/>
                                 </t>
                                 <t t-else="">
-                                    <t t-foreach="state.tags" t-as="tag" t-key="tag.id">
+                                    <t t-foreach="getVisibleTags()" t-as="tag" t-key="tag.id">
                                         <label class="dropdown-item o_layer_option">
                                             <input
                                                 type="checkbox"
