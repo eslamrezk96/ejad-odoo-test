@@ -18,7 +18,7 @@ This version intentionally does not yet read from ea.entity.* models.
 """,
     "author": "Custom",
     "license": "LGPL-3",
-    "depends": ["web", "project"],
+    "depends": ["web", "project", "base_html_to_image_export"],
     "data": [
         "security/ir.model.access.csv",
         "data/roadmap_layer_data.xml",
