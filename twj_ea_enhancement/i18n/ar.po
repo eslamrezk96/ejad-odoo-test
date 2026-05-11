@@ -86,7 +86,7 @@ msgstr "الربع 4"
 #: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
 #, python-format
 msgid "BUILDING BLOCK ROADMAP REPORT"
-msgstr "تقرير خارطة طريق اللبنات الأساسية"
+msgstr "المشهد العام لمكونات البنية المؤسسية"
 
 #. module: twj_ea_enhancement
 #. odoo-javascript
@@ -345,7 +345,7 @@ msgstr "المجال"
 #: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
 #, python-format
 msgid "Building Block (BB)"
-msgstr "اللبنة الأساسية"
+msgstr "نوع المكون"
 
 #. module: twj_ea_enhancement
 #. odoo-javascript
