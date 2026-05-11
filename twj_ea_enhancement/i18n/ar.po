@@ -416,3 +416,10 @@ msgstr "ابحث في النطاقات..."
 #, python-format
 msgid "Search tags..."
 msgstr "ابحث في الوسوم..."
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "Export Image"
+msgstr "تصدير صورة"

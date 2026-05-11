@@ -228,6 +228,7 @@ class BuildingBlockRoadmapReport extends Component {
             uniqueVisibleProjects: _t("Unique visible projects"),
             expandAll: _t("Expand All"),
             collapseAll: _t("Collapse All"),
+            exportImage: _t("Export Image"),
             collapsedDomains: _t("domain(s) collapsed"),
             domain: _t("Domain"),
             buildingBlock: _t("Building Block (BB)"),

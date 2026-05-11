@@ -25,7 +25,7 @@ class RoadmapReportButtonMixin(models.AbstractModel):
         return {
             "type": "ir.actions.client",
             "name": "Building Block Roadmap Report",
-            "tag": "twj_ea_enhancement.client_action",
+            "tag": "twj_ea_enhancement.building_block_roadmap_report_client_action",
             "params": {
                 "source_model": self._name,
                 "source_record_id": self.id,

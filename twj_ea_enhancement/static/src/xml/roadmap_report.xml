@@ -6,326 +6,337 @@
             class="o_dropdown_backdrop"
             t-on-click="closeAllDropdowns"
         />
-        <div class="o_roadmap_top">
-            <div class="o_roadmap_header">
-                <div class="o_roadmap_heading">
-                    <h2 class="mb-1" t-esc="getReportTitle()"/>
-                    <p class="mb-0" t-esc="getReportSubtitle()"/>
-                </div>
-                <div class="o_roadmap_filters">
-                    <div class="o_roadmap_filter">
-                        <label t-esc="getText('filterByDomain')"/>
-                        <div class="dropdown o_domain_filter_dropdown" t-att-class="state.layerDropdownOpen ? 'show' : ''">
-                            <button
-                                type="button"
-                                class="btn o_filter_button o_m2m_filter_button"
-                                t-on-click="toggleLayerDropdown"
-                            >
-                                <span class="o_m2m_tags" t-if="getSelectedLayers().length">
-                                    <t t-foreach="getSelectedLayers()" t-as="layer" t-key="layer.id">
-                                        <span class="o_m2m_tag">
-                                            <span class="o_m2m_tag_label" t-esc="layer.name"/>
-                                            <button
-                                                type="button"
-                                                class="btn o_m2m_tag_remove"
-                                                t-att-title="getText('remove')"
-                                                t-att-data-layer-id="layer.id"
-                                                t-on-click="removeSelectedLayer"
-                                            >
-                                                <i class="fa fa-times"/>
-                                            </button>
-                                        </span>
+        <div id="o_building_block_roadmap_export_root">
+            <div class="o_roadmap_top">
+                <div class="o_roadmap_header">
+                    <div class="o_roadmap_heading">
+                        <h2 class="mb-1" t-esc="getReportTitle()"/>
+                        <p class="mb-0" t-esc="getReportSubtitle()"/>
+                    </div>
+                    <div class="o_roadmap_filters">
+                        <div class="o_roadmap_filter">
+                            <label t-esc="getText('filterByDomain')"/>
+                            <div class="dropdown o_domain_filter_dropdown" t-att-class="state.layerDropdownOpen ? 'show' : ''">
+                                <button
+                                    type="button"
+                                    class="btn o_filter_button o_m2m_filter_button"
+                                    t-on-click="toggleLayerDropdown"
+                                >
+                                    <span class="o_m2m_tags" t-if="getSelectedLayers().length">
+                                        <t t-foreach="getSelectedLayers()" t-as="layer" t-key="layer.id">
+                                            <span class="o_m2m_tag">
+                                                <span class="o_m2m_tag_label" t-esc="layer.name"/>
+                                                <button
+                                                    type="button"
+                                                    class="btn o_m2m_tag_remove"
+                                                    t-att-title="getText('remove')"
+                                                    t-att-data-layer-id="layer.id"
+                                                    t-on-click="removeSelectedLayer"
+                                                >
+                                                    <i class="fa fa-times"/>
+                                                </button>
+                                            </span>
+                                        </t>
+                                    </span>
+                                    <span t-else="" class="o_m2m_placeholder" t-esc="getText('selectLayersPlaceholder')"/>
+                                    <i class="fa fa-angle-down"/>
+                                </button>
+                                <div
+                                    class="dropdown-menu o_layer_dropdown"
+                                    t-att-class="state.layerDropdownOpen ? 'show' : ''"
+                                >
+                                    <div class="o_layer_dropdown_header">
+                                        <span t-esc="getText('selectLayers')"/>
+                                        <button
+                                            t-if="state.selectedLayerIds.length"
+                                            type="button"
+                                            class="btn btn-link p-0"
+                                            t-on-click="clearSelectedLayers"
+                                        >
+                                            <t t-esc="getText('clear')"/>
+                                        </button>
+                                    </div>
+                                    <div class="o_filter_search_box">
+                                        <input
+                                            type="text"
+                                            class="form-control o_filter_search_input"
+                                            t-att-value="state.layerSearchTerm"
+                                            t-att-placeholder="getText('searchDomain')"
+                                            t-on-input="onLayerSearchInput"
+                                        />
+                                    </div>
+                                    <t t-if="state.loadingLayers">
+                                        <div class="dropdown-item-text text-muted" t-esc="getText('loading')"/>
                                     </t>
-                                </span>
-                                <span t-else="" class="o_m2m_placeholder" t-esc="getText('selectLayersPlaceholder')"/>
-                                <i class="fa fa-angle-down"/>
-                            </button>
-                            <div
-                                class="dropdown-menu o_layer_dropdown"
-                                t-att-class="state.layerDropdownOpen ? 'show' : ''"
-                            >
-                                <div class="o_layer_dropdown_header">
-                                    <span t-esc="getText('selectLayers')"/>
-                                    <button
-                                        t-if="state.selectedLayerIds.length"
-                                        type="button"
-                                        class="btn btn-link p-0"
-                                        t-on-click="clearSelectedLayers"
-                                    >
-                                        <t t-esc="getText('clear')"/>
-                                    </button>
-                                </div>
-                                <div class="o_filter_search_box">
-                                    <input
-                                        type="text"
-                                        class="form-control o_filter_search_input"
-                                        t-att-value="state.layerSearchTerm"
-                                        t-att-placeholder="getText('searchDomain')"
-                                        t-on-input="onLayerSearchInput"
-                                    />
-                                </div>
-                                <t t-if="state.loadingLayers">
-                                    <div class="dropdown-item-text text-muted" t-esc="getText('loading')"/>
-                                </t>
-                                <t t-else="">
-                                    <t t-foreach="getVisibleLayers()" t-as="layer" t-key="layer.id">
-                                        <label class="dropdown-item o_layer_option">
-                                            <input
-                                                type="checkbox"
-                                                t-att-value="layer.id"
-                                                t-att-checked="isLayerSelected(layer.id) ? true : undefined"
-                                                t-on-change="onLayerOptionChange"
-                                            />
-                                            <span t-esc="layer.name"/>
-                                        </label>
+                                    <t t-else="">
+                                        <t t-foreach="getVisibleLayers()" t-as="layer" t-key="layer.id">
+                                            <label class="dropdown-item o_layer_option">
+                                                <input
+                                                    type="checkbox"
+                                                    t-att-value="layer.id"
+                                                    t-att-checked="isLayerSelected(layer.id) ? true : undefined"
+                                                    t-on-change="onLayerOptionChange"
+                                                />
+                                                <span t-esc="layer.name"/>
+                                            </label>
+                                        </t>
                                     </t>
-                                </t>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="o_roadmap_filter">
+                            <label t-esc="getText('filterByTag')"/>
+                            <div class="dropdown o_tag_filter_dropdown" t-att-class="state.tagDropdownOpen ? 'show' : ''">
+                                <button
+                                    type="button"
+                                    class="btn o_filter_button o_m2m_filter_button"
+                                    t-on-click="toggleTagDropdown"
+                                >
+                                    <span class="o_m2m_tags" t-if="getSelectedTags().length">
+                                        <t t-foreach="getSelectedTags()" t-as="tag" t-key="tag.id">
+                                            <span class="o_m2m_tag">
+                                                <span class="o_m2m_tag_label" t-esc="tag.name"/>
+                                                <button
+                                                    type="button"
+                                                    class="btn o_m2m_tag_remove"
+                                                    t-att-title="getText('remove')"
+                                                    t-att-data-tag-id="tag.id"
+                                                    t-on-click="removeSelectedTag"
+                                                >
+                                                    <i class="fa fa-times"/>
+                                                </button>
+                                            </span>
+                                        </t>
+                                    </span>
+                                    <span t-else="" class="o_m2m_placeholder" t-esc="getText('all')"/>
+                                    <i class="fa fa-angle-down"/>
+                                </button>
+                                <div
+                                    class="dropdown-menu o_layer_dropdown"
+                                    t-att-class="state.tagDropdownOpen ? 'show' : ''"
+                                >
+                                    <div class="o_layer_dropdown_header">
+                                        <span t-esc="getText('selectTags')"/>
+                                        <button
+                                            t-if="state.selectedTagIds.length"
+                                            type="button"
+                                            class="btn btn-link p-0"
+                                            t-on-click="clearSelectedTags"
+                                        >
+                                            <t t-esc="getText('clear')"/>
+                                        </button>
+                                    </div>
+                                    <div class="o_filter_search_box">
+                                        <input
+                                            type="text"
+                                            class="form-control o_filter_search_input"
+                                            t-att-value="state.tagSearchTerm"
+                                            t-att-placeholder="getText('searchTag')"
+                                            t-on-input="onTagSearchInput"
+                                        />
+                                    </div>
+                                    <t t-if="state.loadingTags">
+                                        <div class="dropdown-item-text text-muted" t-esc="getText('loading')"/>
+                                    </t>
+                                    <t t-else="">
+                                        <t t-foreach="getVisibleTags()" t-as="tag" t-key="tag.id">
+                                            <label class="dropdown-item o_layer_option">
+                                                <input
+                                                    type="checkbox"
+                                                    t-att-value="tag.id"
+                                                    t-att-checked="isTagSelected(tag.id) ? true : undefined"
+                                                    t-on-change="onTagOptionChange"
+                                                />
+                                                <span t-esc="tag.name"/>
+                                            </label>
+                                        </t>
+                                    </t>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="o_roadmap_filter">
-                        <label t-esc="getText('filterByTag')"/>
-                        <div class="dropdown o_tag_filter_dropdown" t-att-class="state.tagDropdownOpen ? 'show' : ''">
-                            <button
-                                type="button"
-                                class="btn o_filter_button o_m2m_filter_button"
-                                t-on-click="toggleTagDropdown"
-                            >
-                                <span class="o_m2m_tags" t-if="getSelectedTags().length">
-                                    <t t-foreach="getSelectedTags()" t-as="tag" t-key="tag.id">
-                                        <span class="o_m2m_tag">
-                                            <span class="o_m2m_tag_label" t-esc="tag.name"/>
-                                            <button
-                                                type="button"
-                                                class="btn o_m2m_tag_remove"
-                                                t-att-title="getText('remove')"
-                                                t-att-data-tag-id="tag.id"
-                                                t-on-click="removeSelectedTag"
-                                            >
-                                                <i class="fa fa-times"/>
-                                            </button>
-                                        </span>
-                                    </t>
-                                </span>
-                                <span t-else="" class="o_m2m_placeholder" t-esc="getText('all')"/>
-                                <i class="fa fa-angle-down"/>
-                            </button>
-                            <div
-                                class="dropdown-menu o_layer_dropdown"
-                                t-att-class="state.tagDropdownOpen ? 'show' : ''"
-                            >
-                                <div class="o_layer_dropdown_header">
-                                    <span t-esc="getText('selectTags')"/>
-                                    <button
-                                        t-if="state.selectedTagIds.length"
-                                        type="button"
-                                        class="btn btn-link p-0"
-                                        t-on-click="clearSelectedTags"
-                                    >
-                                        <t t-esc="getText('clear')"/>
-                                    </button>
+                </div>
+
+                <aside class="o_roadmap_legend">
+                    <div class="o_legend_card">
+                        <h3 t-esc="getText('legend')"/>
+                        <div class="o_legend_section">
+                            <span class="o_legend_title" t-esc="getText('statusColorModel')"/>
+                            <div class="o_legend_grid">
+                                <div class="o_legend_item">
+                                    <span class="o_legend_dot o_dot_green"/>
+                                    <span t-esc="getText('active')"/>
                                 </div>
-                                <div class="o_filter_search_box">
-                                    <input
-                                        type="text"
-                                        class="form-control o_filter_search_input"
-                                        t-att-value="state.tagSearchTerm"
-                                        t-att-placeholder="getText('searchTag')"
-                                        t-on-input="onTagSearchInput"
-                                    />
+                                <div class="o_legend_item">
+                                    <span class="o_legend_dot o_dot_red"/>
+                                    <span t-esc="getText('sunset')"/>
                                 </div>
-                                <t t-if="state.loadingTags">
-                                    <div class="dropdown-item-text text-muted" t-esc="getText('loading')"/>
-                                </t>
-                                <t t-else="">
-                                    <t t-foreach="getVisibleTags()" t-as="tag" t-key="tag.id">
-                                        <label class="dropdown-item o_layer_option">
-                                            <input
-                                                type="checkbox"
-                                                t-att-value="tag.id"
-                                                t-att-checked="isTagSelected(tag.id) ? true : undefined"
-                                                t-on-change="onTagOptionChange"
-                                            />
-                                            <span t-esc="tag.name"/>
-                                        </label>
-                                    </t>
-                                </t>
+                                <div class="o_legend_item">
+                                    <span class="o_legend_dot o_dot_blue"/>
+                                    <span t-esc="getText('build')"/>
+                                </div>
+                                <div class="o_legend_item">
+                                    <span class="o_legend_dot o_dot_dark"/>
+                                    <span t-esc="getText('retired')"/>
+                                </div>
+                                <div class="o_legend_item">
+                                    <span class="o_legend_dot o_dot_yellow"/>
+                                    <span t-esc="getText('maintain')"/>
+                                </div>
+                                <div class="o_legend_item">
+                                    <span class="o_legend_dot o_dot_gray"/>
+                                    <span t-esc="getText('planned')"/>
+                                </div>
+                                <div class="o_legend_item">
+                                    <span class="o_legend_dot o_dot_orange"/>
+                                    <span t-esc="getText('optimize')"/>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <button
+                        type="button"
+                        class="btn btn-primary o_hi_export_btn o_roadmap_legend_export_btn"
+                        data-selector="#o_building_block_roadmap_export_root"
+                        data-filename="building_block_roadmap.svg"
+                        data-export-layout="content"
+                        data-hide-selectors=".o_hi_export_btn, .o_roadmap_filters, .o_table_toolbar"
+                        t-esc="getText('exportImage')"
+                    />
+                </aside>
             </div>
 
-            <aside class="o_roadmap_legend">
-                <div class="o_legend_card">
-                    <h3 t-esc="getText('legend')"/>
-                    <div class="o_legend_section">
-                        <span class="o_legend_title" t-esc="getText('statusColorModel')"/>
-                        <div class="o_legend_grid">
-                            <div class="o_legend_item">
-                                <span class="o_legend_dot o_dot_green"/>
-                                <span t-esc="getText('active')"/>
-                            </div>
-                            <div class="o_legend_item">
-                                <span class="o_legend_dot o_dot_red"/>
-                                <span t-esc="getText('sunset')"/>
-                            </div>
-                            <div class="o_legend_item">
-                                <span class="o_legend_dot o_dot_blue"/>
-                                <span t-esc="getText('build')"/>
-                            </div>
-                            <div class="o_legend_item">
-                                <span class="o_legend_dot o_dot_dark"/>
-                                <span t-esc="getText('retired')"/>
-                            </div>
-                            <div class="o_legend_item">
-                                <span class="o_legend_dot o_dot_yellow"/>
-                                <span t-esc="getText('maintain')"/>
-                            </div>
-                            <div class="o_legend_item">
-                                <span class="o_legend_dot o_dot_gray"/>
-                                <span t-esc="getText('planned')"/>
-                            </div>
-                            <div class="o_legend_item">
-                                <span class="o_legend_dot o_dot_orange"/>
-                                <span t-esc="getText('optimize')"/>
+            <div class="o_roadmap_body">
+                <div class="o_roadmap_main">
+                    <div class="o_kpi_strip">
+                        <div class="o_kpi_label_card">
+                            <div class="o_kpi_label_title">
+                                <span t-esc="getText('kpiLayer')"/>
+                                <small t-esc="getText('executiveView')"/>
+                                <i class="fa fa-info-circle"/>
                             </div>
                         </div>
+                        <div class="o_kpi_card">
+                            <span class="o_kpi_title" t-esc="getText('activeCount')"/>
+                            <strong class="o_kpi_value o_kpi_green" t-esc="getActiveCount()"/>
+                            <small t-esc="getText('visibleRecords')"/>
+                        </div>
+                        <div class="o_kpi_card">
+                            <span class="o_kpi_title" t-esc="getText('sunsetCount')"/>
+                            <strong class="o_kpi_value o_kpi_red" t-esc="getSunsetCount()"/>
+                            <small t-esc="getText('visibleRecords')"/>
+                        </div>
+                        <div class="o_kpi_card">
+                            <span class="o_kpi_title" t-esc="getText('gapCount')"/>
+                            <strong class="o_kpi_value o_kpi_orange" t-esc="getGapCount()"/>
+                            <small t-esc="getText('uniqueVisibleGaps')"/>
+                        </div>
+                        <div class="o_kpi_card">
+                            <span class="o_kpi_title" t-esc="getText('projectCount')"/>
+                            <strong class="o_kpi_value o_kpi_blue" t-esc="getProjectCount()"/>
+                            <small t-esc="getText('uniqueVisibleProjects')"/>
+                        </div>
                     </div>
-                </div>
-            </aside>
-        </div>
 
-        <div class="o_roadmap_body">
-            <div class="o_roadmap_main">
-                <div class="o_kpi_strip">
-                    <div class="o_kpi_label_card">
-                        <div class="o_kpi_label_title">
-                            <span t-esc="getText('kpiLayer')"/>
-                            <small t-esc="getText('executiveView')"/>
-                            <i class="fa fa-info-circle"/>
+                    <div class="o_roadmap_table_card">
+                        <div class="o_table_toolbar">
+                            <button type="button" class="btn btn-light btn-sm" t-on-click="expandAll" t-esc="getText('expandAll')"/>
+                            <button type="button" class="btn btn-light btn-sm" t-on-click="collapseAll" t-esc="getText('collapseAll')"/>
+                            <div class="o_toolbar_note" t-if="getCollapsedCount()">
+                                <span t-esc="getCollapsedCount()"/> <t t-esc="getText('collapsedDomains')"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="o_kpi_card">
-                        <span class="o_kpi_title" t-esc="getText('activeCount')"/>
-                        <strong class="o_kpi_value o_kpi_green" t-esc="getActiveCount()"/>
-                        <small t-esc="getText('visibleRecords')"/>
-                    </div>
-                    <div class="o_kpi_card">
-                        <span class="o_kpi_title" t-esc="getText('sunsetCount')"/>
-                        <strong class="o_kpi_value o_kpi_red" t-esc="getSunsetCount()"/>
-                        <small t-esc="getText('visibleRecords')"/>
-                    </div>
-                    <div class="o_kpi_card">
-                        <span class="o_kpi_title" t-esc="getText('gapCount')"/>
-                        <strong class="o_kpi_value o_kpi_orange" t-esc="getGapCount()"/>
-                        <small t-esc="getText('uniqueVisibleGaps')"/>
-                    </div>
-                    <div class="o_kpi_card">
-                        <span class="o_kpi_title" t-esc="getText('projectCount')"/>
-                        <strong class="o_kpi_value o_kpi_blue" t-esc="getProjectCount()"/>
-                        <small t-esc="getText('uniqueVisibleProjects')"/>
-                    </div>
-                </div>
-
-                <div class="o_roadmap_table_card">
-                    <div class="o_table_toolbar">
-                        <button type="button" class="btn btn-light btn-sm" t-on-click="expandAll" t-esc="getText('expandAll')"/>
-                        <button type="button" class="btn btn-light btn-sm" t-on-click="collapseAll" t-esc="getText('collapseAll')"/>
-                        <div class="o_toolbar_note" t-if="getCollapsedCount()">
-                            <span t-esc="getCollapsedCount()"/> <t t-esc="getText('collapsedDomains')"/>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table o_roadmap_table mb-0">
-                            <thead>
-                                <tr class="o_phase_years">
-                                    <th colspan="5"></th>
-                                    <t t-foreach="getTimelineYears()" t-as="year" t-key="year">
-                                        <th colspan="4" t-esc="year"/>
-                                    </t>
-                                </tr>
-                                <tr>
-                                    <th t-esc="getText('domain')"/>
-                                    <th t-esc="getText('buildingBlock')"/>
-                                    <th t-esc="getText('tagPortfolio')"/>
-                                    <th t-esc="getText('dtProject')"/>
-                                    <th t-esc="getText('gaps')"/>
-                                    <t t-foreach="getTimelineColumns()" t-as="phase" t-key="phase">
-                                        <th class="text-center" t-esc="phase"/>
-                                    </t>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <t t-if="state.loadingReport">
-                                    <tr>
-                                        <td t-att-colspan="getTableColumnCount()" class="text-center text-muted py-4" t-esc="getText('loadingReport')"/>
+                        <div class="table-responsive">
+                            <table class="table o_roadmap_table mb-0">
+                                <thead>
+                                    <tr class="o_phase_years">
+                                        <th colspan="5"></th>
+                                        <t t-foreach="getTimelineYears()" t-as="year" t-key="year">
+                                            <th colspan="4" t-esc="year"/>
+                                        </t>
                                     </tr>
-                                </t>
-                                <t t-elif="getVisibleRows().length">
-                                    <t t-foreach="getVisibleRows()" t-as="row" t-key="row.id">
+                                    <tr>
+                                        <th t-esc="getText('domain')"/>
+                                        <th t-esc="getText('buildingBlock')"/>
+                                        <th t-esc="getText('tagPortfolio')"/>
+                                        <th t-esc="getText('dtProject')"/>
+                                        <th t-esc="getText('gaps')"/>
+                                        <t t-foreach="getTimelineColumns()" t-as="phase" t-key="phase">
+                                            <th class="text-center" t-esc="phase"/>
+                                        </t>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-if="state.loadingReport">
                                         <tr>
-                                            <td
-                                                t-if="row.showLayer"
+                                            <td t-att-colspan="getTableColumnCount()" class="text-center text-muted py-4" t-esc="getText('loadingReport')"/>
+                                        </tr>
+                                    </t>
+                                    <t t-elif="getVisibleRows().length">
+                                        <t t-foreach="getVisibleRows()" t-as="row" t-key="row.id">
+                                            <tr>
+                                                <td
+                                                    t-if="row.showLayer"
                                                 t-att-rowspan="isLayerCollapsed(row.layerId) ? 1 : row.rowSpan"
                                                 t-att-class="'o_domain_cell ' + row.accentClass"
                                             >
                                                 <div class="o_domain_toggle">
                                                     <span class="o_domain_icon">
-                                                        <i t-att-class="row.iconClass"/>
+                                                        <i t-att-class="row.iconClass" data-export-skip-pseudo="1"/>
                                                     </span>
                                                     <span class="o_domain_name" t-esc="row.layerName"/>
                                                 </div>
                                             </td>
-                                            <td class="o_bb_name" t-esc="row.name"/>
-                                            <td t-esc="row.tag"/>
-                                            <td t-esc="row.project"/>
-                                            <td class="o_gap_cell" t-esc="getRowGapsLabel(row)"/>
-                                            <td t-att-colspan="getTimelineColumnCount()" class="o_timeline_cell">
-                                                <div class="o_timeline_track" t-att-style="getTimelineTrackStyle()">
-                                                    <t t-foreach="row.blocks" t-as="block" t-key="block.key">
-                                                        <div
-                                                            t-att-class="'o_timeline_block ' + (block.changeType ? ('bg-' + block.changeType) : block.className)"
-                                                            t-att-style="'grid-column: ' + (block.start + 1) + ' / span ' + block.span"
-                                                        >
-                                                            <span t-esc="block.label"/>
-                                                        </div>
-                                                    </t>
-                                                </div>
+                                                <td class="o_bb_name" t-esc="row.name"/>
+                                                <td t-esc="row.tag"/>
+                                                <td t-esc="row.project"/>
+                                                <td class="o_gap_cell" t-esc="getRowGapsLabel(row)"/>
+                                                <td t-att-colspan="getTimelineColumnCount()" class="o_timeline_cell">
+                                                    <div class="o_timeline_track" t-att-style="getTimelineTrackStyle()">
+                                                        <t t-foreach="row.blocks" t-as="block" t-key="block.key">
+                                                            <div
+                                                                t-att-class="'o_timeline_block ' + (block.changeType ? ('bg-' + block.changeType) : block.className)"
+                                                                t-att-style="'grid-column: ' + (block.start + 1) + ' / span ' + block.span"
+                                                            >
+                                                                <span t-esc="block.label"/>
+                                                            </div>
+                                                        </t>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <t t-elif="state.lines.length and state.selectedLayerIds.length">
+                                        <tr>
+                                            <td t-att-colspan="getTableColumnCount()" class="text-center text-muted py-4">
+                                                <t t-if="state.selectedTagIds.length">
+                                                    <t t-esc="getText('noRowsForTags')"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <t t-esc="getText('allDomainsCollapsed')"/>
+                                                </t>
                                             </td>
                                         </tr>
                                     </t>
-                                </t>
-                                <t t-elif="state.lines.length and state.selectedLayerIds.length">
-                                    <tr>
-                                        <td t-att-colspan="getTableColumnCount()" class="text-center text-muted py-4">
-                                            <t t-if="state.selectedTagIds.length">
-                                                <t t-esc="getText('noRowsForTags')"/>
-                                            </t>
-                                            <t t-else="">
-                                                <t t-esc="getText('allDomainsCollapsed')"/>
-                                            </t>
-                                        </td>
-                                    </tr>
-                                </t>
-                                <t t-else="">
-                                    <tr>
-                                        <td t-att-colspan="getTableColumnCount()" class="text-center text-muted py-4">
-                                            <t t-if="state.message">
-                                                <span t-esc="state.message"/>
-                                            </t>
-                                            <t t-else="">
-                                                <t t-esc="getText('selectLayersToLoad')"/>
-                                            </t>
-                                        </td>
-                                    </tr>
-                                </t>
-                            </tbody>
-                        </table>
+                                    <t t-else="">
+                                        <tr>
+                                            <td t-att-colspan="getTableColumnCount()" class="text-center text-muted py-4">
+                                                <t t-if="state.message">
+                                                    <span t-esc="state.message"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <t t-esc="getText('selectLayersToLoad')"/>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
 </templates>

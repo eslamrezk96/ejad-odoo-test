@@ -84,6 +84,89 @@
     min-width: 180px;
 }
 
+.o_roadmap_export_action {
+    justify-content: flex-end;
+}
+
+.o_roadmap_export_action .btn {
+    align-self: stretch;
+}
+
+.o_roadmap_legend {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 12px;
+    justify-self: end;
+    width: auto;
+}
+
+.o_roadmap_legend_export_btn {
+    margin-top: 0;
+    width: auto;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    align-self: flex-start;
+}
+
+.export-mode #o_building_block_roadmap_export_root {
+    padding: 8px 8px 0;
+}
+
+.export-mode #o_building_block_roadmap_export_root .o_roadmap_filters,
+.export-mode #o_building_block_roadmap_export_root .o_table_toolbar,
+.export-mode #o_building_block_roadmap_export_root .o_hi_export_btn {
+    display: none !important;
+}
+
+.export-mode #o_building_block_roadmap_export_root .o_roadmap_top {
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.export-mode #o_building_block_roadmap_export_root .o_roadmap_header {
+    min-width: 0;
+}
+
+.export-mode #o_building_block_roadmap_export_root .o_roadmap_heading {
+    max-width: 100%;
+}
+
+.export-mode #o_building_block_roadmap_export_root .o_roadmap_heading h2,
+.export-mode #o_building_block_roadmap_export_root .o_roadmap_heading p {
+    margin-bottom: 0;
+}
+
+.export-mode #o_building_block_roadmap_export_root .o_roadmap_body {
+    margin-top: 0;
+}
+
+.export-mode #o_building_block_roadmap_export_root .o_roadmap_table_card {
+    overflow: visible;
+}
+
+.export-mode #o_building_block_roadmap_export_root .o_domain_cell {
+    width: 240px;
+    min-width: 240px;
+}
+
+.export-mode #o_building_block_roadmap_export_root .o_domain_icon::before,
+.export-mode #o_building_block_roadmap_export_root .o_domain_icon::after,
+.export-mode #o_building_block_roadmap_export_root .o_domain_icon i::before,
+.export-mode #o_building_block_roadmap_export_root .o_domain_icon i::after {
+    content: none !important;
+}
+
+.export-mode #o_building_block_roadmap_export_root .o_bb_name,
+.export-mode #o_building_block_roadmap_export_root .o_roadmap_table th:nth-child(2),
+.export-mode #o_building_block_roadmap_export_root .o_roadmap_table td:nth-child(2) {
+    width: 320px;
+    min-width: 600px;
+}
+
+.export-mode #o_building_block_roadmap_export_root .o_timeline_block {
+    align-items: flex-start;
+}
+
 .o_roadmap_filter label {
     font-size: 0.78rem;
     font-weight: 600;
@@ -492,6 +575,7 @@
 .o_legend_card {
     margin-top: 0;
     overflow: hidden;
+    min-width: 320px;
 }
 
 .o_legend_card h3 {
@@ -547,7 +631,7 @@
     }
 
     .o_legend_card {
-        max-width: 360px;
+        max-width: 400px;
     }
 }
 
