@@ -145,8 +145,33 @@
 }
 
 .export-mode #o_building_block_roadmap_export_root .o_domain_cell {
-    width: 240px;
-    min-width: 240px;
+    width: 280px;
+    min-width: 280px;
+}
+
+.export-mode #o_building_block_roadmap_export_root .o_domain_toggle {
+    display: grid !important;
+    grid-template-columns: 24px minmax(180px, 1fr);
+    align-items: center;
+    column-gap: 10px;
+    min-height: auto;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.export-mode #o_building_block_roadmap_export_root .o_domain_name {
+    display: block;
+    width: 180px;
+    min-width: 180px;
+    max-width: none;
+    line-height: 1.35;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
 }
 
 .export-mode #o_building_block_roadmap_export_root .o_domain_icon::before,

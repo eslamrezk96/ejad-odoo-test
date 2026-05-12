@@ -540,6 +540,9 @@
         });
 
         root.querySelectorAll("table tbody > tr > td > div > span").forEach((el) => {
+            if (el.closest(".o_domain_toggle")) {
+                return;
+            }
             el.style.setProperty("display", "block", "important");
             el.style.setProperty("width", "100%", "important");
             el.style.setProperty("max-width", "100%", "important");
@@ -548,6 +551,49 @@
             el.style.setProperty("white-space", "normal", "important");
             el.style.setProperty("overflow-wrap", "anywhere", "important");
             el.style.setProperty("word-break", "break-word", "important");
+        });
+    }
+
+    function normalizeRoadmapTableForExport(root) {
+        const table = root.querySelector(".o_roadmap_table");
+        if (!table) {
+            return;
+        }
+
+        const borderColor = "#d9e1ef";
+        table.style.setProperty("border-collapse", "separate", "important");
+        table.style.setProperty("border-spacing", "0", "important");
+
+        table.querySelectorAll("th, td").forEach((cell) => {
+            cell.style.setProperty("border", "0", "important");
+            cell.style.setProperty("border-top", "0", "important");
+            cell.style.setProperty("border-right", "0", "important");
+            cell.style.setProperty("border-bottom", "0", "important");
+            cell.style.setProperty("border-left", "0", "important");
+            cell.style.setProperty("border-block", "0", "important");
+            cell.style.setProperty("border-inline", "0", "important");
+            cell.style.setProperty("border-block-start", "0", "important");
+            cell.style.setProperty("border-block-end", "0", "important");
+            cell.style.setProperty("border-inline-start", "0", "important");
+            cell.style.setProperty("border-inline-end", "0", "important");
+            cell.style.setProperty("border-style", "none", "important");
+            cell.style.setProperty("border-width", "0", "important");
+            cell.style.setProperty("border-color", "transparent", "important");
+            cell.style.setProperty("box-shadow", "none", "important");
+        });
+
+        table.querySelectorAll("thead th").forEach((cell) => {
+            cell.style.setProperty("border-bottom", `1px solid ${borderColor}`, "important");
+            cell.style.setProperty("border-block-end", `1px solid ${borderColor}`, "important");
+            cell.style.setProperty("border-inline-start", `1px solid ${borderColor}`, "important");
+            cell.style.setProperty("border-inline-end", `1px solid ${borderColor}`, "important");
+        });
+
+        table.querySelectorAll("tbody td, tbody th").forEach((cell) => {
+            cell.style.setProperty("border-inline-start", `1px solid ${borderColor}`, "important");
+            cell.style.setProperty("border-inline-end", `1px solid ${borderColor}`, "important");
+            cell.style.setProperty("border-bottom", `1px solid ${borderColor}`, "important");
+            cell.style.setProperty("border-block-end", `1px solid ${borderColor}`, "important");
         });
     }
 
@@ -587,6 +633,7 @@
         }
 
         normalizeTextBoxesForExport(clone);
+        normalizeRoadmapTableForExport(clone);
         await inlineImagesAsDataUrl(clone);
         await nextFrame();
         await wait(60);

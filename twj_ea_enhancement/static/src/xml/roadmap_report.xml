@@ -213,7 +213,7 @@
                             <div class="o_kpi_label_title">
                                 <span t-esc="getText('kpiLayer')"/>
                                 <small t-esc="getText('executiveView')"/>
-                                <i class="fa fa-info-circle"/>
+                                <i class="fa fa-info-circle" data-export-skip-pseudo="1"/>
                             </div>
                         </div>
                         <div class="o_kpi_card">
