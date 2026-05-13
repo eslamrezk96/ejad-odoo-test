@@ -554,7 +554,21 @@
         });
     }
 
+    function isBuildingBlockRoadmapExport(root) {
+        return Boolean(
+            root &&
+            (
+                root.id === "o_building_block_roadmap_export_root" ||
+                root.querySelector("#o_building_block_roadmap_export_root")
+            )
+        );
+    }
+
     function normalizeRoadmapTableForExport(root) {
+        if (!isBuildingBlockRoadmapExport(root)) {
+            return;
+        }
+
         const table = root.querySelector(".o_roadmap_table");
         if (!table) {
             return;
@@ -594,6 +608,73 @@
             cell.style.setProperty("border-inline-end", `1px solid ${borderColor}`, "important");
             cell.style.setProperty("border-bottom", `1px solid ${borderColor}`, "important");
             cell.style.setProperty("border-block-end", `1px solid ${borderColor}`, "important");
+        });
+    }
+
+    function syncRoadmapRowHeightsFromSource(sourceRoot, cloneRoot) {
+        if (!isBuildingBlockRoadmapExport(sourceRoot) || !isBuildingBlockRoadmapExport(cloneRoot)) {
+            return;
+        }
+
+        const sourceTable = sourceRoot.querySelector(".o_roadmap_table");
+        const cloneTable = cloneRoot.querySelector(".o_roadmap_table");
+        if (!sourceTable || !cloneTable) {
+            return;
+        }
+
+        const sourceRows = Array.from(sourceTable.querySelectorAll("tbody > tr"));
+        const cloneRows = Array.from(cloneTable.querySelectorAll("tbody > tr"));
+
+        cloneRows.forEach((cloneRow, index) => {
+            const sourceRow = sourceRows[index];
+            if (!sourceRow) {
+                return;
+            }
+
+            const rowHeight = sourceRow.getBoundingClientRect().height;
+            if (!rowHeight) {
+                return;
+            }
+
+            cloneRow.style.setProperty("height", `${rowHeight}px`, "important");
+            cloneRow.style.setProperty("min-height", `${rowHeight}px`, "important");
+
+            Array.from(cloneRow.cells).forEach((cell) => {
+                if (cell.classList.contains("o_domain_cell") && cell.hasAttribute("rowspan")) {
+                    return;
+                }
+                cell.style.setProperty("height", `${rowHeight}px`, "important");
+                cell.style.setProperty("min-height", `${rowHeight}px`, "important");
+                cell.style.setProperty("vertical-align", "middle", "important");
+            });
+        });
+
+        cloneRows.forEach((row, index) => {
+            const domainCell = row.querySelector("td.o_domain_cell[rowspan]");
+            if (!domainCell) {
+                return;
+            }
+
+            const span = parseInt(domainCell.getAttribute("rowspan"), 10);
+            if (!span || span < 2) {
+                return;
+            }
+
+            const sourceGroupRows = sourceRows.slice(index, index + span);
+            if (sourceGroupRows.length !== span) {
+                return;
+            }
+
+            const totalHeight = sourceGroupRows.reduce((sum, sourceRow) => {
+                return sum + sourceRow.getBoundingClientRect().height;
+            }, 0);
+            if (!totalHeight) {
+                return;
+            }
+
+            domainCell.style.setProperty("height", `${totalHeight}px`, "important");
+            domainCell.style.setProperty("min-height", `${totalHeight}px`, "important");
+            domainCell.style.setProperty("vertical-align", "middle", "important");
         });
     }
 
@@ -637,6 +718,9 @@
         await inlineImagesAsDataUrl(clone);
         await nextFrame();
         await wait(60);
+        syncRoadmapRowHeightsFromSource(sourceNode, clone);
+        await nextFrame();
+        await wait(20);
 
         const rawDims = collectDeepDimensions(clone);
         const extraLeft = opts.extraLeft || 0;
