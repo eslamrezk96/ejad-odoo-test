@@ -218,13 +218,13 @@
                         </div>
                         <div class="o_kpi_card">
                             <span class="o_kpi_title" t-esc="getText('activeCount')"/>
-                            <strong class="o_kpi_value o_kpi_green" t-esc="getActiveCount()"/>
-                            <small t-esc="getText('visibleRecords')"/>
+                            <strong class="o_kpi_value o_kpi_green" t-esc="getActivePercentage()"/>
+                            <small t-esc="getActiveSummary()"/>
                         </div>
                         <div class="o_kpi_card">
                             <span class="o_kpi_title" t-esc="getText('sunsetCount')"/>
-                            <strong class="o_kpi_value o_kpi_red" t-esc="getSunsetCount()"/>
-                            <small t-esc="getText('visibleRecords')"/>
+                            <strong class="o_kpi_value o_kpi_red" t-esc="getSunsetPercentage()"/>
+                            <small t-esc="getSunsetSummary()"/>
                         </div>
                         <div class="o_kpi_card">
                             <span class="o_kpi_title" t-esc="getText('gapCount')"/>

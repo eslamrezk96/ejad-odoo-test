@@ -267,8 +267,8 @@ msgstr "(عرض تنفيذي)"
 #. odoo-javascript
 #: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
 #, python-format
-msgid "# of Active"
-msgstr "عدد العناصر النشطة"
+msgid "% BBs in Active"
+msgstr "% اللبنات الأساسية في النشط"
 
 #. module: twj_ea_enhancement
 #. odoo-javascript
@@ -281,8 +281,15 @@ msgstr "السجلات الظاهرة"
 #. odoo-javascript
 #: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
 #, python-format
-msgid "# of Sunset"
-msgstr "عدد عناصر الإيقاف"
+msgid "% BBs in Sunset"
+msgstr "% اللبنات الأساسية في الإيقاف"
+
+#. module: twj_ea_enhancement
+#. odoo-javascript
+#: code:addons/twj_ea_enhancement/static/src/js/roadmap_report.js:0
+#, python-format
+msgid "of"
+msgstr "من"
 
 #. module: twj_ea_enhancement
 #. odoo-javascript

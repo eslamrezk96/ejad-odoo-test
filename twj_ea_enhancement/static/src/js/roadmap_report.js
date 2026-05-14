@@ -219,11 +219,12 @@ class BuildingBlockRoadmapReport extends Component {
             optimize: _t("Optimize"),
             kpiLayer: _t("KPI LAYER"),
             executiveView: _t("(Executive View)"),
-            activeCount: _t("# of Active"),
-            sunsetCount: _t("# of Sunset"),
+            activeCount: _t("% BBs in Active"),
+            sunsetCount: _t("% BBs in Sunset"),
             gapCount: _t("# of Gaps"),
             projectCount: _t("# of DT Projects"),
             visibleRecords: _t("Visible records"),
+            of: _t("of"),
             uniqueVisibleGaps: _t("Unique visible gaps"),
             uniqueVisibleProjects: _t("Unique visible projects"),
             expandAll: _t("Expand All"),
@@ -528,12 +529,39 @@ class BuildingBlockRoadmapReport extends Component {
         return (row.gaps || []).join(", ");
     }
 
+    getTotalBuildingBlockCount() {
+        return this.state.filteredLines.length;
+    }
+
     getActiveCount() {
         return this.state.filteredLines.filter((line) => line.change_type === "active").length;
     }
 
     getSunsetCount() {
         return this.state.filteredLines.filter((line) => line.change_type === "cancel").length;
+    }
+
+    formatPercentage(count, total) {
+        if (!total) {
+            return "0%";
+        }
+        return `${Math.round((count / total) * 100)}%`;
+    }
+
+    getActivePercentage() {
+        return this.formatPercentage(this.getActiveCount(), this.getTotalBuildingBlockCount());
+    }
+
+    getSunsetPercentage() {
+        return this.formatPercentage(this.getSunsetCount(), this.getTotalBuildingBlockCount());
+    }
+
+    getActiveSummary() {
+        return `${this.getActiveCount()} ${this.getText("of")} ${this.getTotalBuildingBlockCount()}`;
+    }
+
+    getSunsetSummary() {
+        return `${this.getSunsetCount()} ${this.getText("of")} ${this.getTotalBuildingBlockCount()}`;
     }
 
     getGapCount() {
