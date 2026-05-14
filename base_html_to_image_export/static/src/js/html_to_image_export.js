@@ -609,6 +609,69 @@
             cell.style.setProperty("border-bottom", `1px solid ${borderColor}`, "important");
             cell.style.setProperty("border-block-end", `1px solid ${borderColor}`, "important");
         });
+
+        table.querySelectorAll(".o_domain_toggle").forEach((toggle) => {
+            toggle.style.setProperty("box-sizing", "border-box", "important");
+            toggle.style.setProperty("height", "100%", "important");
+            toggle.style.setProperty("min-height", "0", "important");
+        });
+    }
+
+    function normalizeRoadmapTimelineForExport(sourceRoot, cloneRoot) {
+        if (!isBuildingBlockRoadmapExport(sourceRoot) || !isBuildingBlockRoadmapExport(cloneRoot)) {
+            return;
+        }
+
+        cloneRoot.querySelectorAll(".o_timeline_cell").forEach((cell) => {
+            cell.style.setProperty("padding-top", "8px", "important");
+            cell.style.setProperty("padding-right", "0", "important");
+            cell.style.setProperty("padding-bottom", "8px", "important");
+            cell.style.setProperty("padding-left", "0", "important");
+        });
+
+        const sourceTracks = Array.from(sourceRoot.querySelectorAll(".o_timeline_track"));
+        const cloneTracks = Array.from(cloneRoot.querySelectorAll(".o_timeline_track"));
+        cloneTracks.forEach((track, index) => {
+            const sourceTrack = sourceTracks[index];
+            track.style.setProperty("gap", "0", "important");
+            track.style.setProperty("column-gap", "0", "important");
+            track.style.setProperty("row-gap", "0", "important");
+            track.style.setProperty("padding", "0", "important");
+            track.style.setProperty("margin", "0", "important");
+            track.style.setProperty("width", "100%", "important");
+            track.style.setProperty("box-sizing", "border-box", "important");
+            if (sourceTrack?.style?.gridTemplateColumns) {
+                track.style.setProperty(
+                    "grid-template-columns",
+                    sourceTrack.style.gridTemplateColumns,
+                    "important"
+                );
+            }
+        });
+
+        const sourceBlocks = Array.from(sourceRoot.querySelectorAll(".o_timeline_block"));
+        const cloneBlocks = Array.from(cloneRoot.querySelectorAll(".o_timeline_block"));
+        cloneBlocks.forEach((block, index) => {
+            const sourceBlock = sourceBlocks[index];
+            block.style.setProperty("margin", "0", "important");
+            block.style.setProperty("padding-top", "4px", "important");
+            block.style.setProperty("padding-right", "6px", "important");
+            block.style.setProperty("padding-bottom", "4px", "important");
+            block.style.setProperty("padding-left", "0", "important");
+            block.style.setProperty("justify-content", "flex-start", "important");
+            block.style.setProperty("box-sizing", "border-box", "important");
+            block.style.setProperty("width", "auto", "important");
+            block.style.setProperty("min-width", "0", "important");
+            if (sourceBlock?.style?.gridColumn) {
+                block.style.setProperty("grid-column", sourceBlock.style.gridColumn, "important");
+            }
+        });
+
+        cloneRoot.querySelectorAll(".o_timeline_block > span").forEach((label) => {
+            label.style.setProperty("padding-left", "6px", "important");
+            label.style.setProperty("margin", "0", "important");
+            label.style.setProperty("box-sizing", "border-box", "important");
+        });
     }
 
     function syncRoadmapRowHeightsFromSource(sourceRoot, cloneRoot) {
@@ -655,25 +718,23 @@
                 return;
             }
 
+            const sourceDomainCell = sourceRows[index]?.querySelector("td.o_domain_cell[rowspan]");
+            if (!sourceDomainCell) {
+                return;
+            }
+
             const span = parseInt(domainCell.getAttribute("rowspan"), 10);
             if (!span || span < 2) {
                 return;
             }
 
-            const sourceGroupRows = sourceRows.slice(index, index + span);
-            if (sourceGroupRows.length !== span) {
+            const sourceDomainHeight = sourceDomainCell.getBoundingClientRect().height;
+            if (!sourceDomainHeight) {
                 return;
             }
 
-            const totalHeight = sourceGroupRows.reduce((sum, sourceRow) => {
-                return sum + sourceRow.getBoundingClientRect().height;
-            }, 0);
-            if (!totalHeight) {
-                return;
-            }
-
-            domainCell.style.setProperty("height", `${totalHeight}px`, "important");
-            domainCell.style.setProperty("min-height", `${totalHeight}px`, "important");
+            domainCell.style.setProperty("height", `${sourceDomainHeight}px`, "important");
+            domainCell.style.setProperty("min-height", `${sourceDomainHeight}px`, "important");
             domainCell.style.setProperty("vertical-align", "middle", "important");
         });
     }
@@ -715,6 +776,7 @@
 
         normalizeTextBoxesForExport(clone);
         normalizeRoadmapTableForExport(clone);
+        normalizeRoadmapTimelineForExport(sourceNode, clone);
         await inlineImagesAsDataUrl(clone);
         await nextFrame();
         await wait(60);

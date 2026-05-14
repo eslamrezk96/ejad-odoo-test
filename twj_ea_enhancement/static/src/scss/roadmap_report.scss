@@ -190,6 +190,19 @@
 
 .export-mode #o_building_block_roadmap_export_root .o_timeline_block {
     align-items: flex-start;
+    padding: 4px 6px 4px 0 !important;
+}
+
+.export-mode #o_building_block_roadmap_export_root .o_timeline_cell {
+    padding: 8px 0 !important;
+}
+
+.export-mode #o_building_block_roadmap_export_root .o_timeline_track {
+    gap: 0 !important;
+}
+
+.export-mode #o_building_block_roadmap_export_root .o_timeline_block span {
+    padding-left: 6px !important;
 }
 
 .o_roadmap_filter label {
@@ -501,14 +514,13 @@
 
 .o_timeline_cell {
     min-width: 780px;
-    padding-top: 8px !important;
-    padding-bottom: 8px !important;
+    padding: 8px 0 !important;
 }
 
 .o_timeline_track {
     display: grid;
     grid-template-columns: repeat(12, minmax(52px, 1fr));
-    gap: 5px;
+    gap: 0;
     align-items: center;
 }
 
@@ -517,7 +529,7 @@
     align-items: center;
     justify-content: flex-start;
     min-height: 24px;
-    padding: 4px 8px;
+    padding: 4px 6px 4px 0;
     border-radius: 4px;
     font-size: 0.8rem;
     font-weight: 600;
@@ -532,6 +544,7 @@
 .o_timeline_block span {
     flex: 1 1 auto;
     min-width: 0;
+    padding-left: 6px;
 }
 
 .o_status_blank {
