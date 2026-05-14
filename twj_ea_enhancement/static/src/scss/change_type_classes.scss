@@ -17,8 +17,8 @@
 
 /* new = Planned */
 .bg-new {
-    --status-rgb: 191, 219, 254;
-    --status-text: #1f2937;
+    --status-rgb: 224, 224, 224;
+    --status-text: #374151;
 
     background-color: rgba(var(--status-rgb), var(--bs-bg-opacity)) !important;
     color: var(--status-text) !important;
