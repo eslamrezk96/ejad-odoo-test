@@ -14,7 +14,10 @@ access_ea_entity_stage_user,access.ea.entity.stage.user,model_ea_entity_stage,ba
 access_ea_entity_organization_unit_user,access.ea.entity.organization.unit.user,model_ea_entity_organization_unit,base.group_user,1,1,1,1
 access_ea_entity_business_capability_user,access.ea.entity.business.capability.user,model_ea_entity_business_capability,base.group_user,1,1,1,1
 access_ea_entity_business_service_user,access.ea.entity.business.service.user,model_ea_entity_business_service,base.group_user,1,1,1,1
+access_ea_entity_value_stream_user,access.ea.entity.value.stream.user,model_ea_entity_value_stream,base.group_user,1,1,1,1
+access_ea_entity_value_stream_stages_user,access.ea.entity.value.stream.stages.user,model_ea_entity_value_stream_stages,base.group_user,1,1,1,1
 access_ea_entity_digital_transformation_goals_user,access.ea.entity.digital.transformation.goals.user,model_ea_entity_digital_transformation_goals,base.group_user,1,1,1,1
 access_ea_entity_ea_objective_user,access.ea.entity.ea.objective.user,model_ea_entity_ea_objective,base.group_user,1,1,1,1
+access_ea_entity_process_group_user,access.ea.entity.process.group.user,model_ea_entity_process_group,base.group_user,1,1,1,1
 access_ea_entity_gap_user,access.ea.entity.gap.user,model_ea_entity_gap,base.group_user,1,1,1,1
 access_ea_entity_version_wizard,access_ea_entity_version_wizard,model_ea_entity_version_wizard,base.group_user,1,1,1,1

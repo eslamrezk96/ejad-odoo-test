@@ -531,6 +531,7 @@
                 <field name="name"/>
                 <field name="change_type"/>
                 <field name="transition_id"/>
+                <field name="business_service_ids" widget="many2many_tags"/>
                 <field name="tags_ids" widget="many2many_tags"/>
                 <field name="gap_ids" widget="many2many_tags"/>
             </tree>
@@ -553,6 +554,7 @@
                         <field name="transition_id"/>
                     </group>
                     <group>
+                        <field name="business_service_ids" widget="many2many_tags"/>
                         <field name="tags_ids" widget="many2many_tags"/>
                         <field name="gap_ids" widget="many2many_tags"/>
                     </group>
@@ -588,6 +590,7 @@
                 <field name="name"/>
                 <field name="change_type"/>
                 <field name="transition_id"/>
+                <field name="application_ids" widget="many2many_tags"/>
                 <field name="tags_ids" widget="many2many_tags"/>
                 <field name="gap_ids" widget="many2many_tags"/>
             </tree>
@@ -610,6 +613,7 @@
                         <field name="transition_id"/>
                     </group>
                     <group>
+                        <field name="application_ids" widget="many2many_tags"/>
                         <field name="tags_ids" widget="many2many_tags"/>
                         <field name="gap_ids" widget="many2many_tags"/>
                     </group>
@@ -635,6 +639,191 @@
         parent="menu_ea_entities_root"
         action="action_ea_entity_business_service"
         sequence="70"
+    />
+
+    <record id="view_ea_entity_value_stream_tree" model="ir.ui.view">
+        <field name="name">ea.entity.value.stream.tree</field>
+        <field name="model">ea.entity.value.stream</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_entity_value_stream_form" model="ir.ui.view">
+        <field name="name">ea.entity.value.stream.form</field>
+        <field name="model">ea.entity.value.stream</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_open_value_stream_stages"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-sitemap"
+                    >
+                        <field name="value_stream_stages_count" string="Stages" widget="statinfo"/>
+                    </button>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="sequence"/>
+                        <field name="active"/>
+                    </group>
+                    <notebook>
+                        <page string="Stages">
+                            <field name="value_stream_stages_ids">
+                        <tree editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="process_group_ids" widget="many2many_tags"/>
+                            <field name="organization_unit_ids" widget="many2many_tags"/>
+                            <field name="capabilities_ids" widget="many2many_tags"/>
+                        </tree>
+                        <form>
+                            <sheet>
+                                <group>
+                                    <field name="value_stream_id" invisible="1"/>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="sequence"/>
+                                </group>
+                                <group>
+                                    <field name="process_group_ids" widget="many2many_tags"/>
+                                    <field name="organization_unit_ids" widget="many2many_tags"/>
+                                    <field name="capabilities_ids" widget="many2many_tags"/>
+                                </group>
+                                <group>
+                                    <field name="description"/>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_entity_value_stream" model="ir.actions.act_window">
+        <field name="name">Value Streams</field>
+        <field name="res_model">ea.entity.value.stream</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_ea_entity_value_stream_stages_kanban" model="ir.ui.view">
+        <field name="name">ea.entity.value.stream.stages.kanban</field>
+        <field name="model">ea.entity.value.stream.stages</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="value_stream_id" class="o_kanban_small_column">
+                <field name="value_stream_id"/>
+                <field name="sequence"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="process_group_ids"/>
+                <field name="organization_unit_ids"/>
+                <field name="capabilities_ids"/>
+                <field name="description"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record">
+                            <div class="o_kanban_record_head">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                </strong>
+                                <div t-if="record.code.raw_value">
+                                    <field name="code"/>
+                                </div>
+                            </div>
+                            <div class="mt8">
+                                <div>
+                                    <strong>Process Groups:</strong>
+                                </div>
+                                <field name="process_group_ids" widget="many2many_tags"/>
+                            </div>
+                            <div class="mt8">
+                                <div>
+                                    <strong>Stage Owners:</strong>
+                                </div>
+                                <field name="organization_unit_ids" widget="many2many_tags"/>
+                            </div>
+                            <div class="mt8">
+                                <div>
+                                    <strong>Capabilities:</strong>
+                                </div>
+                                <field name="capabilities_ids" widget="many2many_tags"/>
+                            </div>
+                            <div class="mt8" t-if="record.description.raw_value">
+                                <field name="description"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_ea_entity_value_stream_stages_tree" model="ir.ui.view">
+        <field name="name">ea.entity.value.stream.stages.tree</field>
+        <field name="model">ea.entity.value.stream.stages</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="value_stream_id"/>
+                <field name="sequence"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="process_group_ids" widget="many2many_tags"/>
+                <field name="organization_unit_ids" widget="many2many_tags"/>
+                <field name="capabilities_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_entity_value_stream_stages_form" model="ir.ui.view">
+        <field name="name">ea.entity.value.stream.stages.form</field>
+        <field name="model">ea.entity.value.stream.stages</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="value_stream_id"/>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="sequence"/>
+                    </group>
+                    <group>
+                        <field name="process_group_ids" widget="many2many_tags"/>
+                        <field name="organization_unit_ids" widget="many2many_tags"/>
+                        <field name="capabilities_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_entity_value_stream_stages" model="ir.actions.act_window">
+        <field name="name">Value Stream Stages</field>
+        <field name="res_model">ea.entity.value.stream.stages</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_ea_entity_value_stream"
+        name="Value Streams"
+        parent="menu_ea_entities_root"
+        action="action_ea_entity_value_stream"
+        sequence="80"
     />
 
     <record id="view_ea_entity_digital_transformation_goals_tree" model="ir.ui.view">
@@ -691,7 +880,7 @@
         name="Digital Transformation Goals"
         parent="menu_ea_entities_root"
         action="action_ea_entity_digital_transformation_goals"
-        sequence="80"
+        sequence="90"
     />
 
     <record id="view_ea_entity_ea_objective_tree" model="ir.ui.view">
@@ -748,7 +937,7 @@
         name="EA Objectives"
         parent="menu_ea_entities_root"
         action="action_ea_entity_ea_objective"
-        sequence="90"
+        sequence="100"
     />
 
     <record id="view_ea_cybersecurity_security_apparatus_tree" model="ir.ui.view">
