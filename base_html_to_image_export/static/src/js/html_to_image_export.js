@@ -575,7 +575,7 @@
         }
 
         const borderColor = "#d9e1ef";
-        table.style.setProperty("border-collapse", "separate", "important");
+        // table.style.setProperty("border-collapse", "separate", "important");
         table.style.setProperty("border-spacing", "0", "important");
 
         table.querySelectorAll("th, td").forEach((cell) => {
@@ -598,6 +598,7 @@
 
         table.querySelectorAll("thead th").forEach((cell) => {
             cell.style.setProperty("border-bottom", `1px solid ${borderColor}`, "important");
+            cell.style.setProperty("border-top", `1px solid ${borderColor}`, "important");
             cell.style.setProperty("border-block-end", `1px solid ${borderColor}`, "important");
             cell.style.setProperty("border-inline-start", `1px solid ${borderColor}`, "important");
             cell.style.setProperty("border-inline-end", `1px solid ${borderColor}`, "important");
