@@ -40,18 +40,38 @@
 
     .o_vsm_row_stream {
         background: #f4f0ff;
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 40px;
+        justify-content: flex-start;
+        width: max-content;
     }
 
     .o_vsm_row_capability {
         background: #eefbf5;
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 40px;
+        justify-content: flex-start;
+        width: max-content;
     }
 
     .o_vsm_row_service {
         background: #f5efff;
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 40px;
+        justify-content: flex-start;
+        width: max-content;
     }
 
     .o_vsm_row_application {
         background: #fff7e8;
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 40px;
+        justify-content: flex-start;
+        width: max-content;
     }
 
     .o_vsm_row_capability .o_vsm_stage_column {
