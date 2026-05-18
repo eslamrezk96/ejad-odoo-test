@@ -3,7 +3,6 @@
 import { Component, onWillStart, useState } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { _t } from "@web/core/l10n/translation";
-import { session } from "@web/session";
 import { useService } from "@web/core/utils/hooks";
 
 class ValueStreamMap extends Component {
@@ -13,8 +12,6 @@ class ValueStreamMap extends Component {
         this.rpc = useService("rpc");
         this.notification = useService("notification");
         this.actionParams = this.props.action?.params || {};
-        const currentLang = (session.user_context.lang || "").toLowerCase();
-        this.isRTL = currentLang.startsWith("ar");
 
         this.state = useState({
             loading: true,
