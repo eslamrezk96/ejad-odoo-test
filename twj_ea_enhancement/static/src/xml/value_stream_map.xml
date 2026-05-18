@@ -4,8 +4,7 @@
         <div id="o_value_stream_map_export_root">
             <div class="o_vsm_header">
                 <div>
-                    <h2 class="mb-1" t-esc="state.valueStream.name || 'Value Stream Map'"/>
-                    <p class="mb-0 text-muted" t-if="state.valueStream.code" t-esc="state.valueStream.code"/>
+                    <h2 class="mb-1" t-esc="state.valueStream.name"/>
                 </div>
                 <button
                     type="button"
