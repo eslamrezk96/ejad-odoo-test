@@ -54,6 +54,24 @@
         background: #fff7e8;
     }
 
+    .o_vsm_row_capability .o_vsm_stage_column {
+        background: #dee2e6ab;
+        border-radius: 8px;
+        padding: 8px;
+    }
+
+    .o_vsm_row_service .o_vsm_stage_column {
+        background: #dddbe882;
+        border-radius: 8px;
+        padding: 8px;
+    }
+
+    .o_vsm_row_application .o_vsm_stage_column {
+        background: #e9ecef;
+        border-radius: 8px;
+        padding: 8px;
+    }
+
     .o_vsm_row_label {
         border-radius: 8px;
         color: #fff;
