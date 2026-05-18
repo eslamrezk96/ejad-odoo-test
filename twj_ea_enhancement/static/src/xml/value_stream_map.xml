@@ -35,8 +35,8 @@
                             <div class="o_vsm_label_subtitle">Customer Experience</div>
                         </div>
                         <t t-foreach="state.stages" t-as="stage" t-key="stage.id">
-                            <div class="o_vsm_stage_column o_vsm_stage_flow_column">
-                                <div class="o_vsm_stage_card o_vsm_stage_card_stream">
+                            <div class="o_vsm_stage_column o_vsm_stage_flow_column o_vsm_stage_column_connect_bottom">
+                                <div class="o_vsm_stage_card o_vsm_stage_card_stream o_vsm_stage_card_stream_flow">
                                     <div class="o_vsm_stage_title" t-esc="stage.name"/>
                                 </div>
                             </div>
@@ -49,7 +49,7 @@
                             <div class="o_vsm_label_subtitle">Business Capabilities</div>
                         </div>
                         <t t-foreach="state.stages" t-as="stage" t-key="'cap-' + stage.id">
-                            <div class="o_vsm_stage_column">
+                            <div class="o_vsm_stage_column o_vsm_stage_column_connect_top o_vsm_stage_column_connect_bottom">
                                 <t t-foreach="stage.capabilities" t-as="capability" t-key="capability.id">
                                     <div class="o_vsm_item_card">
                                         <div class="o_vsm_item_name" t-esc="capability.name"/>
@@ -69,7 +69,7 @@
                             <div class="o_vsm_label_subtitle">Business Services</div>
                         </div>
                         <t t-foreach="state.stages" t-as="stage" t-key="'srv-' + stage.id">
-                            <div class="o_vsm_stage_column">
+                            <div class="o_vsm_stage_column o_vsm_stage_column_connect_top o_vsm_stage_column_connect_bottom">
                                 <t t-foreach="stage.services" t-as="service" t-key="service.id">
                                     <div class="o_vsm_item_card">
                                         <div class="o_vsm_item_name" t-esc="service.name"/>
@@ -89,7 +89,7 @@
                             <div class="o_vsm_label_subtitle">Application Systems</div>
                         </div>
                         <t t-foreach="state.stages" t-as="stage" t-key="'app-' + stage.id">
-                            <div class="o_vsm_stage_column">
+                            <div class="o_vsm_stage_column o_vsm_stage_column_connect_top">
                                 <t t-foreach="stage.applications" t-as="application" t-key="application.id">
                                     <div class="o_vsm_item_card">
                                         <div class="o_vsm_item_name" t-esc="application.name"/>

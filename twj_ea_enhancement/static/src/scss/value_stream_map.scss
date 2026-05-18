@@ -160,6 +160,29 @@
         gap: 0;
     }
 
+    .o_vsm_stage_column_connect_bottom::after {
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 8px solid #94a3b8;
+        content: "";
+        left: 50%;
+        position: absolute;
+        top: calc(100% + 50px);
+        transform: translateX(-50%);
+        z-index: 2;
+    }
+
+    .o_vsm_stage_column_connect_top::before {
+        border-left: 2px dashed #94a3b8;
+        content: "";
+        height: 50px;
+        left: 50%;
+        position: absolute;
+        top: -55px;
+        transform: translateX(-50%);
+        z-index: 1;
+    }
+
     .o_vsm_stage_card,
     .o_vsm_item_card {
         background: #fff;
@@ -167,6 +190,7 @@
         border-radius: 8px;
         box-shadow: 0 2px 6px rgba(15, 23, 42, 0.05);
         padding: 14px;
+        position: relative;
     }
 
     .o_vsm_row_capability .o_vsm_item_card,
@@ -256,7 +280,7 @@
         width: 10px;
     }
 
-    .o_vsm_stage_flow_column:not(:last-child)::before {
+    .o_vsm_stage_card_stream_flow::before {
         border-top: 2px solid #94a3b8;
         content: "";
         right: -40px;
@@ -268,7 +292,7 @@
         z-index: 1;
     }
 
-    .o_vsm_stage_flow_column:not(:last-child)::after {
+    .o_vsm_stage_card_stream_flow::after {
         border-bottom: 6px solid transparent;
         border-left: 8px solid #94a3b8;
         border-top: 6px solid transparent;
@@ -281,8 +305,8 @@
         z-index: 2;
     }
 
-    .o_vsm_stage_flow_column::before,
-    .o_vsm_stage_flow_column::after {
+    .o_vsm_stage_card_stream_flow::before,
+    .o_vsm_stage_card_stream_flow::after {
         z-index: 2;
     }
 
