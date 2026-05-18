@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <div t-name="twj_ea_enhancement.ValueStreamMap" class="o_value_stream_map p-4" dir="rtl">
+        <div id="o_value_stream_map_export_root">
+            <div class="o_vsm_header">
+                <div>
+                    <h2 class="mb-1" t-esc="state.valueStream.name || 'Value Stream Map'"/>
+                    <p class="mb-0 text-muted" t-if="state.valueStream.code" t-esc="state.valueStream.code"/>
+                </div>
+                <button
+                    type="button"
+                    class="btn btn-primary o_hi_export_btn"
+                    data-selector="#o_value_stream_map_export_root"
+                    data-filename="value_stream_map.svg"
+                    data-export-layout="content"
+                    data-hide-selectors=".o_hi_export_btn"
+                >
+                    <t t-esc="'Export Image'"/>
+                </button>
+            </div>
+
+            <t t-if="state.loading">
+                <div class="alert alert-info mb-0">Loading value stream map...</div>
+            </t>
+            <t t-elif="state.message">
+                <div class="alert alert-warning mb-0" t-esc="state.message"/>
+            </t>
+            <t t-elif="!state.stages.length">
+                <div class="alert alert-secondary mb-0">No stages found for this value stream.</div>
+            </t>
+            <t t-else="">
+                <div class="o_vsm_board">
+                    <div class="o_vsm_row o_vsm_row_stream">
+                        <div class="o_vsm_row_label o_vsm_row_label_stream">
+                            <div class="o_vsm_label_title">VALUE STREAM</div>
+                            <div class="o_vsm_label_subtitle">Customer Experience</div>
+                        </div>
+                        <t t-foreach="state.stages" t-as="stage" t-key="stage.id">
+                            <div class="o_vsm_stage_column o_vsm_stage_flow_column o_vsm_stage_column_connect_top">
+                                <div class="o_vsm_stage_card o_vsm_stage_card_stream">
+                                    <div class="o_vsm_stage_title" t-esc="stage.name"/>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+
+                    <div class="o_vsm_row o_vsm_row_capability">
+                        <div class="o_vsm_row_label o_vsm_row_label_capability">
+                            <div class="o_vsm_label_title">CAPABILITIES</div>
+                            <div class="o_vsm_label_subtitle">Business Capabilities</div>
+                        </div>
+                        <t t-foreach="state.stages" t-as="stage" t-key="'cap-' + stage.id">
+                            <div class="o_vsm_stage_column o_vsm_stage_column_connect_top o_vsm_stage_column_connect_bottom">
+                                <t t-foreach="stage.capabilities" t-as="capability" t-key="capability.id">
+                                    <div class="o_vsm_item_card">
+                                        <div class="o_vsm_item_name" t-esc="capability.name"/>
+                                        <div class="o_vsm_status_line">
+                                            <span class="o_vsm_status_dot" t-att-class="getStatusClass(capability.change_type)"/>
+                                            <span t-esc="getStatusLabel(capability.change_type)"/>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </t>
+                    </div>
+
+                    <div class="o_vsm_row o_vsm_row_service">
+                        <div class="o_vsm_row_label o_vsm_row_label_service">
+                            <div class="o_vsm_label_title">SERVICES</div>
+                            <div class="o_vsm_label_subtitle">Business Services</div>
+                        </div>
+                        <t t-foreach="state.stages" t-as="stage" t-key="'srv-' + stage.id">
+                            <div class="o_vsm_stage_column o_vsm_stage_column_connect_top o_vsm_stage_column_connect_bottom">
+                                <t t-foreach="stage.services" t-as="service" t-key="service.id">
+                                    <div class="o_vsm_item_card">
+                                        <div class="o_vsm_item_name" t-esc="service.name"/>
+                                        <div class="o_vsm_status_line">
+                                            <span class="o_vsm_status_dot" t-att-class="getStatusClass(service.change_type)"/>
+                                            <span t-esc="getStatusLabel(service.change_type)"/>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </t>
+                    </div>
+
+                    <div class="o_vsm_row o_vsm_row_application">
+                        <div class="o_vsm_row_label o_vsm_row_label_application">
+                            <div class="o_vsm_label_title">APPLICATIONS</div>
+                            <div class="o_vsm_label_subtitle">Application Systems</div>
+                        </div>
+                        <t t-foreach="state.stages" t-as="stage" t-key="'app-' + stage.id">
+                            <div class="o_vsm_stage_column o_vsm_stage_column_connect_top">
+                                <t t-foreach="stage.applications" t-as="application" t-key="application.id">
+                                    <div class="o_vsm_item_card">
+                                        <div class="o_vsm_item_name" t-esc="application.name"/>
+                                        <div class="o_vsm_status_line">
+                                            <span class="o_vsm_status_dot" t-att-class="getStatusClass(application.change_type)"/>
+                                            <span t-esc="getStatusLabel(application.change_type)"/>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </div>
+</templates>

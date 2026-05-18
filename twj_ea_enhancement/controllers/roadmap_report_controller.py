@@ -130,3 +130,91 @@ class BuildingBlockRoadmapReportController(http.Controller):
             "message": "",
             "lines": lines,
         }
+
+    @http.route("/value/stream/map/data", type="json", auth="user")
+    def get_value_stream_map_data(self, value_stream_id=None):
+        try:
+            clean_value_stream_id = int(value_stream_id) if value_stream_id else False
+        except (TypeError, ValueError):
+            return {
+                "success": False,
+                "message": _("Invalid value stream."),
+                "value_stream": {},
+                "stages": [],
+            }
+
+        if not clean_value_stream_id:
+            return {
+                "success": False,
+                "message": _("Missing value stream."),
+                "value_stream": {},
+                "stages": [],
+            }
+
+        value_stream = request.env["ea.entity.value.stream"].with_context(
+            lang=request.env.context.get("lang")
+        ).browse(clean_value_stream_id).exists()
+        if not value_stream:
+            return {
+                "success": False,
+                "message": _("Value stream not found."),
+                "value_stream": {},
+                "stages": [],
+            }
+
+        stages = []
+        for stage in value_stream.value_stream_stages_ids.sorted(key=lambda current_stage: (current_stage.sequence, current_stage.id)):
+            capabilities = stage.capabilities_ids.sorted(key=lambda capability: (capability.name or "", capability.id))
+            services_map = {}
+            applications_map = {}
+
+            capability_items = []
+            for capability in capabilities:
+                capability_items.append(
+                    {
+                        "id": capability.id,
+                        "name": capability.name,
+                        "change_type": capability.change_type or "none",
+                    }
+                )
+                for service in capability.business_service_ids.sorted(key=lambda current_service: (current_service.name or "", current_service.id)):
+                    services_map.setdefault(
+                        service.id,
+                        {
+                            "id": service.id,
+                            "name": service.name,
+                            "change_type": service.change_type or "none",
+                        },
+                    )
+                    for application in service.application_ids.sorted(
+                        key=lambda current_application: (current_application.name or "", current_application.id)
+                    ):
+                        applications_map.setdefault(
+                            application.id,
+                            {
+                                "id": application.id,
+                                "name": application.name,
+                                "change_type": application.change_type or "none",
+                            },
+                        )
+
+            stages.append(
+                {
+                    "id": stage.id,
+                    "name": stage.name,
+                    "sequence": stage.sequence,
+                    "capabilities": capability_items,
+                    "services": list(services_map.values()),
+                    "applications": list(applications_map.values()),
+                }
+            )
+
+        return {
+            "success": True,
+            "message": "",
+            "value_stream": {
+                "id": value_stream.id,
+                "name": value_stream.name,
+            },
+            "stages": stages,
+        }
