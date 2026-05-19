@@ -35,7 +35,7 @@
                             <div class="o_vsm_label_subtitle">Customer Experience</div>
                         </div>
                         <t t-foreach="state.stages" t-as="stage" t-key="stage.id">
-                            <div class="o_vsm_stage_column o_vsm_stage_flow_column o_vsm_stage_column_connect_bottom">
+                            <div t-att-class="stage.columnClass">
                                 <div class="o_vsm_stage_card o_vsm_stage_card_stream o_vsm_stage_card_stream_flow">
                                     <div class="o_vsm_stage_title" t-esc="stage.name"/>
                                 </div>

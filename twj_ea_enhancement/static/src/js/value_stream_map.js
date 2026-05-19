@@ -3,6 +3,7 @@
 import { Component, onWillStart, useState } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { _t } from "@web/core/l10n/translation";
+import { session } from "@web/session";
 import { useService } from "@web/core/utils/hooks";
 
 class ValueStreamMap extends Component {
@@ -12,6 +13,9 @@ class ValueStreamMap extends Component {
         this.rpc = useService("rpc");
         this.notification = useService("notification");
         this.actionParams = this.props.action?.params || {};
+        this.arrowDirectionClass = (session.user_context.lang || "").toLowerCase().startsWith("ar")
+            ? "o_vsm_arrow_rtl"
+            : "o_vsm_arrow_ltr";
 
         this.state = useState({
             loading: true,
@@ -39,7 +43,12 @@ class ValueStreamMap extends Component {
                 return;
             }
             this.state.valueStream = result.value_stream || {};
-            this.state.stages = result.stages || [];
+            this.state.stages = (result.stages || []).map((stage) => ({
+                ...stage,
+                columnClass:
+                    "o_vsm_stage_column o_vsm_stage_flow_column o_vsm_stage_column_connect_bottom " +
+                    this.arrowDirectionClass,
+            }));
         } catch (error) {
             console.error("Failed to load value stream map:", error);
             this.state.message = _t("Failed to load value stream map.");
