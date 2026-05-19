@@ -740,6 +740,105 @@
         });
     }
 
+    function isValueStreamMapExport(root) {
+        return Boolean(
+            root &&
+            (
+                root.id === "o_value_stream_map_export_root" ||
+                root.querySelector("#o_value_stream_map_export_root")
+            )
+        );
+    }
+
+    function syncValueStreamMapFromSource(sourceRoot, cloneRoot) {
+        if (!isValueStreamMapExport(sourceRoot) || !isValueStreamMapExport(cloneRoot)) {
+            return;
+        }
+
+        const sourceRows = Array.from(sourceRoot.querySelectorAll(".o_vsm_row"));
+        const cloneRows = Array.from(cloneRoot.querySelectorAll(".o_vsm_row"));
+
+        cloneRows.forEach((cloneRow, rowIndex) => {
+            const sourceRow = sourceRows[rowIndex];
+            if (!sourceRow) {
+                return;
+            }
+
+            const rowRect = sourceRow.getBoundingClientRect();
+            if (rowRect.height) {
+                cloneRow.style.setProperty("height", `${rowRect.height}px`, "important");
+                cloneRow.style.setProperty("min-height", `${rowRect.height}px`, "important");
+            }
+            if (rowRect.width) {
+                cloneRow.style.setProperty("width", `${rowRect.width}px`, "important");
+                cloneRow.style.setProperty("min-width", `${rowRect.width}px`, "important");
+            }
+
+            const sourceLabel = sourceRow.querySelector(".o_vsm_row_label");
+            const cloneLabel = cloneRow.querySelector(".o_vsm_row_label");
+            if (sourceLabel && cloneLabel) {
+                const labelRect = sourceLabel.getBoundingClientRect();
+                if (labelRect.width) {
+                    cloneLabel.style.setProperty("width", `${labelRect.width}px`, "important");
+                    cloneLabel.style.setProperty("min-width", `${labelRect.width}px`, "important");
+                    cloneLabel.style.setProperty("max-width", `${labelRect.width}px`, "important");
+                    cloneLabel.style.setProperty("flex", `0 0 ${labelRect.width}px`, "important");
+                }
+                if (labelRect.height) {
+                    cloneLabel.style.setProperty("height", `${labelRect.height}px`, "important");
+                    cloneLabel.style.setProperty("min-height", `${labelRect.height}px`, "important");
+                }
+            }
+
+            const sourceColumns = Array.from(sourceRow.querySelectorAll(".o_vsm_stage_column"));
+            const cloneColumns = Array.from(cloneRow.querySelectorAll(".o_vsm_stage_column"));
+            cloneColumns.forEach((cloneColumn, columnIndex) => {
+                const sourceColumn = sourceColumns[columnIndex];
+                if (!sourceColumn) {
+                    return;
+                }
+
+                const columnRect = sourceColumn.getBoundingClientRect();
+                if (columnRect.width) {
+                    const width = `${columnRect.width}px`;
+                    cloneColumn.style.setProperty("box-sizing", "border-box", "important");
+                    cloneColumn.style.setProperty("width", width, "important");
+                    cloneColumn.style.setProperty("min-width", width, "important");
+                    cloneColumn.style.setProperty("max-width", width, "important");
+                    cloneColumn.style.setProperty("flex", `0 0 ${width}`, "important");
+                }
+                if (columnRect.height) {
+                    const height = `${columnRect.height}px`;
+                    cloneColumn.style.setProperty("height", height, "important");
+                    cloneColumn.style.setProperty("min-height", height, "important");
+                }
+            });
+
+            const sourceCards = Array.from(
+                sourceRow.querySelectorAll(".o_vsm_stage_card, .o_vsm_item_card")
+            );
+            const cloneCards = Array.from(
+                cloneRow.querySelectorAll(".o_vsm_stage_card, .o_vsm_item_card")
+            );
+            cloneCards.forEach((cloneCard, cardIndex) => {
+                const sourceCard = sourceCards[cardIndex];
+                if (!sourceCard) {
+                    return;
+                }
+                const cardRect = sourceCard.getBoundingClientRect();
+                if (cardRect.width) {
+                    cloneCard.style.setProperty("width", `${cardRect.width}px`, "important");
+                    cloneCard.style.setProperty("min-width", `${cardRect.width}px`, "important");
+                    cloneCard.style.setProperty("max-width", `${cardRect.width}px`, "important");
+                }
+                if (cardRect.height) {
+                    cloneCard.style.setProperty("height", `${cardRect.height}px`, "important");
+                    cloneCard.style.setProperty("min-height", `${cardRect.height}px`, "important");
+                }
+            });
+        });
+    }
+
     // Build and prepare the clone that will be exported.
     async function buildPreparedClone(sourceNode, opts) {
         const sandbox = makeSandbox();
@@ -782,6 +881,7 @@
         await nextFrame();
         await wait(60);
         syncRoadmapRowHeightsFromSource(sourceNode, clone);
+        syncValueStreamMapFromSource(sourceNode, clone);
         await nextFrame();
         await wait(20);
 
