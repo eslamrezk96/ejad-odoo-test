@@ -133,6 +133,176 @@ class BuildingBlockRoadmapReportController(http.Controller):
             "lines": lines,
         }
 
+
+class MatrixRelationReportController(http.Controller):
+    def _get_matrix_component_domain(self, component_model_names=None):
+        domain = [("data_model_id", "!=", False)]
+        if component_model_names is not None:
+            domain.append(("data_model_id.model", "in", component_model_names))
+        return domain
+
+    def _get_matrix_components(self, component_model_names=None):
+        return request.env["ea.component"].with_context(lang=request.env.context.get("lang")).search(
+            self._get_matrix_component_domain(component_model_names),
+            order="sequence, id",
+        )
+
+    def _serialize_matrix_component(self, component):
+        model_name = component.data_model_id.model if component.data_model_id else False
+        total_count = 0
+        if model_name and model_name in request.env:
+            total_count = request.env[model_name].with_context(lang=request.env.context.get("lang")).search_count([])
+        return {
+            "id": component.id,
+            "name": component.name,
+            "layer_id": component.layer_id.id,
+            "layer_name": component.layer_id.name,
+            "model": model_name,
+            "count": total_count,
+        }
+
+    def _get_related_component_model_names(self, model_name):
+        all_components = self._get_matrix_components()
+        component_models = {
+            component.data_model_id.model: component
+            for component in all_components
+            if component.data_model_id and component.data_model_id.model
+        }
+        if model_name not in component_models or model_name not in request.env:
+            return []
+
+        related_model_names = set()
+        source_model = request.env[model_name]
+
+        for field in source_model._fields.values():
+            if field.type not in ("many2one", "one2many", "many2many"):
+                continue
+            if field.comodel_name in component_models:
+                related_model_names.add(field.comodel_name)
+
+        return sorted(
+            related_model_names,
+            key=lambda current_model_name: (
+                component_models[current_model_name].sequence,
+                component_models[current_model_name].id,
+            ),
+        )
+
+    @http.route("/matrix/relation/domains", type="json", auth="user")
+    def get_matrix_relation_domains(self):
+        layers = request.env["ea.layer"].with_context(lang=request.env.context.get("lang")).search_read(
+            [],
+            ["id", "name"],
+            order="sequence, id",
+        )
+        return {
+            "domains": [
+                {
+                    "id": layer["id"],
+                    "name": layer["name"],
+                }
+                for layer in layers
+            ]
+        }
+
+    @http.route("/matrix/relation/tags", type="json", auth="user")
+    def get_matrix_relation_tags(self):
+        tags = request.env["ea.entity.tags"].with_context(lang=request.env.context.get("lang")).search_read(
+            [],
+            ["id", "name"],
+            order="name, id",
+        )
+        return {
+            "tags": [
+                {
+                    "id": tag["id"],
+                    "name": tag["name"],
+                }
+                for tag in tags
+            ]
+        }
+
+    @http.route("/matrix/relation/transitions", type="json", auth="user")
+    def get_matrix_relation_transitions(self):
+        transitions = request.env["ea.transition"].with_context(lang=request.env.context.get("lang")).search_read(
+            [],
+            ["id", "name"],
+            order="start_date, id",
+        )
+        return {
+            "transitions": [
+                {
+                    "id": transition["id"],
+                    "name": transition["name"],
+                }
+                for transition in transitions
+            ]
+        }
+
+    @http.route("/matrix/relation/from-components", type="json", auth="user")
+    def get_matrix_relation_from_components(self, domain_ids=None):
+        domain_ids = domain_ids or []
+        try:
+            clean_domain_ids = [int(current_domain_id) for current_domain_id in domain_ids if current_domain_id]
+        except (TypeError, ValueError):
+            return {
+                "success": False,
+                "message": _("Invalid domain selection."),
+                "components": [],
+            }
+
+        if not clean_domain_ids:
+            return {
+                "success": True,
+                "message": "",
+                "components": [],
+            }
+
+        components = self._get_matrix_components().filtered(lambda component: component.layer_id.id in clean_domain_ids)
+        return {
+            "success": True,
+            "message": "",
+            "components": [self._serialize_matrix_component(component) for component in components],
+        }
+
+    @http.route("/matrix/relation/to-components", type="json", auth="user")
+    def get_matrix_relation_to_components(self, from_component_id=None):
+        try:
+            clean_from_component_id = int(from_component_id) if from_component_id else False
+        except (TypeError, ValueError):
+            return {
+                "success": False,
+                "message": _("Invalid component selection."),
+                "components": [],
+            }
+
+        if not clean_from_component_id:
+            return {
+                "success": True,
+                "message": "",
+                "components": [],
+            }
+
+        component = request.env["ea.component"].with_context(lang=request.env.context.get("lang")).browse(
+            clean_from_component_id
+        ).exists()
+        if not component or not component.data_model_id or not component.data_model_id.model:
+            return {
+                "success": True,
+                "message": "",
+                "components": [],
+            }
+
+        related_model_names = self._get_related_component_model_names(component.data_model_id.model)
+        related_components = self._get_matrix_components(related_model_names)
+        return {
+            "success": True,
+            "message": "",
+            "components": [self._serialize_matrix_component(related_component) for related_component in related_components],
+        }
+
+
+class ValueStreamMapController(http.Controller):
     @http.route("/value/stream/map/data", type="json", auth="user")
     def get_value_stream_map_data(self, value_stream_id=None):
         try:

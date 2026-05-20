@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <div
+        t-name="twj_ea_enhancement.MatrixRelationReport"
+        class="o_matrix_relation_report p-4"
+        t-att-dir="getRootDirection()"
+    >
+        <div
+            t-if="isAnyDropdownOpen()"
+            class="o_dropdown_backdrop"
+            t-on-click="closeAllDropdowns"
+        />
+        <div class="o_matrix_relation_page_header">
+            <h1 class="mb-1" t-esc="getText('title')"/>
+            <p class="mb-0" t-esc="getText('subtitle')"/>
+        </div>
+
+        <section class="o_matrix_relation_filters_card">
+            <h2 class="o_matrix_relation_section_title" t-esc="getText('sectionTitle')"/>
+
+            <div class="o_matrix_relation_filter_row">
+                <div class="o_matrix_relation_filter o_matrix_relation_domain_filter">
+                    <label t-esc="getText('domain')"/>
+                    <span class="o_matrix_field_caption o_matrix_field_caption_placeholder">.</span>
+                    <div t-att-class="getDomainDropdownClass()">
+                        <button
+                            type="button"
+                            class="btn o_matrix_filter_button o_matrix_m2m_filter_button"
+                            t-on-click="toggleDomainDropdown"
+                        >
+                            <span class="o_matrix_m2m_tags" t-if="getSelectedDomains().length">
+                                <t t-foreach="getSelectedDomains()" t-as="domain" t-key="domain.id">
+                                    <span class="o_matrix_m2m_tag">
+                                        <span class="o_matrix_m2m_tag_label" t-esc="domain.name"/>
+                                        <button
+                                            type="button"
+                                            class="btn o_matrix_m2m_tag_remove"
+                                            t-att-title="getText('remove')"
+                                            t-att-data-domain-id="domain.id"
+                                            t-on-click="removeSelectedDomain"
+                                        >
+                                            <i class="fa fa-times"/>
+                                        </button>
+                                    </span>
+                                </t>
+                            </span>
+                            <span t-else="" class="o_matrix_m2m_placeholder" t-esc="getText('selectDomainsPlaceholder')"/>
+                            <i class="fa fa-angle-down"/>
+                        </button>
+
+                        <div t-att-class="getDomainDropdownMenuClass()">
+                            <div class="o_matrix_dropdown_header">
+                                <span t-esc="getText('selectDomains')"/>
+                                <button
+                                    t-if="state.selectedDomainIds.length"
+                                    type="button"
+                                    class="btn btn-link p-0"
+                                    t-on-click="clearSelectedDomains"
+                                >
+                                    <t t-esc="getText('clear')"/>
+                                </button>
+                            </div>
+                            <div class="o_matrix_filter_search_box">
+                                <input
+                                    type="text"
+                                    class="form-control o_matrix_filter_search_input"
+                                    t-att-value="state.domainSearchTerm"
+                                    t-att-placeholder="getText('searchDomain')"
+                                    t-on-input="onDomainSearchInput"
+                                />
+                            </div>
+                            <t t-if="state.loadingDomains">
+                                <div class="dropdown-item-text text-muted" t-esc="getText('loading')"/>
+                            </t>
+                            <t t-else="">
+                                <t t-foreach="getVisibleDomains()" t-as="domain" t-key="domain.id">
+                                    <label class="dropdown-item o_matrix_dropdown_option">
+                                        <input
+                                            type="checkbox"
+                                            t-att-value="domain.id"
+                                            t-att-checked="isDomainSelectedAttr(domain.id)"
+                                            t-on-change="onDomainOptionChange"
+                                        />
+                                        <span t-esc="domain.name"/>
+                                    </label>
+                                </t>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="o_matrix_relation_filter">
+                    <label t-esc="getText('fromRows')"/>
+                    <span class="o_matrix_field_caption" t-esc="getText('modelComponent')"/>
+                    <select
+                        class="form-select o_matrix_relation_select"
+                        t-att-value="state.selectedFromComponentId"
+                        t-on-change="onFromComponentChange"
+                        t-att-disabled="isFromComponentDisabled()"
+                    >
+                        <option value="" t-esc="getText('selectComponent')"/>
+                        <t t-foreach="state.fromComponents" t-as="component" t-key="component.id">
+                            <option t-att-value="component.id" t-esc="component.name"/>
+                        </t>
+                    </select>
+                    <div t-att-class="getFromMetaClass()">
+                        <i class="fa fa-object-group"/>
+                        <span t-esc="getFromMetaText()"/>
+                    </div>
+                </div>
+
+                <div class="o_matrix_relation_filter">
+                    <label t-esc="getText('toColumns')"/>
+                    <span class="o_matrix_field_caption" t-esc="getText('relatedModelComponent')"/>
+                    <select
+                        class="form-select o_matrix_relation_select"
+                        t-att-value="state.selectedToComponentId"
+                        t-on-change="onToComponentChange"
+                        t-att-disabled="isToComponentDisabled()"
+                    >
+                        <option value="" t-esc="getText('selectComponent')"/>
+                        <t t-foreach="state.toComponents" t-as="component" t-key="component.id">
+                            <option t-att-value="component.id" t-esc="component.name"/>
+                        </t>
+                    </select>
+                    <div t-att-class="getToMetaClass()">
+                        <i class="fa fa-object-group"/>
+                        <span t-esc="getToMetaText()"/>
+                    </div>
+                </div>
+
+                <div class="o_matrix_relation_filter">
+                    <label t-esc="getText('tags')"/>
+                    <span class="o_matrix_field_caption o_matrix_field_caption_placeholder">.</span>
+                    <div t-att-class="getTagDropdownClass()">
+                        <button
+                            type="button"
+                            class="btn o_matrix_filter_button o_matrix_m2m_filter_button"
+                            t-on-click="toggleTagDropdown"
+                        >
+                            <span class="o_matrix_m2m_tags" t-if="getSelectedTags().length">
+                                <t t-foreach="getSelectedTags()" t-as="tag" t-key="tag.id">
+                                    <span class="o_matrix_m2m_tag">
+                                        <span class="o_matrix_m2m_tag_label" t-esc="tag.name"/>
+                                        <button
+                                            type="button"
+                                            class="btn o_matrix_m2m_tag_remove"
+                                            t-att-title="getText('remove')"
+                                            t-att-data-tag-id="tag.id"
+                                            t-on-click="removeSelectedTag"
+                                        >
+                                            <i class="fa fa-times"/>
+                                        </button>
+                                    </span>
+                                </t>
+                            </span>
+                            <span t-else="" class="o_matrix_m2m_placeholder" t-esc="getText('selectTagsPlaceholder')"/>
+                            <i class="fa fa-angle-down"/>
+                        </button>
+
+                        <div t-att-class="getTagDropdownMenuClass()">
+                            <div class="o_matrix_dropdown_header">
+                                <span t-esc="getText('selectTags')"/>
+                                <button
+                                    t-if="state.selectedTagIds.length"
+                                    type="button"
+                                    class="btn btn-link p-0"
+                                    t-on-click="clearSelectedTags"
+                                >
+                                    <t t-esc="getText('clear')"/>
+                                </button>
+                            </div>
+                            <div class="o_matrix_filter_search_box">
+                                <input
+                                    type="text"
+                                    class="form-control o_matrix_filter_search_input"
+                                    t-att-value="state.tagSearchTerm"
+                                    t-att-placeholder="getText('searchTags')"
+                                    t-on-input="onTagSearchInput"
+                                />
+                            </div>
+                            <t t-if="state.loadingTags">
+                                <div class="dropdown-item-text text-muted" t-esc="getText('loading')"/>
+                            </t>
+                            <t t-else="">
+                                <t t-foreach="getVisibleTags()" t-as="tag" t-key="tag.id">
+                                    <label class="dropdown-item o_matrix_dropdown_option">
+                                        <input
+                                            type="checkbox"
+                                            t-att-value="tag.id"
+                                            t-att-checked="isTagSelectedAttr(tag.id)"
+                                            t-on-change="onTagOptionChange"
+                                        />
+                                        <span t-esc="tag.name"/>
+                                    </label>
+                                </t>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="o_matrix_relation_filter">
+                    <label t-esc="getText('transition')"/>
+                    <span class="o_matrix_field_caption o_matrix_field_caption_placeholder">.</span>
+                    <div t-att-class="getTransitionDropdownClass()">
+                        <button
+                            type="button"
+                            class="btn o_matrix_filter_button o_matrix_m2m_filter_button"
+                            t-on-click="toggleTransitionDropdown"
+                        >
+                            <span class="o_matrix_m2m_tags" t-if="getSelectedTransitions().length">
+                                <t t-foreach="getSelectedTransitions()" t-as="transition" t-key="transition.id">
+                                    <span class="o_matrix_m2m_tag">
+                                        <span class="o_matrix_m2m_tag_label" t-esc="transition.name"/>
+                                        <button
+                                            type="button"
+                                            class="btn o_matrix_m2m_tag_remove"
+                                            t-att-title="getText('remove')"
+                                            t-att-data-transition-id="transition.id"
+                                            t-on-click="removeSelectedTransition"
+                                        >
+                                            <i class="fa fa-times"/>
+                                        </button>
+                                    </span>
+                                </t>
+                            </span>
+                            <span t-else="" class="o_matrix_m2m_placeholder" t-esc="getText('selectTransitionsPlaceholder')"/>
+                            <i class="fa fa-angle-down"/>
+                        </button>
+
+                        <div t-att-class="getTransitionDropdownMenuClass()">
+                            <div class="o_matrix_dropdown_header">
+                                <span t-esc="getText('selectTransitions')"/>
+                                <button
+                                    t-if="state.selectedTransitionIds.length"
+                                    type="button"
+                                    class="btn btn-link p-0"
+                                    t-on-click="clearSelectedTransitions"
+                                >
+                                    <t t-esc="getText('clear')"/>
+                                </button>
+                            </div>
+                            <div class="o_matrix_filter_search_box">
+                                <input
+                                    type="text"
+                                    class="form-control o_matrix_filter_search_input"
+                                    t-att-value="state.transitionSearchTerm"
+                                    t-att-placeholder="getText('searchTransitions')"
+                                    t-on-input="onTransitionSearchInput"
+                                />
+                            </div>
+                            <t t-if="state.loadingTransitions">
+                                <div class="dropdown-item-text text-muted" t-esc="getText('loading')"/>
+                            </t>
+                            <t t-else="">
+                                <t t-foreach="getVisibleTransitions()" t-as="transition" t-key="transition.id">
+                                    <label class="dropdown-item o_matrix_dropdown_option">
+                                        <input
+                                            type="checkbox"
+                                            t-att-value="transition.id"
+                                            t-att-checked="isTransitionSelectedAttr(transition.id)"
+                                            t-on-change="onTransitionOptionChange"
+                                        />
+                                        <span t-esc="transition.name"/>
+                                    </label>
+                                </t>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="o_matrix_relation_actions">
+                    <span class="o_matrix_action_placeholder_label" aria-hidden="true">.</span>
+                    <span class="o_matrix_field_caption o_matrix_field_caption_placeholder" aria-hidden="true">.</span>
+                    <button type="button" class="btn btn-outline-primary o_matrix_preview_btn" t-esc="getText('preview')"/>
+                </div>
+            </div>
+        </section>
+    </div>
+</templates>

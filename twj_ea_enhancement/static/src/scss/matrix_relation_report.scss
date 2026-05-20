@@ -1,0 +1,278 @@
+.o_matrix_relation_report {
+    --matrix-border: #d9e1ef;
+    --matrix-text: #20284f;
+    --matrix-muted: #5c6784;
+    --matrix-bg: #f6f8fc;
+    --matrix-card-bg: #fff;
+    --matrix-primary: #4f19f4;
+    --matrix-primary-dark: #3710c2;
+    --matrix-shadow: 0 10px 30px rgba(31, 42, 68, 0.08);
+    color: var(--matrix-text);
+    background:
+        radial-gradient(circle at top left, rgba(79, 25, 244, 0.06), transparent 28%),
+        linear-gradient(180deg, #fbfcff 0%, var(--matrix-bg) 100%);
+    min-height: 100%;
+}
+
+.o_matrix_relation_page_header {
+    margin-bottom: 18px;
+}
+
+.o_matrix_relation_page_header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--matrix-text);
+}
+
+.o_matrix_relation_page_header p {
+    color: var(--matrix-muted);
+    font-size: 0.95rem;
+}
+
+.o_matrix_relation_filters_card {
+    padding: 18px 20px 20px;
+    background: var(--matrix-card-bg);
+    border: 1px solid var(--matrix-border);
+    border-radius: 14px;
+    box-shadow: 0 2px 6px rgba(31, 42, 68, 0.04);
+}
+
+.o_matrix_relation_section_title {
+    margin: 0 0 20px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--matrix-text);
+}
+
+.o_matrix_relation_filter_row {
+    display: grid;
+    grid-template-columns:
+        minmax(240px, 1.2fr)
+        minmax(200px, 1fr)
+        minmax(200px, 1fr)
+        minmax(220px, 1fr)
+        minmax(220px, 1fr)
+        auto;
+    gap: 20px;
+    align-items: start;
+}
+
+.o_matrix_relation_filter {
+    display: grid;
+    grid-template-rows: auto 20px auto auto;
+    gap: 8px;
+    min-width: 0;
+    align-content: start;
+}
+
+.o_matrix_relation_filter label {
+    margin: 0;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--matrix-text);
+}
+
+.o_matrix_field_caption {
+    font-size: 0.84rem;
+    color: var(--matrix-muted);
+    line-height: 20px;
+}
+
+.o_matrix_field_caption_placeholder {
+    visibility: hidden;
+}
+
+.o_matrix_filter_button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 14px;
+    background: var(--matrix-card-bg);
+    border: 1px solid var(--matrix-border);
+    border-radius: 10px;
+    color: var(--matrix-text);
+    box-shadow: 0 1px 2px rgba(31, 42, 68, 0.05);
+}
+
+.o_matrix_m2m_filter_button {
+    align-items: flex-start;
+    overflow-y: auto;
+}
+
+.o_matrix_m2m_tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.o_matrix_m2m_placeholder {
+    color: var(--matrix-muted);
+    flex: 1 1 auto;
+    text-align: start;
+}
+
+.o_matrix_m2m_tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    max-width: 100%;
+    padding: 4px 8px 4px 10px;
+    border-radius: 999px;
+    background: #ebe6fb;
+    color: #372c7b;
+    font-size: 0.84rem;
+    font-weight: 600;
+}
+
+.o_matrix_m2m_tag_label {
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.o_matrix_m2m_tag_remove {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #6b7280;
+    box-shadow: none;
+}
+
+.o_matrix_m2m_tag_remove:hover,
+.o_matrix_m2m_tag_remove:focus,
+.o_matrix_filter_button:hover,
+.o_matrix_filter_button:focus {
+    background: #fff;
+    border-color: #b9c6dd;
+}
+
+.o_matrix_dropdown_menu {
+    min-width: 280px;
+    max-height: 320px;
+    padding: 10px 0;
+    overflow-y: auto;
+    border: 1px solid var(--matrix-border);
+    border-radius: 12px;
+    box-shadow: var(--matrix-shadow);
+}
+
+.o_matrix_dropdown_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 14px 8px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #edf1f7;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.o_matrix_filter_search_box {
+    padding: 0 14px 10px;
+}
+
+.o_matrix_filter_search_input {
+    width: 100%;
+    font-size: 0.9rem;
+    border-radius: 8px;
+}
+
+.o_matrix_dropdown_option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.92rem;
+}
+
+.o_matrix_relation_select {
+    min-height: 48px;
+    border-color: var(--matrix-border);
+    border-radius: 10px;
+    color: var(--matrix-text);
+    box-shadow: 0 1px 2px rgba(31, 42, 68, 0.05);
+}
+
+.o_matrix_filter_meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 22px;
+    font-size: 0.85rem;
+    color: var(--matrix-text);
+}
+
+.o_matrix_filter_meta_placeholder {
+    visibility: hidden;
+}
+
+.o_matrix_relation_actions {
+    display: grid;
+    grid-template-rows: auto 20px auto;
+    gap: 8px;
+    justify-items: end;
+    align-content: start;
+}
+
+.o_matrix_action_placeholder_label {
+    height: 21px;
+    visibility: hidden;
+}
+
+.o_matrix_preview_btn {
+    min-width: 136px;
+    min-height: 48px;
+    border-color: #c8cff1;
+    color: var(--matrix-primary);
+    font-weight: 600;
+}
+
+.o_matrix_preview_btn:hover,
+.o_matrix_preview_btn:focus {
+    border-color: var(--matrix-primary);
+    color: var(--matrix-primary-dark);
+}
+
+@media (max-width: 1280px) {
+    .o_matrix_relation_filter_row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .o_matrix_relation_actions {
+        justify-items: start;
+    }
+}
+
+@media (max-width: 768px) {
+    .o_matrix_relation_report {
+        padding: 16px !important;
+    }
+
+    .o_matrix_relation_filters_card {
+        padding: 16px;
+    }
+
+    .o_matrix_relation_filter_row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .o_matrix_relation_actions {
+        justify-content: flex-start;
+    }
+
+    .o_matrix_preview_btn {
+        width: 100%;
+    }
+}
