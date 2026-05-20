@@ -648,7 +648,7 @@ class BuildingBlockRoadmapReport extends Component {
                     layerName: line.layer_name,
                     iconClass: presentation.iconClass,
                     accentClass: presentation.accentClass,
-                    name: line.root_entity_name || line.name,
+                    name: line.type_name || "",
                     tagNames: new Set(),
                     projectNames: new Set(),
                     gapNames: new Set(),

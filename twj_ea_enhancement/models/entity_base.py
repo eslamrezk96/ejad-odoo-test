@@ -17,6 +17,11 @@ class EaEntityBase(models.Model):
         string="Transition",
         ondelete="set null",
     )
+    type_id = fields.Many2one(
+        "ea.entity.type",
+        string="Type",
+        ondelete="set null",
+    )
     version_parent_entity_id = fields.Many2one(
         "ea.entity.base",
         string="Version Parent",

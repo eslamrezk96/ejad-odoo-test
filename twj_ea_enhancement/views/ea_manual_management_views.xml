@@ -146,6 +146,46 @@
         sequence="30"
     />
 
+    <record id="view_ea_entity_type_tree" model="ir.ui.view">
+        <field name="name">ea.entity.type.tree</field>
+        <field name="model">ea.entity.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_entity_type_form" model="ir.ui.view">
+        <field name="name">ea.entity.type.form</field>
+        <field name="model">ea.entity.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_entity_type" model="ir.actions.act_window">
+        <field name="name">Entity Types</field>
+        <field name="res_model">ea.entity.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_ea_entity_type"
+        name="Entity Types"
+        parent="menu_ea_management_root"
+        action="action_ea_entity_type"
+        sequence="35"
+    />
+
     <record id="view_ea_transition_tree" model="ir.ui.view">
         <field name="name">ea.transition.tree</field>
         <field name="model">ea.transition</field>
@@ -213,6 +253,7 @@
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
+                        <field name="type_id"/>
                         <field name="transition_id"/>
                     </group>
                     <group>
@@ -265,6 +306,7 @@
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
+                        <field name="type_id"/>
                         <field name="transition_id"/>
                     </group>
                     <group>
@@ -322,6 +364,7 @@
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
+                        <field name="type_id"/>
                         <field name="transition_id"/>
                     </group>
                     <group>
@@ -379,6 +422,7 @@
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
+                        <field name="type_id"/>
                         <field name="transition_id"/>
                     </group>
                     <group>
@@ -436,6 +480,7 @@
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
+                        <field name="type_id"/>
                         <field name="transition_id"/>
                     </group>
                     <group>
@@ -493,6 +538,7 @@
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
+                        <field name="type_id"/>
                         <field name="transition_id"/>
                     </group>
                     <group>
@@ -551,6 +597,7 @@
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
+                        <field name="type_id"/>
                         <field name="transition_id"/>
                     </group>
                     <group>
@@ -610,6 +657,7 @@
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
+                        <field name="type_id"/>
                         <field name="transition_id"/>
                     </group>
                     <group>
@@ -853,6 +901,7 @@
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
+                        <field name="type_id"/>
                         <field name="transition_id"/>
                     </group>
                     <group>
@@ -910,6 +959,7 @@
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
+                        <field name="type_id"/>
                         <field name="transition_id"/>
                     </group>
                     <group>
@@ -967,6 +1017,7 @@
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
+                        <field name="type_id"/>
                         <field name="transition_id"/>
                     </group>
                     <group>
@@ -1024,6 +1075,7 @@
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
+                        <field name="type_id"/>
                         <field name="transition_id"/>
                     </group>
                     <group>
@@ -1081,6 +1133,7 @@
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
+                        <field name="type_id"/>
                         <field name="transition_id"/>
                     </group>
                     <group>

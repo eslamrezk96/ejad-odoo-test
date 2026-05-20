@@ -3,6 +3,7 @@ access_ea_entity_base_user,access.ea.entity.base.user,model_ea_entity_base,base.
 access_ea_layer_user,access.ea.layer.user,model_ea_layer,base.group_user,1,1,1,1
 access_ea_component_user,access.ea.component.user,model_ea_component,base.group_user,1,1,1,1
 access_ea_entity_tags_user,access.ea.entity.tags.user,model_ea_entity_tags,base.group_user,1,1,1,1
+access_ea_entity_type_user,access.ea.entity.type.user,model_ea_entity_type,base.group_user,1,1,1,1
 access_ea_transition_user,access.ea.transition.user,model_ea_transition,base.group_user,1,1,1,1
 access_ea_cybersecurity_security_apparatus_user,access.ea.cybersecurity.security.apparatus.user,model_ea_cybersecurity_security_apparatus,base.group_user,1,1,1,1
 access_ea_cybersecurity_security_software_user,access.ea.cybersecurity.security.software.user,model_ea_cybersecurity_security_software,base.group_user,1,1,1,1
