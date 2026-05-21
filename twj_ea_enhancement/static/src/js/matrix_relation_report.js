@@ -443,7 +443,7 @@ class MatrixRelationReport extends Component {
         if (!fromName || !toName) {
             return "";
         }
-        return `${fromName} (Rows) \\ ${toName} (Columns)`;
+        return `${fromName} ${_t("(Rows)")} \\ ${toName} ${_t("(Columns)")}`;
     }
 
     shouldShowPreviewSection() {
