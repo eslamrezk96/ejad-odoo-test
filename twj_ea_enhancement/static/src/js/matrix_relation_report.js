@@ -434,7 +434,7 @@ class MatrixRelationReport extends Component {
         if (!fromName || !toName) {
             return this.getText("previewSectionTitle");
         }
-        return `${this.getText("previewSectionTitle")}: ${fromName} vs ${toName}`;
+        return `${this.getText("previewSectionTitle")}: ${fromName} ${_t("VS")} ${toName}`;
     }
 
     getMatrixCornerTitle() {
