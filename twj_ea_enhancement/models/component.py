@@ -6,7 +6,7 @@ class EaComponent(models.Model):
     _description = "EA Component"
     _order = "sequence, id"
 
-    name = fields.Char(required=True)
+    name = fields.Char(required=True, translate=True)
     sequence = fields.Integer(default=10)
     active = fields.Boolean(default=True)
     layer_id = fields.Many2one(
