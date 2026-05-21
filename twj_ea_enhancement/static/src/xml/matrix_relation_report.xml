@@ -272,8 +272,55 @@
                 <div class="o_matrix_relation_actions">
                     <span class="o_matrix_action_placeholder_label" aria-hidden="true">.</span>
                     <span class="o_matrix_field_caption o_matrix_field_caption_placeholder" aria-hidden="true">.</span>
-                    <button type="button" class="btn btn-outline-primary o_matrix_preview_btn" t-esc="getText('preview')"/>
+                    <button
+                        type="button"
+                        class="btn btn-outline-primary o_matrix_preview_btn"
+                        t-att-disabled="state.loadingPreview"
+                        t-on-click="onPreviewClick"
+                        t-esc="getText('preview')"
+                    />
                 </div>
+            </div>
+        </section>
+
+        <section class="o_matrix_preview_section" t-if="shouldShowPreviewSection()">
+            <h2 class="o_matrix_preview_section_title" t-esc="getPreviewSectionTitle()"/>
+
+            <div class="o_matrix_preview_card">
+                <t t-if="state.loadingPreview">
+                    <div class="o_matrix_preview_message" t-esc="getText('loadingPreview')"/>
+                </t>
+                <t t-elif="getMatrixRows().length and getMatrixColumns().length">
+                    <div class="o_matrix_preview_scroll">
+                        <table class="table o_matrix_preview_table mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="o_matrix_preview_corner" t-esc="getMatrixCornerTitle()"/>
+                                    <t t-foreach="getMatrixColumns()" t-as="column" t-key="column.id">
+                                        <th class="text-center" t-esc="column.name"/>
+                                    </t>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="getPreviewRows()" t-as="row" t-key="row.id">
+                                    <tr>
+                                        <th class="o_matrix_preview_row_name" t-esc="row.name"/>
+                                        <t t-foreach="row.cells" t-as="cell" t-key="cell.key">
+                                            <td class="text-center">
+                                                <span t-att-class="getMatrixCellClass(cell.isRelated)">
+                                                    <i t-if="cell.isRelated" class="fa fa-check"/>
+                                                </span>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+                <t t-if="state.previewMessage">
+                    <div class="o_matrix_preview_message" t-esc="state.previewMessage"/>
+                </t>
             </div>
         </section>
     </div>

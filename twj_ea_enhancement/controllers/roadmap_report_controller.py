@@ -188,6 +188,48 @@ class MatrixRelationReportController(http.Controller):
             ),
         )
 
+    def _get_relation_field_names(self, from_model_name, to_model_name):
+        if from_model_name not in request.env or to_model_name not in request.env:
+            return []
+
+        relation_field_names = []
+        source_model = request.env[from_model_name]
+        for field_name, field in source_model._fields.items():
+            if field.type not in ("many2one", "one2many", "many2many"):
+                continue
+            if field.comodel_name == to_model_name:
+                relation_field_names.append(field_name)
+        return relation_field_names
+
+    def _build_record_filter_domain(self, model, tag_ids=None, transition_ids=None):
+        domain = []
+        tag_ids = tag_ids or []
+        transition_ids = transition_ids or []
+
+        if tag_ids and "tags_ids" in model._fields:
+            domain.append(("tags_ids", "in", tag_ids))
+        if transition_ids and "transition_id" in model._fields:
+            domain.append(("transition_id", "in", transition_ids))
+        return domain
+
+    def _serialize_matrix_record(self, record):
+        return {
+            "id": record.id,
+            "name": record.display_name or record.name or str(record.id),
+        }
+
+    def _row_record_has_relation(self, row_record, column_record, relation_field_names):
+        for field_name in relation_field_names:
+            field = row_record._fields[field_name]
+            value = row_record[field_name]
+            if field.type == "many2one":
+                if value and value.id == column_record.id:
+                    return True
+                continue
+            if column_record in value:
+                return True
+        return False
+
     @http.route("/matrix/relation/domains", type="json", auth="user")
     def get_matrix_relation_domains(self):
         layers = request.env["ea.layer"].with_context(lang=request.env.context.get("lang")).search_read(
@@ -299,6 +341,110 @@ class MatrixRelationReportController(http.Controller):
             "success": True,
             "message": "",
             "components": [self._serialize_matrix_component(related_component) for related_component in related_components],
+        }
+
+    @http.route("/matrix/relation/preview", type="json", auth="user")
+    def get_matrix_relation_preview(
+        self,
+        from_component_id=None,
+        to_component_id=None,
+        tag_ids=None,
+        transition_ids=None,
+    ):
+        tag_ids = tag_ids or []
+        transition_ids = transition_ids or []
+
+        try:
+            clean_from_component_id = int(from_component_id) if from_component_id else False
+            clean_to_component_id = int(to_component_id) if to_component_id else False
+            clean_tag_ids = [int(current_tag_id) for current_tag_id in tag_ids if current_tag_id]
+            clean_transition_ids = [
+                int(current_transition_id) for current_transition_id in transition_ids if current_transition_id
+            ]
+        except (TypeError, ValueError):
+            return {
+                "success": False,
+                "message": _("Invalid preview selection."),
+                "matrix": {},
+            }
+
+        if not clean_from_component_id or not clean_to_component_id:
+            return {
+                "success": False,
+                "message": _("Missing component selection."),
+                "matrix": {},
+            }
+
+        component_env = request.env["ea.component"].with_context(lang=request.env.context.get("lang"))
+        from_component = component_env.browse(clean_from_component_id).exists()
+        to_component = component_env.browse(clean_to_component_id).exists()
+
+        if (
+            not from_component
+            or not to_component
+            or not from_component.data_model_id
+            or not to_component.data_model_id
+            or not from_component.data_model_id.model
+            or not to_component.data_model_id.model
+        ):
+            return {
+                "success": False,
+                "message": _("Invalid component selection."),
+                "matrix": {},
+            }
+
+        from_model_name = from_component.data_model_id.model
+        to_model_name = to_component.data_model_id.model
+        relation_field_names = self._get_relation_field_names(from_model_name, to_model_name)
+
+        if not relation_field_names:
+            return {
+                "success": True,
+                "message": "",
+                "matrix": {
+                    "from_component_name": from_component.name,
+                    "to_component_name": to_component.name,
+                    "rows": [],
+                    "columns": [],
+                    "cells": [],
+                    "has_relations": False,
+                },
+            }
+
+        from_model = request.env[from_model_name].with_context(lang=request.env.context.get("lang"))
+        to_model = request.env[to_model_name].with_context(lang=request.env.context.get("lang"))
+
+        row_records = from_model.search(
+            self._build_record_filter_domain(from_model, clean_tag_ids, clean_transition_ids),
+            order="name, id" if "name" in from_model._fields else "id",
+        )
+        column_records = to_model.search(
+            self._build_record_filter_domain(to_model, clean_tag_ids, clean_transition_ids),
+            order="name, id" if "name" in to_model._fields else "id",
+        )
+
+        cell_rows = []
+        has_relations = False
+        for row_record in row_records:
+            current_cells = []
+            for column_record in column_records:
+                is_related = self._row_record_has_relation(row_record, column_record, relation_field_names)
+                if is_related:
+                    has_relations = True
+                current_cells.append(is_related)
+            cell_rows.append(current_cells)
+
+        return {
+            "success": True,
+            "message": "",
+            "matrix": {
+                "from_component_name": from_component.name,
+                "to_component_name": to_component.name,
+                "rows": [self._serialize_matrix_record(row_record) for row_record in row_records],
+                "columns": [self._serialize_matrix_record(column_record) for column_record in column_records],
+                "cells": cell_rows,
+                "has_relations": has_relations,
+            },
         }
 
 

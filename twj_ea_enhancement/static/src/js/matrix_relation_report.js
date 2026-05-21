@@ -37,6 +37,17 @@ class MatrixRelationReport extends Component {
             loadingTransitions: false,
             loadingFromComponents: false,
             loadingToComponents: false,
+            loadingPreview: false,
+            previewLoaded: false,
+            previewMessage: "",
+            matrix: {
+                fromComponentName: "",
+                toComponentName: "",
+                rows: [],
+                columns: [],
+                cells: [],
+                hasRelations: false,
+            },
         });
 
         this.onDocumentPointerDown = this.onDocumentPointerDown.bind(this);
@@ -85,8 +96,13 @@ class MatrixRelationReport extends Component {
             toColumns: _t("To (Columns)"),
             relatedModelComponent: _t("Related Model Component"),
             preview: _t("Preview"),
+            previewSectionTitle: _t("2. MATRIX RELATION REPORT"),
             selectComponent: _t("Select component..."),
             noRelatedComponents: _t("No related components found."),
+            missingPreviewSelection: _t("Select From (Rows) and To (Columns) first."),
+            loadingPreview: _t("Loading preview..."),
+            noMatrixRows: _t("No records match the current filters."),
+            noMatrixRelations: _t("No relations found for the current filters."),
             remove: _t("Remove"),
         };
         return texts[key] || "";
@@ -137,6 +153,7 @@ class MatrixRelationReport extends Component {
         this.state.selectedFromComponentId = "";
         this.state.selectedToComponentId = "";
         this.state.toComponents = [];
+        this.resetPreview();
 
         try {
             if (!this.state.selectedDomainIds.length) {
@@ -160,6 +177,7 @@ class MatrixRelationReport extends Component {
     async loadToComponents() {
         this.state.loadingToComponents = true;
         this.state.selectedToComponentId = "";
+        this.resetPreview();
 
         try {
             if (!this.state.selectedFromComponentId) {
@@ -220,6 +238,19 @@ class MatrixRelationReport extends Component {
         this.closeDomainDropdown();
         this.closeTagDropdown();
         this.closeTransitionDropdown();
+    }
+
+    resetPreview() {
+        this.state.previewLoaded = false;
+        this.state.previewMessage = "";
+        this.state.matrix = {
+            fromComponentName: "",
+            toComponentName: "",
+            rows: [],
+            columns: [],
+            cells: [],
+            hasRelations: false,
+        };
     }
 
     closeAuxiliaryDropdowns(keepOpen) {
@@ -395,6 +426,52 @@ class MatrixRelationReport extends Component {
         return "";
     }
 
+    getPreviewSectionTitle() {
+        const fromComponent = this.getSelectedFromComponent();
+        const toComponent = this.getSelectedToComponent();
+        const fromName = (this.state.matrix.fromComponentName || fromComponent?.name || "").toUpperCase();
+        const toName = (this.state.matrix.toComponentName || toComponent?.name || "").toUpperCase();
+        if (!fromName || !toName) {
+            return this.getText("previewSectionTitle");
+        }
+        return `${this.getText("previewSectionTitle")}: ${fromName} vs ${toName}`;
+    }
+
+    getMatrixCornerTitle() {
+        const fromName = this.state.matrix.fromComponentName || this.getSelectedFromComponent()?.name || "";
+        const toName = this.state.matrix.toComponentName || this.getSelectedToComponent()?.name || "";
+        if (!fromName || !toName) {
+            return "";
+        }
+        return `${fromName} (Rows) \\ ${toName} (Columns)`;
+    }
+
+    shouldShowPreviewSection() {
+        return this.state.loadingPreview || this.state.previewLoaded || Boolean(this.state.previewMessage);
+    }
+
+    getMatrixRows() {
+        return this.state.matrix.rows || [];
+    }
+
+    getMatrixColumns() {
+        return this.state.matrix.columns || [];
+    }
+
+    getPreviewRows() {
+        return this.getMatrixRows().map((row, rowIndex) => ({
+            ...row,
+            cells: ((this.state.matrix.cells || [])[rowIndex] || []).map((isRelated, cellIndex) => ({
+                key: `${row.id}-${cellIndex}`,
+                isRelated,
+            })),
+        }));
+    }
+
+    getMatrixCellClass(isRelated) {
+        return isRelated ? "o_matrix_boolean_cell o_matrix_boolean_true" : "o_matrix_boolean_cell o_matrix_boolean_false";
+    }
+
     async onDomainOptionChange(ev) {
         const domainId = ev.target.value;
         if (!domainId) {
@@ -448,6 +525,7 @@ class MatrixRelationReport extends Component {
     }
 
     onTagOptionChange(ev) {
+        this.resetPreview();
         const tagId = ev.target.value;
         if (!tagId) {
             return;
@@ -464,6 +542,7 @@ class MatrixRelationReport extends Component {
     }
 
     onTransitionOptionChange(ev) {
+        this.resetPreview();
         const transitionId = ev.target.value;
         if (!transitionId) {
             return;
@@ -482,6 +561,7 @@ class MatrixRelationReport extends Component {
     removeSelectedTag(ev) {
         ev.stopPropagation();
         ev.preventDefault();
+        this.resetPreview();
         const tagId = ev.currentTarget?.dataset?.tagId;
         if (!tagId) {
             return;
@@ -494,6 +574,7 @@ class MatrixRelationReport extends Component {
     removeSelectedTransition(ev) {
         ev.stopPropagation();
         ev.preventDefault();
+        this.resetPreview();
         const transitionId = ev.currentTarget?.dataset?.transitionId;
         if (!transitionId) {
             return;
@@ -505,11 +586,13 @@ class MatrixRelationReport extends Component {
 
     clearSelectedTags(ev) {
         ev.stopPropagation();
+        this.resetPreview();
         this.state.selectedTagIds = [];
     }
 
     clearSelectedTransitions(ev) {
         ev.stopPropagation();
+        this.resetPreview();
         this.state.selectedTransitionIds = [];
     }
 
@@ -520,6 +603,7 @@ class MatrixRelationReport extends Component {
 
     onToComponentChange(ev) {
         this.state.selectedToComponentId = ev.target.value || "";
+        this.resetPreview();
     }
 
     getSelectedFromComponent() {
@@ -539,6 +623,63 @@ class MatrixRelationReport extends Component {
             return "";
         }
         return `${_t("Total")} ${component.name}: ${component.count}`;
+    }
+
+    async onPreviewClick() {
+        if (!this.state.selectedFromComponentId || !this.state.selectedToComponentId) {
+            this.state.previewLoaded = false;
+            this.state.previewMessage = this.getText("missingPreviewSelection");
+            this.notification.add(this.state.previewMessage, { type: "warning" });
+            return;
+        }
+
+        this.state.loadingPreview = true;
+        this.state.previewLoaded = false;
+        this.state.previewMessage = "";
+
+        try {
+            const result = await this.rpc("/matrix/relation/preview", {
+                from_component_id: this.state.selectedFromComponentId,
+                to_component_id: this.state.selectedToComponentId,
+                tag_ids: this.state.selectedTagIds,
+                transition_ids: this.state.selectedTransitionIds,
+            });
+
+            if (!result.success) {
+                this.state.previewMessage = result.message || this.getText("noMatrixRows");
+                this.notification.add(this.state.previewMessage, { type: "warning" });
+                return;
+            }
+
+            const matrix = result.matrix || {};
+            this.state.matrix = {
+                fromComponentName: matrix.from_component_name || "",
+                toComponentName: matrix.to_component_name || "",
+                rows: matrix.rows || [],
+                columns: matrix.columns || [],
+                cells: matrix.cells || [],
+                hasRelations: Boolean(matrix.has_relations),
+            };
+            this.state.previewLoaded = true;
+
+            if (!this.state.matrix.rows.length || !this.state.matrix.columns.length) {
+                this.state.previewMessage = this.getText("noMatrixRows");
+                return;
+            }
+
+            if (!this.state.matrix.hasRelations) {
+                this.state.previewMessage = this.getText("noMatrixRelations");
+                return;
+            }
+
+            this.state.previewMessage = "";
+        } catch (error) {
+            console.error("Failed to load matrix preview:", error);
+            this.state.previewMessage = _t("Failed to load preview.");
+            this.notification.add(this.state.previewMessage, { type: "danger" });
+        } finally {
+            this.state.loadingPreview = false;
+        }
     }
 }
 
