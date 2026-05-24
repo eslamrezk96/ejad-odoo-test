@@ -750,6 +750,120 @@
         );
     }
 
+    function isMatrixRelationExport(root) {
+        return Boolean(
+            root &&
+            (
+                root.id === "o_matrix_relation_export_root" ||
+                root.querySelector("#o_matrix_relation_export_root")
+            )
+        );
+    }
+
+    function normalizeMatrixBooleanCellsForExport(root) {
+        if (!isMatrixRelationExport(root)) {
+            return;
+        }
+
+        root.querySelectorAll(".o_matrix_boolean_cell").forEach((cell) => {
+            cell.style.setProperty("line-height", "1", "important");
+            cell.style.setProperty("font-size", "0", "important");
+        });
+
+        root.querySelectorAll(".o_matrix_boolean_true").forEach((cell) => {
+            cell.innerHTML = "";
+
+            const check = document.createElement("span");
+            check.textContent = "✓";
+            check.setAttribute("data-export-skip-pseudo", "1");
+            check.style.setProperty("display", "inline-block", "important");
+            check.style.setProperty("font-family", "Arial, sans-serif", "important");
+            check.style.setProperty("font-size", "14px", "important");
+            check.style.setProperty("font-weight", "700", "important");
+            check.style.setProperty("line-height", "1", "important");
+            check.style.setProperty("color", "inherit", "important");
+
+            cell.appendChild(check);
+        });
+
+        root.querySelectorAll(".o_matrix_boolean_false").forEach((cell) => {
+            cell.innerHTML = "";
+        });
+    }
+
+    function normalizeMatrixTableForExport(root) {
+        if (!isMatrixRelationExport(root)) {
+            return;
+        }
+
+        const previewCard = root.querySelector(".o_matrix_preview_card");
+        if (previewCard) {
+            previewCard.style.setProperty("border", "0", "important");
+            previewCard.style.setProperty("border-radius", "0", "important");
+            previewCard.style.setProperty("box-shadow", "none", "important");
+            previewCard.style.setProperty("background", "transparent", "important");
+            previewCard.style.setProperty("background-color", "transparent", "important");
+            previewCard.style.setProperty("overflow", "visible", "important");
+            previewCard.style.setProperty("padding", "0", "important");
+        }
+
+        const table = root.querySelector(".o_matrix_preview_table");
+        if (!table) {
+            return;
+        }
+
+        table.style.setProperty("border-collapse", "separate", "important");
+        table.style.setProperty("border-spacing", "0", "important");
+
+        table.querySelectorAll(".o_matrix_preview_corner, .o_matrix_preview_row_name, thead th").forEach((cell) => {
+            cell.style.setProperty("position", "static", "important");
+            cell.style.setProperty("left", "auto", "important");
+            cell.style.setProperty("top", "auto", "important");
+            cell.style.setProperty("right", "auto", "important");
+            cell.style.setProperty("bottom", "auto", "important");
+            cell.style.setProperty("z-index", "auto", "important");
+            cell.style.setProperty("transform", "none", "important");
+        });
+
+        table.querySelectorAll("thead, tbody, tr").forEach((node) => {
+            node.style.setProperty("border", "0", "important");
+            node.style.setProperty("border-top", "0", "important");
+            node.style.setProperty("border-right", "0", "important");
+            node.style.setProperty("border-bottom", "0", "important");
+            node.style.setProperty("border-left", "0", "important");
+            node.style.setProperty("border-block", "0", "important");
+            node.style.setProperty("border-inline", "0", "important");
+            node.style.setProperty("border-block-start", "0", "important");
+            node.style.setProperty("border-block-end", "0", "important");
+            node.style.setProperty("border-inline-start", "0", "important");
+            node.style.setProperty("border-inline-end", "0", "important");
+            node.style.setProperty("border-style", "none", "important");
+            node.style.setProperty("border-width", "0", "important");
+            node.style.setProperty("border-color", "transparent", "important");
+            node.style.setProperty("box-shadow", "none", "important");
+            node.style.setProperty("background-image", "none", "important");
+        });
+
+        table.querySelectorAll("th, td").forEach((cell) => {
+            cell.style.setProperty("border", "0", "important");
+            cell.style.setProperty("border-top", "0", "important");
+            cell.style.setProperty("border-left", "0", "important");
+            cell.style.setProperty("border-right", "0", "important");
+            cell.style.setProperty("border-bottom", "0", "important");
+            cell.style.setProperty("border-block", "0", "important");
+            cell.style.setProperty("border-inline", "0", "important");
+            cell.style.setProperty("border-block-start", "0", "important");
+            cell.style.setProperty("border-block-end", "0", "important");
+            cell.style.setProperty("border-inline-start", "0", "important");
+            cell.style.setProperty("border-inline-end", "0", "important");
+            cell.style.setProperty("border-style", "none", "important");
+            cell.style.setProperty("border-width", "0", "important");
+            cell.style.setProperty("border-color", "transparent", "important");
+            cell.style.setProperty("box-shadow", "none", "important");
+            cell.style.setProperty("background-clip", "padding-box", "important");
+        });
+    }
+
     function syncValueStreamMapFromSource(sourceRoot, cloneRoot) {
         if (!isValueStreamMapExport(sourceRoot) || !isValueStreamMapExport(cloneRoot)) {
             return;
@@ -877,6 +991,8 @@
         normalizeTextBoxesForExport(clone);
         normalizeRoadmapTableForExport(clone);
         normalizeRoadmapTimelineForExport(sourceNode, clone);
+        normalizeMatrixTableForExport(clone);
+        normalizeMatrixBooleanCellsForExport(clone);
         await inlineImagesAsDataUrl(clone);
         await nextFrame();
         await wait(60);
@@ -952,6 +1068,13 @@
         };
     }
 
+    function isMatrixRelationExportOptions(opts) {
+        return Boolean(
+            opts &&
+            opts.selector === "#o_matrix_relation_export_root"
+        );
+    }
+
     // Export the prepared clone using html-to-image.
     async function exportWithHtmlToImage(node, dims, opts) {
         const htmlToImage = getHtmlToImageLib();
@@ -988,6 +1111,11 @@
             ...opts,
             filename: opts.filename || "export.svg",
         };
+
+        if (isMatrixRelationExportOptions(effective)) {
+            const blob = await fallbackToSvg(prepared.clone, prepared.dims, effective);
+            return { blob, effective };
+        }
 
         try {
             const blob = await exportWithHtmlToImage(prepared.clone, prepared.dims, effective);
