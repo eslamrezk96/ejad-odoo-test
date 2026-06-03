@@ -34,13 +34,17 @@ This version intentionally does not yet read from ea.entity.* models.
             "twj_ea_enhancement/static/src/js/matrix_relation_report.js",
             "twj_ea_enhancement/static/src/js/roadmap_report.js",
             "twj_ea_enhancement/static/src/js/value_stream_map.js",
+            "twj_ea_enhancement/static/src/js/form_tab_counters.js",
+
             "twj_ea_enhancement/static/src/xml/matrix_relation_report.xml",
             "twj_ea_enhancement/static/src/xml/roadmap_report.xml",
             "twj_ea_enhancement/static/src/xml/value_stream_map.xml",
+
             "twj_ea_enhancement/static/src/scss/matrix_relation_report.scss",
             "twj_ea_enhancement/static/src/scss/roadmap_report.scss",
             "twj_ea_enhancement/static/src/scss/value_stream_map.scss",
             "twj_ea_enhancement/static/src/scss/change_type_classes.scss",
+            "twj_ea_enhancement/static/src/scss/form_tab_counters.scss",
         ],
     },
     "installable": True,

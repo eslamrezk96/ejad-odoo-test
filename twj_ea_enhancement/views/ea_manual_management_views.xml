@@ -2,17 +2,17 @@
 <odoo>
 
     <menuitem
-        id="menu_ea_management_root"
-        name="Management"
-        parent="menu_building_block_roadmap_root"
-        sequence="20"
+            id="menu_ea_management_root"
+            name="Management"
+            parent="menu_building_block_roadmap_root"
+            sequence="20"
     />
 
     <menuitem
-        id="menu_ea_entities_root"
-        name="Entities"
-        parent="menu_building_block_roadmap_root"
-        sequence="30"
+            id="menu_ea_entities_root"
+            name="Entities"
+            parent="menu_building_block_roadmap_root"
+            sequence="30"
     />
 
     <record id="view_ea_layer_tree" model="ir.ui.view">
@@ -51,11 +51,11 @@
     </record>
 
     <menuitem
-        id="menu_ea_layer"
-        name="Layers"
-        parent="menu_ea_management_root"
-        action="action_ea_layer"
-        sequence="10"
+            id="menu_ea_layer"
+            name="Layers"
+            parent="menu_ea_management_root"
+            action="action_ea_layer"
+            sequence="10"
     />
 
     <record id="view_ea_component_tree" model="ir.ui.view">
@@ -97,11 +97,11 @@
     </record>
 
     <menuitem
-        id="menu_ea_component"
-        name="Components"
-        parent="menu_ea_management_root"
-        action="action_ea_component"
-        sequence="20"
+            id="menu_ea_component"
+            name="Components"
+            parent="menu_ea_management_root"
+            action="action_ea_component"
+            sequence="20"
     />
 
     <record id="view_ea_entity_tags_tree" model="ir.ui.view">
@@ -139,11 +139,11 @@
     </record>
 
     <menuitem
-        id="menu_ea_entity_tags"
-        name="Tags"
-        parent="menu_ea_management_root"
-        action="action_ea_entity_tags"
-        sequence="30"
+            id="menu_ea_entity_tags"
+            name="Tags"
+            parent="menu_ea_management_root"
+            action="action_ea_entity_tags"
+            sequence="30"
     />
 
     <record id="view_ea_entity_type_tree" model="ir.ui.view">
@@ -179,11 +179,11 @@
     </record>
 
     <menuitem
-        id="menu_ea_entity_type"
-        name="Entity Types"
-        parent="menu_ea_management_root"
-        action="action_ea_entity_type"
-        sequence="35"
+            id="menu_ea_entity_type"
+            name="Entity Types"
+            parent="menu_ea_management_root"
+            action="action_ea_entity_type"
+            sequence="35"
     />
 
     <record id="view_ea_transition_tree" model="ir.ui.view">
@@ -223,11 +223,11 @@
     </record>
 
     <menuitem
-        id="menu_ea_transition"
-        name="Transitions"
-        parent="menu_ea_management_root"
-        action="action_ea_transition"
-        sequence="40"
+            id="menu_ea_transition"
+            name="Transitions"
+            parent="menu_ea_management_root"
+            action="action_ea_transition"
+            sequence="40"
     />
 
     <record id="view_ea_entity_gap_tree" model="ir.ui.view">
@@ -272,11 +272,11 @@
     </record>
 
     <menuitem
-        id="menu_ea_entity_gap"
-        name="Gaps"
-        parent="menu_ea_management_root"
-        action="action_ea_entity_gap"
-        sequence="50"
+            id="menu_ea_entity_gap"
+            name="Gaps"
+            parent="menu_ea_management_root"
+            action="action_ea_entity_gap"
+            sequence="50"
     />
 
     <record id="view_ea_entity_application_tree" model="ir.ui.view">
@@ -299,7 +299,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report"
+                            class="btn-primary"/>
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
@@ -330,11 +331,11 @@
     </record>
 
     <menuitem
-        id="menu_ea_entity_application"
-        name="Applications"
-        parent="menu_ea_entities_root"
-        action="action_ea_entity_application"
-        sequence="10"
+            id="menu_ea_entity_application"
+            name="Applications"
+            parent="menu_ea_entities_root"
+            action="action_ea_entity_application"
+            sequence="10"
     />
 
     <record id="view_ea_entity_technology_service_tree" model="ir.ui.view">
@@ -357,7 +358,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report"
+                            class="btn-primary"/>
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
@@ -388,11 +390,11 @@
     </record>
 
     <menuitem
-        id="menu_ea_entity_technology_service"
-        name="Technology Services"
-        parent="menu_ea_entities_root"
-        action="action_ea_entity_technology_service"
-        sequence="20"
+            id="menu_ea_entity_technology_service"
+            name="Technology Services"
+            parent="menu_ea_entities_root"
+            action="action_ea_entity_technology_service"
+            sequence="20"
     />
 
     <record id="view_ea_entity_step_tree" model="ir.ui.view">
@@ -415,7 +417,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report"
+                            class="btn-primary"/>
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
@@ -446,11 +449,11 @@
     </record>
 
     <menuitem
-        id="menu_ea_entity_step"
-        name="Steps"
-        parent="menu_ea_entities_root"
-        action="action_ea_entity_step"
-        sequence="30"
+            id="menu_ea_entity_step"
+            name="Steps"
+            parent="menu_ea_entities_root"
+            action="action_ea_entity_step"
+            sequence="30"
     />
 
     <record id="view_ea_entity_stage_tree" model="ir.ui.view">
@@ -473,7 +476,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report"
+                            class="btn-primary"/>
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
@@ -504,11 +508,11 @@
     </record>
 
     <menuitem
-        id="menu_ea_entity_stage"
-        name="Stages"
-        parent="menu_ea_entities_root"
-        action="action_ea_entity_stage"
-        sequence="40"
+            id="menu_ea_entity_stage"
+            name="Stages"
+            parent="menu_ea_entities_root"
+            action="action_ea_entity_stage"
+            sequence="40"
     />
 
     <record id="view_ea_entity_organization_unit_tree" model="ir.ui.view">
@@ -531,7 +535,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report"
+                            class="btn-primary"/>
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
@@ -562,11 +567,11 @@
     </record>
 
     <menuitem
-        id="menu_ea_entity_organization_unit"
-        name="Organization Units"
-        parent="menu_ea_entities_root"
-        action="action_ea_entity_organization_unit"
-        sequence="50"
+            id="menu_ea_entity_organization_unit"
+            name="Organization Units"
+            parent="menu_ea_entities_root"
+            action="action_ea_entity_organization_unit"
+            sequence="50"
     />
 
     <record id="view_ea_entity_business_capability_tree" model="ir.ui.view">
@@ -590,7 +595,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report"
+                            class="btn-primary"/>
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
@@ -622,11 +628,11 @@
     </record>
 
     <menuitem
-        id="menu_ea_entity_business_capability"
-        name="Business Capabilities"
-        parent="menu_ea_entities_root"
-        action="action_ea_entity_business_capability"
-        sequence="60"
+            id="menu_ea_entity_business_capability"
+            name="Business Capabilities"
+            parent="menu_ea_entities_root"
+            action="action_ea_entity_business_capability"
+            sequence="60"
     />
 
     <record id="view_ea_entity_business_service_tree" model="ir.ui.view">
@@ -650,7 +656,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report"
+                            class="btn-primary"/>
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
@@ -682,11 +689,11 @@
     </record>
 
     <menuitem
-        id="menu_ea_entity_business_service"
-        name="Business Services"
-        parent="menu_ea_entities_root"
-        action="action_ea_entity_business_service"
-        sequence="70"
+            id="menu_ea_entity_business_service"
+            name="Business Services"
+            parent="menu_ea_entities_root"
+            action="action_ea_entity_business_service"
+            sequence="70"
     />
 
     <record id="view_ea_entity_value_stream_tree" model="ir.ui.view">
@@ -706,13 +713,13 @@
         <field name="name">ea.entity.value.stream.form</field>
         <field name="model">ea.entity.value.stream</field>
         <field name="arch" type="xml">
-            <form>
+            <form js_class="form_tab_counters">
                 <header>
                     <button
-                        name="action_open_value_stream_stages"
-                        type="object"
-                        class="oe_stat_button"
-                        icon="fa-sitemap"
+                            name="action_open_value_stream_stages"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-sitemap"
                     >
                         <field name="value_stream_stages_count" string="Stages" widget="statinfo"/>
                     </button>
@@ -725,35 +732,35 @@
                         <field name="active"/>
                     </group>
                     <notebook>
-                        <page string="Stages">
+                        <page string="Stages" name="stages">
                             <field name="value_stream_stages_ids">
-                        <tree editable="bottom">
-                            <field name="sequence" widget="handle"/>
-                            <field name="name"/>
-                            <field name="code"/>
-                            <field name="process_group_ids" widget="many2many_tags"/>
-                            <field name="organization_unit_ids" widget="many2many_tags"/>
-                            <field name="capabilities_ids" widget="many2many_tags"/>
-                        </tree>
-                        <form>
-                            <sheet>
-                                <group>
-                                    <field name="value_stream_id" invisible="1"/>
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
                                     <field name="name"/>
                                     <field name="code"/>
-                                    <field name="sequence"/>
-                                </group>
-                                <group>
                                     <field name="process_group_ids" widget="many2many_tags"/>
                                     <field name="organization_unit_ids" widget="many2many_tags"/>
                                     <field name="capabilities_ids" widget="many2many_tags"/>
-                                </group>
-                                <group>
-                                    <field name="description"/>
-                                </group>
-                            </sheet>
-                        </form>
-                    </field>
+                                </tree>
+                                <form>
+                                    <sheet>
+                                        <group>
+                                            <field name="value_stream_id" invisible="1"/>
+                                            <field name="name"/>
+                                            <field name="code"/>
+                                            <field name="sequence"/>
+                                        </group>
+                                        <group>
+                                            <field name="process_group_ids" widget="many2many_tags"/>
+                                            <field name="organization_unit_ids" widget="many2many_tags"/>
+                                            <field name="capabilities_ids" widget="many2many_tags"/>
+                                        </group>
+                                        <group>
+                                            <field name="description"/>
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field>
                         </page>
                     </notebook>
                 </sheet>
@@ -867,11 +874,11 @@
     </record>
 
     <menuitem
-        id="menu_ea_entity_value_stream"
-        name="Value Streams"
-        parent="menu_ea_entities_root"
-        action="action_ea_entity_value_stream"
-        sequence="80"
+            id="menu_ea_entity_value_stream"
+            name="Value Streams"
+            parent="menu_ea_entities_root"
+            action="action_ea_entity_value_stream"
+            sequence="80"
     />
 
     <record id="view_ea_entity_digital_transformation_goals_tree" model="ir.ui.view">
@@ -894,7 +901,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report"
+                            class="btn-primary"/>
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
@@ -925,11 +933,11 @@
     </record>
 
     <menuitem
-        id="menu_ea_entity_digital_transformation_goals"
-        name="Digital Transformation Goals"
-        parent="menu_ea_entities_root"
-        action="action_ea_entity_digital_transformation_goals"
-        sequence="90"
+            id="menu_ea_entity_digital_transformation_goals"
+            name="Digital Transformation Goals"
+            parent="menu_ea_entities_root"
+            action="action_ea_entity_digital_transformation_goals"
+            sequence="90"
     />
 
     <record id="view_ea_entity_ea_objective_tree" model="ir.ui.view">
@@ -952,7 +960,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report"
+                            class="btn-primary"/>
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
@@ -983,11 +992,11 @@
     </record>
 
     <menuitem
-        id="menu_ea_entity_ea_objective"
-        name="EA Objectives"
-        parent="menu_ea_entities_root"
-        action="action_ea_entity_ea_objective"
-        sequence="100"
+            id="menu_ea_entity_ea_objective"
+            name="EA Objectives"
+            parent="menu_ea_entities_root"
+            action="action_ea_entity_ea_objective"
+            sequence="100"
     />
 
     <record id="view_ea_cybersecurity_security_apparatus_tree" model="ir.ui.view">
@@ -1010,7 +1019,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report"
+                            class="btn-primary"/>
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
@@ -1041,11 +1051,11 @@
     </record>
 
     <menuitem
-        id="menu_ea_cybersecurity_security_apparatus"
-        name="Cybersecurity Apparatus"
-        parent="menu_ea_entities_root"
-        action="action_ea_cybersecurity_security_apparatus"
-        sequence="100"
+            id="menu_ea_cybersecurity_security_apparatus"
+            name="Cybersecurity Apparatus"
+            parent="menu_ea_entities_root"
+            action="action_ea_cybersecurity_security_apparatus"
+            sequence="100"
     />
 
     <record id="view_ea_cybersecurity_security_software_tree" model="ir.ui.view">
@@ -1068,7 +1078,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report"
+                            class="btn-primary"/>
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
@@ -1099,11 +1110,11 @@
     </record>
 
     <menuitem
-        id="menu_ea_cybersecurity_security_software"
-        name="Cybersecurity Software"
-        parent="menu_ea_entities_root"
-        action="action_ea_cybersecurity_security_software"
-        sequence="110"
+            id="menu_ea_cybersecurity_security_software"
+            name="Cybersecurity Software"
+            parent="menu_ea_entities_root"
+            action="action_ea_cybersecurity_security_software"
+            sequence="110"
     />
 
     <record id="view_ea_cybersecurity_security_service_tree" model="ir.ui.view">
@@ -1126,7 +1137,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report" class="btn-primary"/>
+                    <button name="action_open_roadmap_report" type="object" string="Open Roadmap Report"
+                            class="btn-primary"/>
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
@@ -1157,11 +1169,11 @@
     </record>
 
     <menuitem
-        id="menu_ea_cybersecurity_security_service"
-        name="Cybersecurity Services"
-        parent="menu_ea_entities_root"
-        action="action_ea_cybersecurity_security_service"
-        sequence="120"
+            id="menu_ea_cybersecurity_security_service"
+            name="Cybersecurity Services"
+            parent="menu_ea_entities_root"
+            action="action_ea_cybersecurity_security_service"
+            sequence="120"
     />
 
 </odoo>
