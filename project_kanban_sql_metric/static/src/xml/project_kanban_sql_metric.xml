@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="project_kanban_sql_metric.KanbanHeader"
+       t-inherit="web.KanbanHeader"
+       t-inherit-mode="primary">
+
+        <xpath expr="//div[contains(@class, 'o_kanban_header_title')]"
+               position="after">
+            <div t-if="group.groupByField.name === 'last_update_status' and !group.isFolded"
+                 class="o_kanban_sql_metrics d-flex flex-wrap gap-1 pt-1">
+                <span class="badge text-bg-info rounded-pill lh-1">
+                    <t t-esc="formattedTotal"/>
+                </span>
+                <span class="badge text-bg-success rounded-pill lh-1">
+                    <t t-esc="formattedDone"/>
+                </span>
+                <span class="badge text-bg-danger rounded-pill lh-1">
+                    <t t-esc="formattedRemaining"/>
+                </span>
+            </div>
+        </xpath>
+
+    </t>
+
+</templates>
