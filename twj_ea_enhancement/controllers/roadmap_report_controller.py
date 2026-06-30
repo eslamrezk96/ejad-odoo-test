@@ -1,8 +1,23 @@
+from pathlib import Path
+
 from odoo import _, http
 from odoo.http import request
 
 
 class BuildingBlockRoadmapReportController(http.Controller):
+    @http.route("/twj_ea_enhancement/organizational_chart", type="http", auth="user")
+    def get_organizational_chart(self):
+        module_root = Path(__file__).resolve().parent.parent
+        html_path = module_root / "organizational_chart.html"
+        html_content = html_path.read_text(encoding="utf-8")
+        return request.make_response(
+            html_content,
+            headers=[
+                ("Content-Type", "text/html; charset=utf-8"),
+                ("X-Frame-Options", "SAMEORIGIN"),
+            ],
+        )
+
     @http.route("/building/block/roadmap/layers", type="json", auth="user")
     def get_building_block_roadmap_layers(self):
         layers = request.env["ea.layer"].with_context(lang=request.env.context.get("lang")).search_read(

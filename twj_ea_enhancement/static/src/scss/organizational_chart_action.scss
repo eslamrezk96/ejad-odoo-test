@@ -1,0 +1,39 @@
+.o_twj_org_chart_action {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 120px);
+    padding: 1rem;
+    background: #f5f7fa;
+}
+
+.o_twj_org_chart_header {
+    margin-bottom: 1rem;
+}
+
+.o_twj_org_chart_header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.o_twj_org_chart_header p {
+    color: #6b7280;
+}
+
+.o_twj_org_chart_frame_wrap {
+    flex: 1 1 auto;
+    min-height: 720px;
+    background: #fff;
+    border: 1px solid #d7dee7;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.o_twj_org_chart_iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 720px;
+    border: 0;
+    background: #1f3a5f;
+}
