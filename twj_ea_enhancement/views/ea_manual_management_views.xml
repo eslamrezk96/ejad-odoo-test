@@ -521,6 +521,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
+                <field name="parent_id"/>
                 <field name="change_type"/>
                 <field name="transition_id"/>
                 <field name="tags_ids" widget="many2many_tags"/>
@@ -542,6 +543,7 @@
                 <sheet>
                     <group>
                         <field name="name"/>
+                        <field name="parent_id"/>
                         <field name="change_type"/>
                         <field name="type_id"/>
                         <field name="transition_id"/>

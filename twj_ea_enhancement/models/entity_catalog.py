@@ -89,12 +89,21 @@ class EaEntityOrganizationUnit(models.Model):
     _name = "ea.entity.organization.unit"
     _description = "EA Entity Organization Unit"
     _inherits = {"ea.entity.base": "entity_base_id"}
+    _parent_name = "parent_id"
+    _parent_store = True
 
     entity_base_id = fields.Many2one(
         "ea.entity.base",
         required=True,
         ondelete="cascade",
     )
+    parent_id = fields.Many2one(
+        "ea.entity.organization.unit",
+        string="Parent Organization Unit",
+        index=True,
+        ondelete="restrict",
+    )
+    parent_path = fields.Char(index=True)
 
 
 class EaEntityBusinessCapability(models.Model):
