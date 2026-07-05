@@ -31,9 +31,8 @@ class StrategyHouseController(http.Controller):
         )
 
     def _get_strategy_house_data(self, strategy_id=None):
-        env = request.env.with_context(lang=request.env.context.get("lang"))
-        strategy_model = env["ea.entity.strategy"]
-        goal_model = env["ea.entity.digital.transformation.goals"]
+        strategy_model = request.env["ea.entity.strategy"].with_context(lang=request.env.context.get("lang"))
+        goal_model = request.env["ea.entity.digital.transformation.goals"].with_context(lang=request.env.context.get("lang"))
 
         strategies = strategy_model.search(self._get_strategy_domain(strategy_id), order="name, id")
         goals = goal_model.search([], order="name, id")
