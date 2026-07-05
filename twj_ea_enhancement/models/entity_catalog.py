@@ -217,6 +217,29 @@ class EaEntityDigitalTransformationGoals(models.Model):
     )
 
 
+class EaEntityStrategy(models.Model):
+    _name = "ea.entity.strategy"
+    _description = "EA Entity Strategy"
+    _inherits = {"ea.entity.base": "entity_base_id"}
+
+    entity_base_id = fields.Many2one(
+        "ea.entity.base",
+        required=True,
+        ondelete="cascade",
+    )
+
+    def action_open_strategy_house(self):
+        self.ensure_one()
+        return {
+            "type": "ir.actions.client",
+            "name": "Strategy House",
+            "tag": "twj_ea_enhancement.strategy_house_client_action",
+            "params": {
+                "strategy_id": self.id,
+            },
+        }
+
+
 class EaEntityEaObjective(models.Model):
     _name = "ea.entity.ea.objective"
     _description = "EA Entity EA Objective"

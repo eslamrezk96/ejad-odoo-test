@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <div
+        t-name="twj_ea_enhancement.StrategyHouseAction"
+        class="o_twj_strategy_house_action"
+        t-att-dir="getRootDirection()"
+    >
+        <div class="o_twj_strategy_house_header">
+            <h1 class="mb-1" t-esc="getTitle()"/>
+            <p class="mb-0" t-esc="getSubtitle()"/>
+        </div>
+        <div class="o_twj_strategy_house_frame_wrap">
+            <iframe
+                class="o_twj_strategy_house_iframe"
+                t-att-src="strategyHouseUrl"
+                t-att-title="getTitle()"
+            />
+        </div>
+    </div>
+</templates>

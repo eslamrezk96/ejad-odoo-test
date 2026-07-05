@@ -940,6 +940,72 @@
             sequence="90"
     />
 
+    <record id="view_ea_entity_strategy_tree" model="ir.ui.view">
+        <field name="name">ea.entity.strategy.tree</field>
+        <field name="model">ea.entity.strategy</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="change_type"/>
+                <field name="transition_id"/>
+                <field name="tags_ids" widget="many2many_tags"/>
+                <field name="gap_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_entity_strategy_form" model="ir.ui.view">
+        <field name="name">ea.entity.strategy.form</field>
+        <field name="model">ea.entity.strategy</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                                name="action_open_strategy_house"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-sitemap"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Strategy House</span>
+                            </div>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="change_type"/>
+                        <field name="type_id"/>
+                        <field name="transition_id"/>
+                    </group>
+                    <group>
+                        <field name="tags_ids" widget="many2many_tags"/>
+                        <field name="gap_ids" widget="many2many_tags"/>
+                    </group>
+                    <group string="Version Links">
+                        <field name="version_parent_entity_id"/>
+                        <field name="version_previous_entity_id"/>
+                        <field name="version_next_entity_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_entity_strategy" model="ir.actions.act_window">
+        <field name="name">Strategies</field>
+        <field name="res_model">ea.entity.strategy</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="menu_ea_entity_strategy"
+            name="Strategies"
+            parent="menu_ea_entities_root"
+            action="action_ea_entity_strategy"
+            sequence="95"
+    />
+
     <record id="view_ea_entity_ea_objective_tree" model="ir.ui.view">
         <field name="name">ea.entity.ea.objective.tree</field>
         <field name="model">ea.entity.ea.objective</field>

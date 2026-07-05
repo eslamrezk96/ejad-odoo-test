@@ -11,6 +11,11 @@
         <field name="tag">twj_ea_enhancement.matrix_relation_report_client_action</field>
     </record>
 
+    <record id="action_strategy_house" model="ir.actions.client">
+        <field name="name">Strategy House</field>
+        <field name="tag">twj_ea_enhancement.strategy_house_client_action</field>
+    </record>
+
     <menuitem
         id="menu_building_block_roadmap_root"
         name="Building Block Roadmap"
@@ -31,6 +36,14 @@
         parent="menu_building_block_roadmap_root"
         action="action_matrix_relation_report"
         sequence="20"
+    />
+
+    <menuitem
+        id="menu_strategy_house"
+        name="Strategy House"
+        parent="menu_building_block_roadmap_root"
+        action="action_strategy_house"
+        sequence="25"
     />
 
 </odoo>
