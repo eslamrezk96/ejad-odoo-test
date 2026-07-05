@@ -6,38 +6,12 @@
         <field name="tag">twj_ea_enhancement.organizational_chart_client_action</field>
     </record>
 
-    <record id="action_ea_flow_diagram" model="ir.actions.client">
-        <field name="name">Enterprise Model</field>
-        <field name="tag">twj_ea_enhancement.enterprise_model_diagram_client_action</field>
-    </record>
-
-    <record id="action_service_detail_diagram" model="ir.actions.client">
-        <field name="name">Service Detail</field>
-        <field name="tag">twj_ea_enhancement.service_detail_diagram_client_action</field>
-    </record>
-
     <menuitem
         id="menu_organizational_chart"
         name="Organizational Chart"
         parent="menu_building_block_roadmap_root"
         action="action_organizational_chart"
         sequence="30"
-    />
-
-    <menuitem
-        id="menu_ea_flow_diagram"
-        name="Enterprise Model"
-        parent="menu_building_block_roadmap_root"
-        action="action_ea_flow_diagram"
-        sequence="40"
-    />
-
-    <menuitem
-        id="menu_service_detail_diagram"
-        name="Service Detail"
-        parent="menu_building_block_roadmap_root"
-        action="action_service_detail_diagram"
-        sequence="50"
     />
 
 </odoo>
