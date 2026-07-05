@@ -27,6 +27,16 @@
                             icon="fa-file-text-o" invisible="not has_rop"/>
                 </xpath>
 
+                <xpath expr="//notebook" position="inside">
+                    <page string="ROP Product" name="rop_product">
+                        <field name="product_rop_ids" domain="[('id', '!=', active_id), ('has_rop', '=', True)]">
+                            <tree>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+
             </field>
         </record>
 
