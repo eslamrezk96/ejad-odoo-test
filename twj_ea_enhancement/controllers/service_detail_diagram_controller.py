@@ -1,6 +1,6 @@
 from odoo import http
 
-from .ea_flow_base_controller import EaFlowBaseController
+from .ea_flow_base import EaFlowBaseController
 
 
 class ServiceDetailDiagramController(EaFlowBaseController, http.Controller):
