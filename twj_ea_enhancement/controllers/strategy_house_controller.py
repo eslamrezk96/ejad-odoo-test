@@ -31,48 +31,26 @@ class StrategyHouseController(http.Controller):
         )
 
     def _get_strategy_house_data(self, strategy_id=None):
-        strategy_model = request.env["ea.entity.strategy"].with_context(lang=request.env.context.get("lang"))
-        goal_model = request.env["ea.entity.digital.transformation.goals"].with_context(lang=request.env.context.get("lang"))
+        lang = request.env.context.get("lang")
+        strategy_model = request.env["ea.entity.strategy"].with_context(lang=lang)
 
-        strategies = strategy_model.search(self._get_strategy_domain(strategy_id), order="name, id")
-        goals = goal_model.search([], order="name, id")
+        strategy = strategy_model.browse(int(strategy_id)) if strategy_id else strategy_model
+        if not strategy.exists():
+            return {}
 
-        if not strategies:
-            return self._empty_strategy_data()
+        pillars = [
+            {
+                "title": pillar.display_name,
+                "goals": [goal.display_name for goal in pillar.strategic_goal_ids],
+            }
+            for pillar in strategy.pillars_ids
+            if pillar.strategic_goal_ids
+        ]
 
-        goal_buckets = [[] for strategy in strategies]
-        for index, goal in enumerate(goals):
-            goal_buckets[index % len(goal_buckets)].append(goal.display_name)
-
-        pillars = []
-        for index, strategy in enumerate(strategies):
-            pillars.append(
-                {
-                    "title": strategy.display_name,
-                    "goals": goal_buckets[index],
-                }
-            )
-
-        strategy_data = self._empty_strategy_data()
-        strategy_data["pillars"] = pillars
-        return strategy_data
-
-    def _get_strategy_domain(self, strategy_id=None):
-        if not strategy_id:
-            return []
-        try:
-            return [("id", "=", int(strategy_id))]
-        except (TypeError, ValueError):
-            return [("id", "=", 0)]
-
-    def _empty_strategy_data(self):
         return {
-            "vision": {"label": "الرؤية", "text": "تجربة استثمار رقمية مبتكرة آمنة"},
-            "mission": {
-                "label": "الرسالة",
-                "text": "فتح مجالات استثمار متنوعة الأصل والأثر وتحسين العائد للناتج القومي",
-            },
+            "vision": {"label": "الرؤية", "text": strategy.vision or ""},
+            "mission": {"label": "الرسالة", "text": strategy.mission or ""},
             "pillarsLabel": "الركائز",
             "goalsLabel": "الأهداف",
-            "pillars": [],
+            "pillars": pillars,
         }

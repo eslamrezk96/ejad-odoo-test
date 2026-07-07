@@ -236,6 +236,13 @@ class EaEntityStrategy(models.Model):
         required=True,
         ondelete="cascade",
     )
+    vision = fields.Text(string="Vision", translate=True)
+    mission = fields.Text(string="Mission", translate=True)
+    pillars_ids = fields.One2many(
+        "ea.entity.strategy.pillar",
+        "strategy_id",
+        string="Strategic Pillars",
+    )
 
     def action_open_strategy_house(self):
         self.ensure_one()
@@ -247,6 +254,28 @@ class EaEntityStrategy(models.Model):
                 "strategy_id": self.id,
             },
         }
+
+
+class EaEntityStrategyPillar(models.Model):
+    _name = "ea.entity.strategy.pillar"
+    _description = "EA Entity Strategy Pillar"
+    _order = "sequence, name, id"
+
+    name = fields.Char(string="Name", translate=True, required=True)
+    sequence = fields.Integer(string="Sequence", default=10)
+    strategy_id = fields.Many2one(
+        "ea.entity.strategy",
+        string="Strategy",
+        required=True,
+        ondelete="cascade",
+    )
+    strategic_goal_ids = fields.Many2many(
+        "ea.entity.digital.transformation.goals",
+        "ea_strategy_pillar_goal_rel",
+        "pillar_id",
+        "goal_id",
+        string="Strategic Goals",
+    )
 
 
 class EaEntityEaObjective(models.Model):

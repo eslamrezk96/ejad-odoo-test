@@ -980,6 +980,28 @@
                         <field name="type_id"/>
                         <field name="transition_id"/>
                     </group>
+                    <group string="Strategy House">
+                        <field name="vision"/>
+                        <field name="mission"/>
+                    </group>
+                    <notebook>
+                        <page string="Strategic Pillars">
+                            <field name="pillars_ids">
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="strategic_goal_ids" widget="many2many_tags"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="sequence"/>
+                                        <field name="name"/>
+                                        <field name="strategic_goal_ids" widget="many2many_tags"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
                     <group>
                         <field name="tags_ids" widget="many2many_tags"/>
                         <field name="gap_ids" widget="many2many_tags"/>
