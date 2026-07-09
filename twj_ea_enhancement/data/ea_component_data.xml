@@ -78,6 +78,13 @@
         <field name="data_model_id" ref="model_ea_entity_digital_transformation_goals"/>
     </record>
 
+    <record id="ea_component_strategy" model="ea.component">
+        <field name="name">Strategy</field>
+        <field name="sequence">115</field>
+        <field name="layer_id" ref="roadmap_layer_strategy"/>
+        <field name="data_model_id" ref="model_ea_entity_strategy"/>
+    </record>
+
     <record id="ea_component_ea_objective" model="ea.component">
         <field name="name">EA Objective</field>
         <field name="sequence">120</field>

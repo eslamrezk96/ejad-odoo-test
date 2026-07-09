@@ -96,12 +96,54 @@
         <field name="view_mode">tree,form</field>
     </record>
 
+    <record id="view_ea_component_relation_tree" model="ir.ui.view">
+        <field name="name">ea.component.relation.tree</field>
+        <field name="model">ea.component.relation</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="source_type"/>
+                <field name="dest_type"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_component_relation_form" model="ir.ui.view">
+        <field name="name">ea.component.relation.form</field>
+        <field name="model">ea.component.relation</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="source_type"/>
+                        <field name="dest_type"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_component_relation" model="ir.actions.act_window">
+        <field name="name">Component Relations</field>
+        <field name="res_model">ea.component.relation</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
     <menuitem
             id="menu_ea_component"
             name="Components"
             parent="menu_ea_management_root"
             action="action_ea_component"
             sequence="20"
+    />
+
+    <menuitem
+            id="menu_ea_component_relation"
+            name="Component Relations"
+            parent="menu_ea_management_root"
+            action="action_ea_component_relation"
+            sequence="25"
     />
 
     <record id="view_ea_entity_tags_tree" model="ir.ui.view">

@@ -84,6 +84,11 @@ class EaEntityBusinessServiceRoadmapButton(models.Model):
     _inherit = ["ea.entity.business.service", "ea.roadmap.report.button.mixin"]
 
 
+class EaEntityStrategyRoadmapButton(models.Model):
+    _name = "ea.entity.strategy"
+    _inherit = ["ea.entity.strategy", "ea.roadmap.report.button.mixin"]
+
+
 class EaEntityDigitalTransformationGoalsRoadmapButton(models.Model):
     _name = "ea.entity.digital.transformation.goals"
     _inherit = ["ea.entity.digital.transformation.goals", "ea.roadmap.report.button.mixin"]
