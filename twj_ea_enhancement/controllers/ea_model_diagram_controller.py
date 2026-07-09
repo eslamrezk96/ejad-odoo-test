@@ -134,27 +134,35 @@ class EaModelDiagramController(http.Controller):
         return relation_groups
 
     def _build_model_diagram(self, source_record, source_component, relation_groups):
-        lane_x = 300
+        lane_x = 250
         lane_width = 760
-        node_height = 46
-        root_height = 54
-        source_y = 40
-        first_group_y = 180
+        root_height = self._get_node_height(source_record.display_name, variant="root")
+        first_group_y = 40
+        lane_gap = 40
+        group_layouts = []
+
+        for relation_group in relation_groups:
+            records = relation_group["records"]
+            record_heights = [self._get_node_height(record.display_name) for record in records]
+            lane_height = max(110, 38 + sum(record_heights) + max(len(records) - 1, 0) * 16)
+            group_layouts.append(
+                {
+                    "relation_group": relation_group,
+                    "record_heights": record_heights,
+                    "lane_height": lane_height,
+                }
+            )
+
+        lane_block_height = sum(layout["lane_height"] for layout in group_layouts)
+        lane_block_height += max(len(group_layouts) - 1, 0) * lane_gap
+        source_y = first_group_y + max((lane_block_height - root_height) / 2, 0)
 
         nodes = [
-            self._lane_node(
-                "model-diagram-l-source",
-                source_component.display_name,
-                lane_x,
-                20,
-                lane_width,
-                110,
-            ),
             self._item_node(
                 "model-diagram-root",
                 source_record.display_name,
-                40,
-                source_y + 18,
+                -400,
+                source_y,
                 variant="root",
                 height=root_height,
             ),
@@ -162,9 +170,11 @@ class EaModelDiagramController(http.Controller):
         edges = []
 
         current_y = first_group_y
-        for group_index, relation_group in enumerate(relation_groups):
+        for group_index, group_layout in enumerate(group_layouts):
+            relation_group = group_layout["relation_group"]
             records = relation_group["records"]
-            lane_height = max(110, 38 + len(records) * 70)
+            record_heights = group_layout["record_heights"]
+            lane_height = group_layout["lane_height"]
             nodes.append(
                 self._lane_node(
                     f"model-diagram-l-{group_index}",
@@ -178,13 +188,15 @@ class EaModelDiagramController(http.Controller):
 
             for record_index, related_record in enumerate(records):
                 node_id = self._record_node_id(related_record)
+                related_record_height = record_heights[record_index]
+                previous_height = sum(record_heights[:record_index])
                 nodes.append(
                     self._item_node(
                         node_id,
                         related_record.display_name,
                         470,
-                        current_y + 36 + record_index * 70,
-                        height=node_height,
+                        current_y + 36 + previous_height + record_index * 16,
+                        height=related_record_height,
                     )
                 )
                 edges.append(
@@ -196,7 +208,7 @@ class EaModelDiagramController(http.Controller):
                     )
                 )
 
-            current_y += lane_height + 40
+            current_y += lane_height + lane_gap
 
         return nodes, edges
 
@@ -258,3 +270,19 @@ class EaModelDiagramController(http.Controller):
         if variant == "root":
             base_width += 20
         return max(76, min(base_width, 300))
+
+    def _get_node_height(self, label, variant=None):
+        label = label or ""
+        label_length = len(label)
+        base_height = 54 if variant == "root" else 56
+        if label_length <= 28:
+            return base_height
+
+        width = self._get_node_width(label, variant=variant)
+        content_width = max(width - 32, 60)
+        average_character_width = 8 if variant == "root" else 9
+        characters_per_line = max(int(content_width / average_character_width), 10)
+        line_count = max(1, (label_length + characters_per_line - 1) // characters_per_line)
+        vertical_padding = 22 if variant == "root" else 28
+        line_height = 22 if variant == "root" else 22
+        return max(base_height, vertical_padding + line_count * line_height)

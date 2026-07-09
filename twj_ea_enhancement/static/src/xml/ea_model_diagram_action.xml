@@ -7,7 +7,6 @@
     >
         <div class="o_twj_ea_model_diagram_header">
             <h1 class="mb-1" t-esc="getTitle()"/>
-            <p class="mb-0" t-esc="getSubtitle()"/>
         </div>
         <div class="o_twj_ea_model_diagram_frame_wrap">
             <iframe

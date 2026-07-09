@@ -36,9 +36,6 @@ class EaModelDiagramAction extends Component {
         return _t("EA Model Diagram");
     }
 
-    getSubtitle() {
-        return _t("Model relationship diagram");
-    }
 }
 
 registry.category("actions").add(
