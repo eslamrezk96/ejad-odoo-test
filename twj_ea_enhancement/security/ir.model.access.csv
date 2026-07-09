@@ -2,6 +2,7 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_ea_entity_base_user,access.ea.entity.base.user,model_ea_entity_base,base.group_user,1,1,1,1
 access_ea_layer_user,access.ea.layer.user,model_ea_layer,base.group_user,1,1,1,1
 access_ea_component_user,access.ea.component.user,model_ea_component,base.group_user,1,1,1,1
+access_ea_component_relation_user,access.ea.component.relation.user,model_ea_component_relation,base.group_user,1,1,1,1
 access_ea_entity_tags_user,access.ea.entity.tags.user,model_ea_entity_tags,base.group_user,1,1,1,1
 access_ea_entity_type_user,access.ea.entity.type.user,model_ea_entity_type,base.group_user,1,1,1,1
 access_ea_transition_user,access.ea.transition.user,model_ea_transition,base.group_user,1,1,1,1
