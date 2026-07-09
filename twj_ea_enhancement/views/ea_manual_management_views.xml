@@ -760,6 +760,8 @@
                 <field name="change_type"/>
                 <field name="transition_id"/>
                 <field name="application_ids" widget="many2many_tags"/>
+                <field name="business_capability_ids" widget="many2many_tags"/>
+                <field name="organization_unit_ids" widget="many2many_tags"/>
                 <field name="tags_ids" widget="many2many_tags"/>
                 <field name="gap_ids" widget="many2many_tags"/>
             </tree>
@@ -797,6 +799,18 @@
                     </group>
                     <group>
                         <field name="application_ids" widget="many2many_tags"/>
+                        <field name="technology_service_ids" widget="many2many_tags"/>
+                        <field name="step_ids" widget="many2many_tags"/>
+                        <field name="stage_ids" widget="many2many_tags"/>
+                        <field name="organization_unit_ids" widget="many2many_tags"/>
+                        <field name="business_capability_ids" widget="many2many_tags"/>
+                        <field name="process_group_ids" widget="many2many_tags"/>
+                        <field name="value_stream_ids" widget="many2many_tags"/>
+                        <field name="digital_transformation_goal_ids" widget="many2many_tags"/>
+                        <field name="strategy_ids" widget="many2many_tags"/>
+                        <field name="ea_objective_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
                         <field name="tags_ids" widget="many2many_tags"/>
                         <field name="gap_ids" widget="many2many_tags"/>
                     </group>

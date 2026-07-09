@@ -142,6 +142,76 @@ class EaEntityBusinessService(models.Model):
         "application_id",
         string="Applications",
     )
+    technology_service_ids = fields.Many2many(
+        "ea.entity.technology.service",
+        "business_service_technology_service_rel",
+        "business_service_id",
+        "technology_service_id",
+        string="Technology Services",
+    )
+    step_ids = fields.Many2many(
+        "ea.entity.step",
+        "business_service_step_rel",
+        "business_service_id",
+        "step_id",
+        string="Steps",
+    )
+    stage_ids = fields.Many2many(
+        "ea.entity.stage",
+        "business_service_stage_rel",
+        "business_service_id",
+        "stage_id",
+        string="Stages",
+    )
+    organization_unit_ids = fields.Many2many(
+        "ea.entity.organization.unit",
+        "business_service_organization_unit_rel",
+        "business_service_id",
+        "organization_unit_id",
+        string="Organization Units",
+    )
+    business_capability_ids = fields.Many2many(
+        "ea.entity.business.capability",
+        "business_service_capability_rel",
+        "business_service_id",
+        "capability_id",
+        string="Business Capabilities",
+    )
+    process_group_ids = fields.Many2many(
+        "ea.entity.process.group",
+        "business_service_process_group_rel",
+        "business_service_id",
+        "process_group_id",
+        string="Process Groups",
+    )
+    value_stream_ids = fields.Many2many(
+        "ea.entity.value.stream",
+        "business_service_value_stream_rel",
+        "business_service_id",
+        "value_stream_id",
+        string="Value Streams",
+    )
+    digital_transformation_goal_ids = fields.Many2many(
+        "ea.entity.digital.transformation.goals",
+        "business_service_digital_goal_rel",
+        "business_service_id",
+        "goal_id",
+        string="Digital Transformation Goals",
+    )
+    strategy_ids = fields.Many2many(
+        "ea.entity.strategy",
+        "business_service_strategy_rel",
+        "business_service_id",
+        "strategy_id",
+        string="Strategies",
+    )
+    ea_objective_ids = fields.Many2many(
+        "ea.entity.ea.objective",
+        "business_service_ea_objective_rel",
+        "business_service_id",
+        "objective_id",
+        string="EA Objectives",
+    )
 
 class EaEntityProcessGroup(models.Model):
     _name = "ea.entity.process.group"
