@@ -20,6 +20,32 @@ class RoadmapReportButtonMixin(models.AbstractModel):
         self.ensure_one()
         return self.tags_ids.ids if "tags_ids" in self._fields else []
 
+    def _get_expected_fields(self):
+        expected_fields = [
+            "entity_id",
+            "entity_base_id",
+            "type_id",
+            "version_parent_entity_id",
+            "version_entity_ids",
+            "version_previous_entity_id",
+            "version_next_entity_id",
+        ]
+
+        if self._name not in ["ea.entity.project"]:
+            expected_fields.append("gap_ids")
+
+        return expected_fields
+
+    def _model_fields_domain(self):
+        return [
+            ("model", "=", self._name),
+            ("ttype", "in", ["one2many", "many2many", "many2one"]),
+            "|",
+            ("relation", "ilike", "ea.entity"),
+            ("relation", "ilike", "ea.cybersecurity"),
+            ("name", "not in", self._get_expected_fields()),
+        ]
+
     def action_open_roadmap_report(self):
         self.ensure_one()
         return {
@@ -34,12 +60,12 @@ class RoadmapReportButtonMixin(models.AbstractModel):
             },
         }
 
-    def action_open_ea_service_detail(self):
+    def action_open_ea_model_diagram(self):
         self.ensure_one()
         return {
             "type": "ir.actions.client",
-            "name": _("EA Service Detail"),
-            "tag": "twj_ea_enhancement.ea_service_detail_client_action",
+            "name": "EA Model Diagram",
+            "tag": "twj_ea_enhancement.ea_model_diagram_client_action",
             "params": {
                 "source_model": self._name,
                 "source_record_id": self.id,
@@ -94,6 +120,11 @@ class EaEntityBusinessCapabilityRoadmapButton(models.Model):
 class EaEntityBusinessServiceRoadmapButton(models.Model):
     _name = "ea.entity.business.service"
     _inherit = ["ea.entity.business.service", "ea.roadmap.report.button.mixin"]
+
+
+class EaEntityStrategyRoadmapButton(models.Model):
+    _name = "ea.entity.strategy"
+    _inherit = ["ea.entity.strategy", "ea.roadmap.report.button.mixin"]
 
 
 class EaEntityDigitalTransformationGoalsRoadmapButton(models.Model):

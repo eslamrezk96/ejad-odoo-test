@@ -96,12 +96,54 @@
         <field name="view_mode">tree,form</field>
     </record>
 
+    <record id="view_ea_component_relation_tree" model="ir.ui.view">
+        <field name="name">ea.component.relation.tree</field>
+        <field name="model">ea.component.relation</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="source_type"/>
+                <field name="dest_type"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ea_component_relation_form" model="ir.ui.view">
+        <field name="name">ea.component.relation.form</field>
+        <field name="model">ea.component.relation</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="source_type"/>
+                        <field name="dest_type"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ea_component_relation" model="ir.actions.act_window">
+        <field name="name">Component Relations</field>
+        <field name="res_model">ea.component.relation</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
     <menuitem
             id="menu_ea_component"
             name="Components"
             parent="menu_ea_management_root"
             action="action_ea_component"
             sequence="20"
+    />
+
+    <menuitem
+            id="menu_ea_component_relation"
+            name="Component Relations"
+            parent="menu_ea_management_root"
+            action="action_ea_component_relation"
+            sequence="25"
     />
 
     <record id="view_ea_entity_tags_tree" model="ir.ui.view">
@@ -304,6 +346,18 @@
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button
+                                name="action_open_ea_model_diagram"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-sitemap"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Model Diagram</span>
+                            </div>
+                        </button>
+                    </div>
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
@@ -363,15 +417,15 @@
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
+                    <div name="button_box" class="oe_button_box">
                         <button
-                                name="action_open_ea_service_detail"
+                                name="action_open_ea_model_diagram"
                                 type="object"
                                 class="oe_stat_button"
                                 icon="fa-sitemap"
                         >
                             <div class="o_stat_info">
-                                <span class="o_stat_text">Service Detail</span>
+                                <span class="o_stat_text">Model Diagram</span>
                             </div>
                         </button>
                     </div>
@@ -434,6 +488,18 @@
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button
+                                name="action_open_ea_model_diagram"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-sitemap"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Model Diagram</span>
+                            </div>
+                        </button>
+                    </div>
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
@@ -493,6 +559,18 @@
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button
+                                name="action_open_ea_model_diagram"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-sitemap"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Model Diagram</span>
+                            </div>
+                        </button>
+                    </div>
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
@@ -553,6 +631,18 @@
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button
+                                name="action_open_ea_model_diagram"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-sitemap"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Model Diagram</span>
+                            </div>
+                        </button>
+                    </div>
                     <group>
                         <field name="name"/>
                         <field name="parent_id"/>
@@ -614,6 +704,18 @@
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button
+                                name="action_open_ea_model_diagram"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-sitemap"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Model Diagram</span>
+                            </div>
+                        </button>
+                    </div>
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
@@ -658,6 +760,8 @@
                 <field name="change_type"/>
                 <field name="transition_id"/>
                 <field name="application_ids" widget="many2many_tags"/>
+                <field name="business_capability_ids" widget="many2many_tags"/>
+                <field name="organization_unit_ids" widget="many2many_tags"/>
                 <field name="tags_ids" widget="many2many_tags"/>
                 <field name="gap_ids" widget="many2many_tags"/>
             </tree>
@@ -675,15 +779,15 @@
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
+                    <div name="button_box" class="oe_button_box">
                         <button
-                                name="action_open_ea_service_detail"
+                                name="action_open_ea_model_diagram"
                                 type="object"
                                 class="oe_stat_button"
                                 icon="fa-sitemap"
                         >
                             <div class="o_stat_info">
-                                <span class="o_stat_text">Service Detail</span>
+                                <span class="o_stat_text">Model Diagram</span>
                             </div>
                         </button>
                     </div>
@@ -695,6 +799,18 @@
                     </group>
                     <group>
                         <field name="application_ids" widget="many2many_tags"/>
+                        <field name="technology_service_ids" widget="many2many_tags"/>
+                        <field name="step_ids" widget="many2many_tags"/>
+                        <field name="stage_ids" widget="many2many_tags"/>
+                        <field name="organization_unit_ids" widget="many2many_tags"/>
+                        <field name="business_capability_ids" widget="many2many_tags"/>
+                        <field name="process_group_ids" widget="many2many_tags"/>
+                        <field name="value_stream_ids" widget="many2many_tags"/>
+                        <field name="digital_transformation_goal_ids" widget="many2many_tags"/>
+                        <field name="strategy_ids" widget="many2many_tags"/>
+                        <field name="ea_objective_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
                         <field name="tags_ids" widget="many2many_tags"/>
                         <field name="gap_ids" widget="many2many_tags"/>
                     </group>
@@ -932,6 +1048,18 @@
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button
+                                name="action_open_ea_model_diagram"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-sitemap"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Model Diagram</span>
+                            </div>
+                        </button>
+                    </div>
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
@@ -986,7 +1114,17 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
+                    <div name="button_box" class="oe_button_box">
+                        <button
+                                name="action_open_ea_model_diagram"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-sitemap"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Model Diagram</span>
+                            </div>
+                        </button>
                         <button
                                 name="action_open_strategy_house"
                                 type="object"
@@ -1079,6 +1217,18 @@
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button
+                                name="action_open_ea_model_diagram"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-sitemap"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Model Diagram</span>
+                            </div>
+                        </button>
+                    </div>
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
@@ -1138,6 +1288,18 @@
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button
+                                name="action_open_ea_model_diagram"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-sitemap"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Model Diagram</span>
+                            </div>
+                        </button>
+                    </div>
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
@@ -1197,6 +1359,18 @@
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button
+                                name="action_open_ea_model_diagram"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-sitemap"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Model Diagram</span>
+                            </div>
+                        </button>
+                    </div>
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
@@ -1256,6 +1430,18 @@
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button
+                                name="action_open_ea_model_diagram"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-sitemap"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Model Diagram</span>
+                            </div>
+                        </button>
+                    </div>
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>

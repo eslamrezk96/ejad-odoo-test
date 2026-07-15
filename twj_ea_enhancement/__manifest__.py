@@ -39,6 +39,7 @@ This version intentionally does not yet read from ea.entity.* models.
             "twj_ea_enhancement/static/src/js/strategy_house_action.js",
             "twj_ea_enhancement/static/src/js/value_stream_map.js",
             "twj_ea_enhancement/static/src/js/form_tab_counters.js",
+            "twj_ea_enhancement/static/src/js/ea_model_diagram_action.js",
 
             "twj_ea_enhancement/static/src/xml/matrix_relation_report.xml",
             "twj_ea_enhancement/static/src/xml/organizational_chart_action.xml",
@@ -46,6 +47,7 @@ This version intentionally does not yet read from ea.entity.* models.
             "twj_ea_enhancement/static/src/xml/ea_service_detail_action.xml",
             "twj_ea_enhancement/static/src/xml/strategy_house_action.xml",
             "twj_ea_enhancement/static/src/xml/value_stream_map.xml",
+            "twj_ea_enhancement/static/src/xml/ea_model_diagram_action.xml",
 
             "twj_ea_enhancement/static/src/scss/matrix_relation_report.scss",
             "twj_ea_enhancement/static/src/scss/organizational_chart_action.scss",
@@ -55,6 +57,7 @@ This version intentionally does not yet read from ea.entity.* models.
             "twj_ea_enhancement/static/src/scss/value_stream_map.scss",
             "twj_ea_enhancement/static/src/scss/change_type_classes.scss",
             "twj_ea_enhancement/static/src/scss/form_tab_counters.scss",
+            "twj_ea_enhancement/static/src/scss/ea_model_diagram_action.scss",
         ],
     },
     "installable": True,

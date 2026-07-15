@@ -19,3 +19,23 @@ class EaComponent(models.Model):
         "ir.model",
         string="Model",
     )
+
+
+class EaComponentRelation(models.Model):
+    _name = "ea.component.relation"
+    _description = "EA Component Relation"
+    _order = "source_type, dest_type, id"
+
+    name = fields.Char(required=True, translate=True)
+    source_type = fields.Many2one(
+        "ea.component",
+        string="Source Component",
+        required=True,
+        ondelete="cascade",
+    )
+    dest_type = fields.Many2one(
+        "ea.component",
+        string="Destination Component",
+        required=True,
+        ondelete="cascade",
+    )

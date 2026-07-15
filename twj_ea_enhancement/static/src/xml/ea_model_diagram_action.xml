@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <div
+        t-name="twj_ea_enhancement.EaModelDiagramAction"
+        class="o_twj_ea_model_diagram_action"
+        t-att-dir="getRootDirection()"
+    >
+        <div class="o_twj_ea_model_diagram_header">
+            <h1 class="mb-1" t-esc="getTitle()"/>
+        </div>
+        <div class="o_twj_ea_model_diagram_frame_wrap">
+            <iframe
+                class="o_twj_ea_model_diagram_iframe"
+                t-att-src="eaModelDiagramUrl"
+                t-att-title="getTitle()"
+            />
+        </div>
+    </div>
+</templates>
