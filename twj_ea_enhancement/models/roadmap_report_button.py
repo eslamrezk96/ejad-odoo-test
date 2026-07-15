@@ -34,6 +34,18 @@ class RoadmapReportButtonMixin(models.AbstractModel):
             },
         }
 
+    def action_open_ea_service_detail(self):
+        self.ensure_one()
+        return {
+            "type": "ir.actions.client",
+            "name": _("EA Service Detail"),
+            "tag": "twj_ea_enhancement.ea_service_detail_client_action",
+            "params": {
+                "source_model": self._name,
+                "source_record_id": self.id,
+            },
+        }
+
     def action_open_new_version_wizard(self):
         self.ensure_one()
         return {

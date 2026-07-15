@@ -363,6 +363,18 @@
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                                name="action_open_ea_service_detail"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-sitemap"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Service Detail</span>
+                            </div>
+                        </button>
+                    </div>
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
@@ -663,6 +675,18 @@
                     <button name="action_open_new_version_wizard" type="object" string="Create New Version"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                                name="action_open_ea_service_detail"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-sitemap"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Service Detail</span>
+                            </div>
+                        </button>
+                    </div>
                     <group>
                         <field name="name"/>
                         <field name="change_type"/>
