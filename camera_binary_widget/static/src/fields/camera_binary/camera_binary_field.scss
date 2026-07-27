@@ -1,0 +1,61 @@
+.o_camera_binary_panel {
+    width: 100%;
+    max-width: 760px;
+    padding: 12px;
+    border: 1px solid var(--border-color, #dee2e6);
+    border-radius: 8px;
+}
+
+.o_camera_binary_media {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #000;
+    min-height: 220px;
+}
+
+.o_camera_binary_video,
+.o_camera_binary_image {
+    display: block;
+    width: 100%;
+    max-height: 72vh;
+    object-fit: contain;
+}
+
+.o_camera_binary_loading {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.45);
+    pointer-events: none;
+}
+
+.o_camera_binary_actions {
+    align-items: center;
+}
+
+@media (max-width: 767.98px) {
+    .o_camera_binary_panel {
+        max-width: none;
+        padding: 8px;
+    }
+
+    .o_camera_binary_media {
+        min-height: 260px;
+    }
+
+    .o_camera_binary_video,
+    .o_camera_binary_image {
+        max-height: 68vh;
+    }
+
+    .o_camera_binary_actions > .btn {
+        flex: 1 1 auto;
+        min-height: 44px;
+    }
+}

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="camera_binary_widget.CameraBinaryField"
+       t-inherit="web.BinaryField"
+       t-inherit-mode="primary">
+
+        <!-- Existing file: add Camera next to the normal Odoo controls. -->
+        <xpath expr="//div[hasclass('w-100')]/FileUploader" position="after">
+            <button type="button"
+                    class="btn btn-link btn-sm lh-1 fa fa-camera o_camera_binary_button"
+                    data-tooltip="Camera"
+                    aria-label="Camera"
+                    t-on-click="openCamera"/>
+        </xpath>
+
+        <!-- Empty field: keep Upload and add a Camera action beside it. -->
+        <xpath expr="//label[hasclass('o_select_file_button')]" position="after">
+            <button type="button"
+                    class="btn btn-outline-primary ms-2 o_camera_binary_empty_button"
+                    t-on-click="openCamera">
+                <i class="fa fa-camera me-1"/>
+                Camera
+            </button>
+        </xpath>
+
+        <!--
+            Camera workspace. The video stays mounted even in preview mode so the
+            same reference can be reused when Retake or Switch Camera is pressed.
+        -->
+        <xpath expr="//t[@t-if='!props.readonly']" position="inside">
+            <div t-att-class="cameraState.open ? 'o_camera_binary_panel mt-3' : 'd-none'">
+
+                <div class="o_camera_binary_media">
+                    <video t-ref="cameraVideo"
+                           t-att-class="cameraState.preview ? 'd-none' : 'o_camera_binary_video'"
+                           autoplay="true"
+                           playsinline="true"
+                           muted="true"/>
+
+                    <img t-if="cameraState.preview"
+                         t-att-src="cameraState.previewSrc"
+                         class="o_camera_binary_image"
+                         alt="Captured photo preview"/>
+
+                    <div t-if="cameraState.busy &amp;&amp; !cameraState.preview"
+                         class="o_camera_binary_loading">
+                        <i class="fa fa-spinner fa-spin me-2"/>
+                        Opening camera...
+                    </div>
+                </div>
+
+                <!-- Live camera actions -->
+                <div t-if="!cameraState.preview"
+                     class="o_camera_binary_actions d-flex flex-wrap gap-2 mt-2">
+                    <button type="button"
+                            class="btn btn-primary"
+                            t-att-disabled="cameraState.busy"
+                            t-on-click="captureImage">
+                        <i class="fa fa-camera me-1"/>
+                        Capture
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-outline-secondary"
+                            t-att-disabled="cameraState.busy"
+                            t-on-click="switchCamera">
+                        <i class="fa fa-refresh me-1"/>
+                        Switch Camera
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-secondary"
+                            t-on-click="closeCamera">
+                        Cancel
+                    </button>
+                </div>
+
+                <!-- Captured photo review actions -->
+                <div t-if="cameraState.preview"
+                     class="o_camera_binary_actions d-flex flex-wrap gap-2 mt-2">
+                    <button type="button"
+                            class="btn btn-primary"
+                            t-att-disabled="cameraState.busy"
+                            t-on-click="usePhoto">
+                        <i class="fa fa-check me-1"/>
+                        Use Photo
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-outline-primary"
+                            t-att-disabled="cameraState.busy"
+                            t-on-click="retakePhoto">
+                        <i class="fa fa-repeat me-1"/>
+                        Retake
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-secondary"
+                            t-att-disabled="cameraState.busy"
+                            t-on-click="closeCamera">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </xpath>
+
+    </t>
+
+</templates>
