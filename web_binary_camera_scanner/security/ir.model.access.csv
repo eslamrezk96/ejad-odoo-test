@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_scanner_job_user,scanner.job user,model_scanner_job,base.group_user,1,1,1,0
+access_scanner_job_manager,scanner.job manager,model_scanner_job,web_binary_camera_scanner.group_scanner_manager,1,1,1,1
+access_scanner_test_wizard_user,scanner.test.wizard user,model_scanner_test_wizard,base.group_user,1,1,1,1

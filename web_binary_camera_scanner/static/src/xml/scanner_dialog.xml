@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="web_binary_camera_scanner.ScannerDialog" owl="1">
+        <Dialog title="'Scan Document'" size="'lg'">
+            <div class="o_scanner_dialog">
+                <t t-if="state.phase === 'setup'">
+                    <div class="alert alert-info">
+                        The default scanner configured locally in the Gateway will be used.
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Resolution</label>
+                            <select class="form-select" t-model="state.dpi">
+                                <option value="150">150 DPI</option>
+                                <option value="200">200 DPI</option>
+                                <option value="300">300 DPI</option>
+                                <option value="600">600 DPI</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Color Mode</label>
+                            <select class="form-select" t-model="state.colorMode">
+                                <option value="color">Color</option>
+                                <option value="grayscale">Grayscale</option>
+                                <option value="bw">Black &amp; White</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Source</label>
+                            <select class="form-select" t-model="state.source">
+                                <option value="auto">Automatic</option>
+                                <option value="flatbed">Flatbed</option>
+                                <option value="feeder">Feeder</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Output Format</label>
+                            <select class="form-select" t-model="state.outputFormat">
+                                <option value="jpeg">JPEG</option>
+                                <option value="png">PNG</option>
+                                <option value="pdf">PDF</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input id="scanner_duplex"
+                                       class="form-check-input"
+                                       type="checkbox"
+                                       t-model="state.duplex"/>
+                                <label class="form-check-label" for="scanner_duplex">
+                                    Duplex
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+
+                <t t-elif="isWorking">
+                    <div class="text-center py-5">
+                        <i class="fa fa-spinner fa-spin fa-3x text-primary"/>
+                        <h4 class="mt-3">
+                            <t t-if="state.phase === 'pending'">Waiting for Gateway...</t>
+                            <t t-elif="state.phase === 'claimed'">Job received by Gateway...</t>
+                            <t t-elif="state.phase === 'scanning'">Scanning document...</t>
+                            <t t-elif="state.phase === 'uploading'">Uploading result...</t>
+                        </h4>
+                        <div class="text-muted" t-if="state.jobId">
+                            Job #<t t-esc="state.jobId"/>
+                        </div>
+                    </div>
+                </t>
+
+                <t t-elif="state.phase === 'completed'">
+                    <div class="alert alert-success">
+                        Scan completed successfully.
+                    </div>
+                    <div t-if="state.loadingResult" class="text-center py-4">
+                        <i class="fa fa-spinner fa-spin fa-2x"/>
+                    </div>
+                    <div t-elif="state.result" class="o_scanner_preview text-center">
+                        <img t-if="state.mimetype and state.mimetype.startsWith('image/')"
+                             t-att-src="previewUrl"
+                             class="img-fluid border rounded"
+                             alt="Scanned document"/>
+                        <div t-else="" class="alert alert-secondary">
+                            Result file: <t t-esc="state.filename"/>
+                        </div>
+                    </div>
+                </t>
+
+                <t t-elif="state.phase === 'failed'">
+                    <div class="alert alert-danger">
+                        <strong t-if="state.errorCode">
+                            <t t-esc="state.errorCode"/>:
+                        </strong>
+                        <t t-esc="state.errorMessage or 'The scan operation failed.'"/>
+                    </div>
+                </t>
+            </div>
+
+            <t t-set-slot="footer">
+                <t t-if="state.phase === 'setup'">
+                    <button type="button"
+                            class="btn btn-primary"
+                            t-on-click="startScan">
+                        <i class="fa fa-print me-1"/>Start Scan
+                    </button>
+                    <button type="button"
+                            class="btn btn-secondary"
+                            t-on-click="props.close">
+                        Cancel
+                    </button>
+                </t>
+                <t t-elif="isWorking">
+                    <button type="button"
+                            class="btn btn-secondary"
+                            t-on-click="cancel">
+                        Cancel Job
+                    </button>
+                </t>
+                <t t-elif="state.phase === 'completed'">
+                    <button type="button"
+                            class="btn btn-primary"
+                            t-att-disabled="!state.result"
+                            t-on-click="useResult">
+                        Use Scan
+                    </button>
+                    <button type="button"
+                            class="btn btn-secondary"
+                            t-on-click="reset">
+                        Rescan
+                    </button>
+                </t>
+                <t t-elif="state.phase === 'failed'">
+                    <button type="button"
+                            class="btn btn-primary"
+                            t-on-click="reset">
+                        Try Again
+                    </button>
+                    <button type="button"
+                            class="btn btn-secondary"
+                            t-on-click="props.close">
+                        Close
+                    </button>
+                </t>
+            </t>
+        </Dialog>
+    </t>
+</templates>

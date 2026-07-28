@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_scanner_wizard_form" model="ir.ui.view">
+        <field name="name">scanner.wizard.form</field>
+        <field name="model">scanner.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Scan Document">
+                <field name="res_model" invisible="1"/>
+                <field name="res_id" invisible="1"/>
+                <group>
+                    <field name="scan_filename" widget="scan_capture"/>
+                    <field name="scan_data" filename="scan_filename" invisible="not scan_data"/>
+                </group>
+                <footer>
+                    <button name="action_attach" type="object"
+                            string="Attach to record" class="btn-primary"
+                            invisible="not scan_data"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

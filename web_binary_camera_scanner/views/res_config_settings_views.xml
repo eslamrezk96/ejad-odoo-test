@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_scanner" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.scanner</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app string="Scanner Gateway" name="scanner_gateway"
+                     groups="base.group_system">
+                    <block title="Scanner Gateway">
+                        <setting string="Gateway API token"
+                                 help="Bearer token used by the Scanner Gateway.">
+                            <field name="scanner_api_token" password="True"/>
+                        </setting>
+                        <setting string="Maximum scan upload"
+                                 help="Maximum accepted result size from the Gateway.">
+                            <field name="scanner_max_upload_mb"/>
+                            <span class="ms-2">MB</span>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

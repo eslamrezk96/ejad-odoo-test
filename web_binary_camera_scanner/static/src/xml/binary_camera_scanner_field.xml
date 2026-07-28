@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="web_binary_camera_scanner.BinaryCameraScannerField" owl="1">
+        <div class="o_binary_camera_scanner_field">
+            <t t-if="!props.readonly">
+                <t t-if="props.record.data[props.name]">
+                    <div class="w-100 d-flex align-items-center flex-wrap gap-1">
+                        <FileUploader
+                            acceptedFileExtensions="props.acceptedFileExtensions"
+                            onUploaded.bind="update">
+                            <t name="download"
+                               t-if="props.record.resId and !props.record.dirty">
+                                <button type="button"
+                                        class="btn btn-link btn-sm lh-1 fa fa-download"
+                                        title="Download"
+                                        t-on-click="onFileDownload"/>
+                            </t>
+                            <t t-set-slot="toggler">
+                                <input type="text"
+                                       class="o_input o_scanner_filename"
+                                       t-att-value="fileName"
+                                       readonly="readonly"/>
+                                <button type="button"
+                                        class="btn btn-link btn-sm lh-1 fa fa-pencil"
+                                        title="Replace file"/>
+                            </t>
+                            <button type="button"
+                                    class="btn btn-link btn-sm lh-1 fa fa-trash"
+                                    title="Clear"
+                                    t-on-click="() => this.update({})"/>
+                        </FileUploader>
+                        <button type="button"
+                                class="btn btn-outline-secondary btn-sm"
+                                t-on-click="openCamera">
+                            <i class="fa fa-camera me-1"/>Camera
+                        </button>
+                        <button type="button"
+                                class="btn btn-outline-primary btn-sm"
+                                t-on-click="openScanner">
+                            <i class="fa fa-print me-1"/>Scanner
+                        </button>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="d-flex flex-wrap gap-2">
+                        <FileUploader
+                            acceptedFileExtensions="props.acceptedFileExtensions"
+                            onUploaded.bind="update">
+                            <t t-set-slot="toggler">
+                                <button type="button" class="btn btn-primary">
+                                    <i class="fa fa-upload me-1"/>Upload
+                                </button>
+                            </t>
+                        </FileUploader>
+                        <button type="button"
+                                class="btn btn-outline-secondary"
+                                t-on-click="openCamera">
+                            <i class="fa fa-camera me-1"/>Camera
+                        </button>
+                        <button type="button"
+                                class="btn btn-outline-primary"
+                                t-on-click="openScanner">
+                            <i class="fa fa-print me-1"/>Scanner
+                        </button>
+                    </div>
+                </t>
+            </t>
+            <t t-elif="props.record.resId and props.record.data[props.name]">
+                <a class="o_form_uri" href="#" t-on-click.prevent="onFileDownload">
+                    <span class="fa fa-download me-2"/>
+                    <t t-if="fileName" t-esc="fileName"/>
+                </a>
+            </t>
+        </div>
+    </t>
+</templates>

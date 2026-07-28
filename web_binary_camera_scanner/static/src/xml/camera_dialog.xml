@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="web_binary_camera_scanner.CameraDialog" owl="1">
+        <Dialog title="'Capture from Camera'" size="'lg'">
+            <div class="o_camera_dialog">
+                <div t-if="state.error" class="alert alert-danger mb-3" role="alert">
+                    <t t-esc="state.error"/>
+                </div>
+
+                <t t-if="!isPreview">
+                    <div class="o_camera_stage">
+                        <div t-if="state.loading"
+                             class="o_camera_loading text-center text-white">
+                            <i class="fa fa-spinner fa-spin fa-2x"/>
+                            <div class="mt-2">Starting camera...</div>
+                        </div>
+
+                        <video t-ref="video"
+                               class="o_camera_video"
+                               t-att-class="state.facingMode === 'user' ? 'o_camera_mirrored' : ''"
+                               autoplay="autoplay"
+                               playsinline="playsinline"
+                               muted="muted"/>
+
+                        <button type="button"
+                                class="btn btn-light o_camera_switch_button"
+                                title="Switch Camera"
+                                t-att-disabled="state.loading or state.switching"
+                                t-on-click="switchCamera">
+                            <i t-att-class="state.switching ? 'fa fa-spinner fa-spin' : 'fa fa-refresh'"/>
+                            <span class="d-none d-sm-inline ms-1">Switch Camera</span>
+                        </button>
+                    </div>
+                </t>
+
+                <t t-else="">
+                    <div class="o_camera_preview_stage">
+                        <img t-att-src="state.previewUrl"
+                             class="o_camera_preview_image"
+                             alt="Captured photo preview"/>
+                    </div>
+                </t>
+
+                <canvas t-ref="canvas" class="d-none"/>
+            </div>
+
+            <t t-set-slot="footer">
+                <t t-if="!isPreview">
+                    <button type="button"
+                            class="btn btn-primary"
+                            t-att-disabled="state.loading or state.error"
+                            t-on-click="capture">
+                        <i class="fa fa-camera me-1"/>Capture
+                    </button>
+                    <button type="button"
+                            class="btn btn-secondary"
+                            t-on-click="props.close">
+                        Cancel
+                    </button>
+                </t>
+
+                <t t-else="">
+                    <button type="button"
+                            class="btn btn-secondary"
+                            t-on-click="retake">
+                        <i class="fa fa-refresh me-1"/>Retake
+                    </button>
+                    <button type="button"
+                            class="btn btn-primary"
+                            t-on-click="usePhoto">
+                        <i class="fa fa-check me-1"/>Use Photo
+                    </button>
+                </t>
+            </t>
+        </Dialog>
+    </t>
+</templates>

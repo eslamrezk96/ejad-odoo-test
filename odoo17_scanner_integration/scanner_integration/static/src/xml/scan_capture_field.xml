@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="scanner_integration.ScanCaptureField">
+        <div class="o_scan_capture_widget d-flex align-items-center gap-2">
+            <button type="button"
+                    class="btn btn-primary"
+                    t-on-click="onScanClick"
+                    t-att-disabled="state.scanning">
+                <i class="fa fa-print me-1"/>
+                <t t-if="state.scanning">Scanning...</t>
+                <t t-else="">Scan Document</t>
+            </button>
+            <span t-if="props.record.data.scan_filename and !state.scanning"
+                  class="text-muted">
+                <t t-esc="props.record.data.scan_filename"/>
+            </span>
+        </div>
+    </t>
+</templates>
