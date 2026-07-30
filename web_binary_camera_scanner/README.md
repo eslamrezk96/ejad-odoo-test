@@ -13,6 +13,28 @@ The add-on provides:
 No `scanner.gateway` or `scanner.device` models are created.
 Virtual Scanner Mode has been removed.
 
+## Global Binary field behavior
+
+Starting from version `17.0.1.3.0`, the add-on replaces Odoo's default
+`binary` field widget globally. Therefore, a normal field declaration is
+enough:
+
+```xml
+<field name="document" filename="document_filename"/>
+```
+
+It automatically displays Upload, Camera, and Scanner actions. It is no
+longer necessary to add:
+
+```xml
+widget="binary_camera_scanner"
+```
+
+The old explicit widget name remains registered for backward compatibility.
+Fields that explicitly use another widget, such as `widget="image"`, are not
+affected. The global behavior also applies to the default binary widget in
+list views.
+
 ## Test screen
 
 Open:

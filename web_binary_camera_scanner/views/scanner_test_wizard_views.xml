@@ -14,8 +14,7 @@
                     </p>
                     <group>
                         <field name="document"
-                               filename="document_filename"
-                               widget="binary_camera_scanner"/>
+                               filename="document_filename"/>
                         <field name="document_filename" invisible="1"/>
                     </group>
                 </sheet>

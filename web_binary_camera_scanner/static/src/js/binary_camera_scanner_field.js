@@ -5,6 +5,7 @@ import { useService } from "@web/core/utils/hooks";
 import {
     BinaryField,
     binaryField,
+    listBinaryField,
 } from "@web/views/fields/binary/binary_field";
 import { CameraDialog } from "./camera_dialog";
 import { ScannerDialog } from "./scanner_dialog";
@@ -40,11 +41,33 @@ export class BinaryCameraScannerField extends BinaryField {
     }
 }
 
+/**
+ * Use the same enhanced interface in list views. Keeping a separate class
+ * allows list-specific behavior to be introduced later without changing the
+ * global form-field implementation.
+ */
+export class ListBinaryCameraScannerField extends BinaryCameraScannerField {}
+
 export const binaryCameraScannerField = {
     ...binaryField,
     component: BinaryCameraScannerField,
 };
 
-registry
-    .category("fields")
-    .add("binary_camera_scanner", binaryCameraScannerField);
+export const listBinaryCameraScannerField = {
+    ...listBinaryField,
+    component: ListBinaryCameraScannerField,
+};
+
+const fieldsRegistry = registry.category("fields");
+
+// Keep the explicit widget name for backward compatibility.
+fieldsRegistry.add("binary_camera_scanner", binaryCameraScannerField);
+fieldsRegistry.add(
+    "list.binary_camera_scanner",
+    listBinaryCameraScannerField
+);
+
+// Replace Odoo's default Binary widget globally. A field that explicitly uses
+// another widget, such as widget="image", is not affected by this override.
+fieldsRegistry.add("binary", binaryCameraScannerField, { force: true });
+fieldsRegistry.add("list.binary", listBinaryCameraScannerField, { force: true });

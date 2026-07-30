@@ -1,6 +1,6 @@
 {
     "name": "Binary Camera & Scanner",
-    "version": "17.0.1.2.0",
+    "version": "17.0.1.3.0",
     "summary": "Upload, camera capture, and scanner jobs for binary fields",
     "category": "Technical",
     "author": "Custom",
