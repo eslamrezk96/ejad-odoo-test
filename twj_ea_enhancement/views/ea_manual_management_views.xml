@@ -302,6 +302,10 @@
                         <field name="tags_ids" widget="many2many_tags"/>
                         <field name="projects_ids" widget="many2many_tags"/>
                     </group>
+                    <group>
+                        <field name="text_int_field" required="1" widget="numeric_integer" options="{'allow_negative': True}"/>
+                        <field name="text_flt_field" required="1" widget="numeric_float" options="{'allow_negative': False}"/>
+                    </group>
                 </sheet>
             </form>
         </field>

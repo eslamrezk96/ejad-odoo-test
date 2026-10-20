@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="numeric_field_widgets.NumericIntegerField">
+        <span t-if="props.readonly" t-esc="formattedValue"/>
+        <input
+            t-else=""
+            t-ref="numpadDecimal"
+            t-on-focusin="onFocusIn"
+            t-on-focusout="onFocusOut"
+            t-on-beforeinput="onBeforeInput"
+            t-on-paste="onPaste"
+            t-on-drop="onDrop"
+            t-att-id="props.id"
+            t-att-type="props.inputType"
+            t-att-placeholder="props.placeholder"
+            inputmode="numeric"
+            class="o_input"
+            autocomplete="off"
+            t-att-step="props.step"/>
+    </t>
+
+    <t t-name="numeric_field_widgets.NumericFloatField">
+        <span t-if="props.readonly" t-esc="formattedValue"/>
+        <input
+            t-else=""
+            t-ref="numpadDecimal"
+            t-on-focusin="onFocusIn"
+            t-on-focusout="onFocusOut"
+            t-on-beforeinput="onBeforeInput"
+            t-on-paste="onPaste"
+            t-on-drop="onDrop"
+            t-att-id="props.id"
+            t-att-placeholder="props.placeholder"
+            t-att-type="props.inputType"
+            inputmode="decimal"
+            class="o_input"
+            autocomplete="off"
+            t-att-step="props.step"/>
+    </t>
+
+</templates>

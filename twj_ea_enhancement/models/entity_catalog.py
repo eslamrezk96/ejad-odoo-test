@@ -377,3 +377,5 @@ class EaEntityGap(models.Model):
         "project_id",
         string="Projects",
     )
+    text_int_field = fields.Integer()
+    text_flt_field = fields.Float()
